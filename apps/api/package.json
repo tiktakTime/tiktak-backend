@@ -1,0 +1,22 @@
+{
+  "name": "@tiktak/api",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=../../.env index.ts",
+    "start": "tsx --env-file=../../.env index.ts",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.6",
+    "@tiktak/database": "workspace:*",
+    "@tiktak/env": "workspace:*",
+    "@tiktak/http": "workspace:*",
+    "hono": "^4.8.3"
+  },
+  "devDependencies": {
+    "@tiktak/tsconfig": "workspace:*",
+    "@types/node": "^25.7.0",
+    "tsx": "^4.21.0",
+    "typescript": "~6.0.3"
+  }
+}

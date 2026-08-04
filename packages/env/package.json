@@ -1,0 +1,19 @@
+{
+  "name": "@tiktak/env",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "^0.13.10",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tiktak/tsconfig": "workspace:*",
+    "@types/node": "^25.7.0",
+    "typescript": "~6.0.3"
+  }
+}
