@@ -1,0 +1,3 @@
+# Branch-specific deploy/local env: keep each branch's copy on merge.
+.env merge=ours
+.env.local merge=ours

@@ -13,9 +13,9 @@
 | `.env.local` | Docker Postgres/Redis/MinIO on localhost (default for `dev` / `db:*`) |
 | `.env` | Remote host (publish / `*:remote`) |
 
-`pnpm dev` / `dev:remote` (ve db script’leri) dosya yoksa ilgili example’dan **otomatik kopyalar**; mevcut dosyayı asla üzerine yazmaz.
+`pnpm dev` dosya yoksa example’dan kopyalamaz; branch’te commit’li `.env` / `.env.local` kullanılır.
 
-Do not commit `.env` / `.env.local`.
+**Env politikası:** Dosyalar image içinde olmalı. Her branch’te bir kez commit edilir; `.gitignore`’da kalırlar (yeni untracked kopyaları engeller). `test` / `main` env’leri farklıdır — merge sırasında `.gitattributes` (`merge=ours`) ile üzerine yazılmaz. Bilinçli güncelleme: `git add -f .env .env.local`.
 
 ## Install
 
@@ -41,24 +41,24 @@ pnpm dev
 
 API: `http://localhost:3001` (see `PORT` in `.env.local`).
 
-## Run — remote
+## Run — remote / deploy
 
-Docker not required. Uses root `.env`.
+`pnpm start` (and Docker `CMD`) runs **`prisma migrate deploy`** against the active `DIRECT_URL`, then starts the API. Local `pnpm dev` does **not** migrate.
+
+Optional: `SKIP_DB_MIGRATE=1` to skip migrations on start.
 
 ```bash
-pnpm db:deploy:remote   # only when you intend to migrate the remote DB
-pnpm dev:remote
+pnpm start
 ```
 
 ## Scripts
 
-| Script | Docker | Env file |
-|--------|--------|----------|
-| `pnpm dev` / `dev:local` | Required (compose up) | `.env.local` |
-| `pnpm dev:remote` | Skipped | `.env` |
-| `pnpm db:deploy:local` / `db:migrate:local` | — | `.env.local` |
-| `pnpm db:deploy:remote` / `db:migrate:remote` | — | `.env` |
-| `pnpm db:studio:local` / `db:studio:remote` | — | matching env |
+| Script | Docker | Env file | Migrate |
+|--------|--------|----------|---------|
+| `pnpm dev` | Required (compose up) | `.env.local` | Hayır — elle `pnpm db:migrate` |
+| `pnpm start` | — | `.env` / container env | Evet — `migrate deploy` |
+| `pnpm db:migrate` | — | `.env.local` | Local geliştirme (`migrate dev`) |
+| `pnpm db:studio` | — | `.env.local` | — |
 
 ## Renaming template
 

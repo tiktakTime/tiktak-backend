@@ -53,10 +53,9 @@ Migration’lar: `20260806140000_user`, `20260806150000_core_org_models`, `20260
 
 ```bash
 pnpm db:generate
-pnpm dev:local
-pnpm dev:remote
-pnpm db:deploy:local
-pnpm db:deploy:remote
+pnpm db:migrate          # local (.env.local) — migrate dev
+pnpm dev                 # local; migrate otomatik değil
+pnpm start               # deploy; start öncesi migrate deploy
 ```
 
 ## Yeni model ekleme

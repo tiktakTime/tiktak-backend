@@ -18,7 +18,8 @@
     "S3_SECRET_ACCESS_KEY",
     "S3_BUCKET_NAME",
     "RESEND_API_KEY",
-    "SKIP_ENV_VALIDATION"
+    "SKIP_ENV_VALIDATION",
+    "SKIP_DB_MIGRATE"
   ],
   "tasks": {
     "build": {
