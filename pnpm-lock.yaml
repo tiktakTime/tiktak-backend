@@ -159,12 +159,45 @@ importers:
 
   modules:
     dependencies:
+      '@tiktak/auth':
+        specifier: workspace:*
+        version: link:../packages/auth
+      '@tiktak/cache':
+        specifier: workspace:*
+        version: link:../packages/cache
+      '@tiktak/constants':
+        specifier: workspace:*
+        version: link:../packages/constants
+      '@tiktak/core':
+        specifier: workspace:*
+        version: link:../packages/core
       '@tiktak/database':
         specifier: workspace:*
         version: link:../packages/database
+      '@tiktak/env':
+        specifier: workspace:*
+        version: link:../packages/env
+      '@tiktak/middlewares':
+        specifier: workspace:*
+        version: link:../packages/middlewares
+      '@tiktak/queue':
+        specifier: workspace:*
+        version: link:../packages/queue
+      '@tiktak/storage':
+        specifier: workspace:*
+        version: link:../packages/storage
+      hono:
+        specifier: ^4.8.3
+        version: 4.13.0
       kysely:
         specifier: ^0.28.17
         version: 0.28.17
+      uuid:
+        specifier: ^13.0.2
+        version: 13.0.2
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@types/node':
         specifier: ^25.7.0
