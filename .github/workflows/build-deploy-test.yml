@@ -12,6 +12,8 @@ jobs:
       # Avoid actions/checkout (GitHub Actions CDN 503 breaks Set up job)
       - name: Checkout Repository
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           ORIGIN="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
