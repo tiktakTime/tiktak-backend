@@ -60,7 +60,9 @@ export default function configureOpenAPI(app: AppOpenAPI) {
   app.get(
     "/ui",
     Scalar({
-      url: isProduction ? "/no-index-openapi-doc" : "/doc",
+      url: isProduction
+        ? `${env.API_BASE_PATH}/no-index-openapi-doc`
+        : `${env.API_BASE_PATH}/doc`,
       theme: "default",
       layout: "modern",
       defaultHttpClient: {

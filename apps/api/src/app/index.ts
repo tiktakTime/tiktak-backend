@@ -3,7 +3,8 @@ import {
   configureCache,
   defaultCacheStore,
 } from "@tiktak/cache";
-import { createApp } from "@tiktak/core";
+import { createApp, createRouter } from "@tiktak/core";
+import { env } from "@tiktak/env";
 import { rateLimit } from "@tiktak/middlewares";
 
 import configureOpenAPI from "@/app/configure-open-api";
@@ -56,5 +57,8 @@ export function createConfiguredApp(options?: {
     return c.text("pong");
   });
 
-  return app;
+  // Gateway: /api → live (:7036), /api-test → test (:7037); prefix from API_BASE_PATH
+  const root = createRouter();
+  root.route(env.API_BASE_PATH, app);
+  return root;
 }

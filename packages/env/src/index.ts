@@ -11,6 +11,15 @@ const raw = createEnv({
     DIRECT_URL_LIVE: z.string().url().optional(),
     DIRECT_URL_TEST: z.string().url().optional(),
     PORT: z.coerce.number().default(3001),
+    /** HTTP mount prefix for the API (gateway /api and /api-test → /api). */
+    API_BASE_PATH: z
+      .string()
+      .default("/api")
+      .transform((v) => {
+        const trimmed = v.trim() || "/api";
+        const withSlash = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+        return withSlash.replace(/\/+$/, "") || "/api";
+      }),
     REDIS_URL: z.string().default("redis://localhost:6379"),
     // Optional until Faz 1 (jose + Redis session); starter auth still reads it.
     FIREBASE_PROJECT_ID: z.string().optional(),
