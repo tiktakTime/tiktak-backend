@@ -9,21 +9,8 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-      # Avoid actions/checkout (GitHub Actions CDN 503 breaks Set up job)
       - name: Checkout Repository
-        shell: bash
-        run: |
-          set -euo pipefail
-          ORIGIN="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if [ -d .git ]; then
-            git remote set-url origin "$ORIGIN"
-          else
-            git init
-            git remote add origin "$ORIGIN"
-          fi
-          git fetch --force origin "${GITHUB_SHA}"
-          git checkout --force "${GITHUB_SHA}"
-          git clean -ffdx
+        uses: actions/checkout@v2
 
       - name: Build Docker Image
         run: |
