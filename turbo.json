@@ -4,7 +4,11 @@
   "globalEnv": [
     "NODE_ENV",
     "DATABASE_URL",
+    "DATABASE_URL_LIVE",
+    "DATABASE_URL_TEST",
     "DIRECT_URL",
+    "DIRECT_URL_LIVE",
+    "DIRECT_URL_TEST",
     "PORT",
     "API_BASE_PATH",
     "REDIS_URL",
