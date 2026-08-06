@@ -4,7 +4,11 @@
   "globalEnv": [
     "NODE_ENV",
     "DATABASE_URL",
+    "DATABASE_URL_LIVE",
+    "DATABASE_URL_TEST",
     "DIRECT_URL",
+    "DIRECT_URL_LIVE",
+    "DIRECT_URL_TEST",
     "PORT",
     "API_BASE_PATH",
     "REDIS_URL",
@@ -14,7 +18,8 @@
     "S3_SECRET_ACCESS_KEY",
     "S3_BUCKET_NAME",
     "RESEND_API_KEY",
-    "SKIP_ENV_VALIDATION"
+    "SKIP_ENV_VALIDATION",
+    "SKIP_DB_MIGRATE"
   ],
   "tasks": {
     "build": {
