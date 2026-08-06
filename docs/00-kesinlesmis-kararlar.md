@@ -1,11 +1,11 @@
 # Kesinleşmiş kararlar
 
 Bu dosya planlama sırasında **kilitlenen** kararları toplar.  
-Henüz karar verilmemiş konular → [07-acik-sorular.md](./07-acik-sorular.md) (henüz oluşturulmadıysa bu dosyaya bak).
+Henüz karar verilmemiş konular → [07-acik-sorular.md](./07-acik-sorular.md).
 
 Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olmalı.
 
-**Son güncelleme:** 2026-08-04 — transcript’ten geri yükleme + güncel mimari (socket API içinde, `modules/` kök, Next.js tarzı klasörler).
+**Son güncelleme:** 2026-08-06 — API path (prefix yok), POC sırası (user), uygulama fazları, auth/starter referansı.
 
 ## Başlıklar
 
@@ -63,7 +63,7 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 |------|-------|
 | **Karar** | **Hono** + `@hono/node-server` (Node 24 üzerinde) |
 | **Tarih** | 2026-07-31 |
-| **Gerekçe** | TypeScript-first DX; `@hono/zod-openapi` ile validation + OpenAPI tek şemadan; 350 endpoint için daha az kalıp. Express greenfield için yetersiz. Fastify olgun ama Zod-OpenAPI + lemonerce/backend-starter referansları Hono yolunu kısaltır. Node adapter v2 ile performans mazereti kalktı. |
+| **Gerekçe** | TypeScript-first DX; `@hono/zod-openapi` ile validation + OpenAPI tek şemadan; 350 endpoint için daha az kalıp. Express greenfield için yetersiz. Fastify olgun ama Zod-OpenAPI + lemonerce/tiktak-backend referansları Hono yolunu kısaltır. Node adapter v2 ile performans mazereti kalktı. |
 | **Kapsam dışı** | Express (yeni monolit), Fastify, Elysia (Bun-first). |
 | **Sonraki etki** | Validation: **Zod** (aşağıda). OpenAPI code-first. ORM: Prisma migrate + Kysely (aşağıda). |
 
@@ -75,7 +75,7 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 |------|-------|
 | **Karar** | **Prisma migrate** (şema + migration) + **Kysely** (runtime query) + **`prisma-kysely`** (tip üretimi) |
 | **Tarih** | 2026-07-31 |
-| **Gerekçe** | Brownfield ~90 tablo: risk migrate tarafında. Prisma migrate olgun (`db pull`, baseline, `migrate deploy` + advisory lock). Runtime'da Prisma Client yok — ağır transaction / join / raw SQL için Kysely. `lemonerce` / `backend-starter` birebir bu stack. Edge/cold-start ihtiyacı yok (Node monolit). |
+| **Gerekçe** | Brownfield ~90 tablo: risk migrate tarafında. Prisma migrate olgun (`db pull`, baseline, `migrate deploy` + advisory lock). Runtime'da Prisma Client yok — ağır transaction / join / raw SQL için Kysely. `lemonerce` / `tiktak-backend` birebir bu stack. Edge/cold-start ihtiyacı yok (Node monolit). |
 | **Kapsam dışı** | Pure Prisma Client (runtime). Drizzle. Sequelize / TypeORM (greenfield). |
 | **Sonraki etki** | Validation: Zod + isteğe bağlı `zod-prisma-types`. Brownfield: `prisma db pull` → baseline → `migrate resolve`. |
 
@@ -107,7 +107,7 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 |------|-------|
 | **Karar** | **Zod v4** + **`@hono/zod-openapi`** (request/response validation + OpenAPI) |
 | **Tarih** | 2026-07-31 |
-| **Gerekçe** | Hono kararı Zod-OpenAPI yolunu güçlendirdi. lemonerce/backend-starter aynı stack. Mevcut Joi (45 dosya) yerine TS-native şema; `z.infer` ile tip + runtime tek yer. |
+| **Gerekçe** | Hono kararı Zod-OpenAPI yolunu güçlendirdi. lemonerce/tiktak-backend aynı stack. Mevcut Joi (45 dosya) yerine TS-native şema; `z.infer` ile tip + runtime tek yer. |
 | **Kapsam dışı** | Joi (legacy). TypeBox / Valibot (yeni monolit). |
 | **Sonraki etki** | Request → Zod parse → domain; hata → [Error sistemi](#error-sistemi). OpenAPI code-first. DB satır tipleri Prisma/Kysely'den; API DTO'ları Zod'dan (ayrı katman). |
 
@@ -121,6 +121,24 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 | 4 | **Parse sınırı:** handler'a girmeden `safeParse` / OpenAPI middleware. |
 | 5 | **Hata eşlemesi:** Zod issue'ları error wire şemasına (`VALIDATION_ERROR` + `errors[]`) ve DB Error modeline map edilir. |
 
+### Kural: generated vs modül API şemaları (2026-08-06)
+
+| # | Kural |
+|---|-------|
+| 1 | **`generated/zod` + `generated/kysely`:** `pnpm db:generate` ile migration sonrası; tablo **base** şeması; elle düzenlenmez. |
+| 2 | **`packages/database/dto/*`:** repo katmanı — Kysely kolon listeleri, hassas alan ayrımı (`password_hash`); **OpenAPI response sözleşmesi değil**. |
+| 3 | **API request/response Zod:** modül içinde, ilgili **contract’a özel elle** (`modules/*/*.contract.ts`, `*.types.ts`); zamanla DB row’dan ayrışır. |
+| 4 | **POC istisna:** `UserPublicSchema` şimdilik `UserSchema.omit`; nihai response tipi modül contract’ına taşınacak. |
+| 5 | **İsimlendirme:** DB kolon referansları **snake_case** (Prisma şema, Kysely, generated Zod). |
+
+### Kural: DB kolon adları (snake_case)
+
+| # | Kural |
+|---|-------|
+| 1 | Prisma model alanları doğrudan **snake_case** (`created_at`, `password_hash`); `@map` yok. |
+| 2 | Kysely generator: `camelCase` kapalı — tipler DB ile aynı. |
+| 3 | Tablo okuma/yazma ve generated Zod base şeması aynı isimleri kullanır. |
+
 ---
 
 ## Monorepo tooling
@@ -129,7 +147,7 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 |------|-------|
 | **Karar** | **pnpm workspaces** + **Turborepo** (`apps/*` + `packages/*` + `modules/`) |
 | **Tarih** | 2026-07-31 (workspace: 2026-08-04 `modules/` eklendi) |
-| **Gerekçe** | humans tek `package.json` + 16 serviste kopyalanmış altyapı → paylaşım sınırı yok. `api` / `worker` ayrı process; ortak `database`, `errors`, `auth` paketleri şart. lemonerce/backend-starter aynı yapı (onlar Bun PM; biz Node 24 → **pnpm**). |
+| **Gerekçe** | humans tek `package.json` + 16 serviste kopyalanmış altyapı → paylaşım sınırı yok. `api` / `worker` ayrı process; ortak `database`, `errors`, `auth` paketleri şart. lemonerce/tiktak-backend aynı yapı (onlar Bun PM; biz Node 24 → **pnpm**). |
 | **Kapsam dışı** | Nx. Tek root `package.json` (tüm kod tek paket). Bun / yarn PM. Domain entity'lerini ayrı npm paketi yapmak. |
 | **Sonraki etki** | Repo: `apps/api|worker`, `packages/*`, `modules/`. `packageManager: pnpm@…`. CI: `pnpm turbo run check/build`. |
 
@@ -213,7 +231,7 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 | **Tarih** | 2026-08-03 (katman: 2026-08-04 güncellendi) |
 | **Gerekçe** | web-v2’de **350 operasyon**: **%63 CRUD**, **%37 özel**. Sabit 6 dosyalı şablon (contract/routes/repo/service) her modüle aynı maliyeti yüklüyordu. Config’ten CRUD üretmek boilerplate’i siler; özel operasyonlar `operations/*.ts` kalır. |
 | **Kapsam dışı** | Her modüle sabit dosya şablonu. Domain kodunu `packages/` altına koymak. |
-| **Sonraki etki** | POC modülü **`work`** (CRUD + özel operasyonlar). Taşıma sırasında modüller tek tek eklenir (şu an iskelet: `user`). |
+| **Sonraki etki** | Factory doğrulama modülü **`user`** (CRUD, uçtan uca test). **`work`** ve diğer domain modülleri altyapı + user POC sonrası taşınır. `packages/module-kit` klasörü kalır; API detayları user POC sırasında netleşir, sonra dondurulur. |
 
 ### Kural: modül dosya düzeni
 
@@ -239,7 +257,7 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 
 | # | Kural |
 |---|-------|
-| 1 | **POC hedefi factory:** modül `work` — CRUD + özel operasyon + transaction. |
+| 1 | **POC hedefi factory:** modül **`user`** — CRUD + uçtan uca test. `work` (CRUD + özel operasyon + transaction) domain taşıması fazında. |
 | 2 | **Kabul:** uçtan uca tip akışı (`any` kaçışı yok) — tablo → handler → response → OpenAPI → Orval. |
 | 3 | **Config donması:** `crud` seçenek kümesi POC sonunda dondurulur; yeni ihtiyaç `defineOperation`. |
 
@@ -265,7 +283,21 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 | **Tarih** | 2026-08-01 |
 | **Gerekçe** | Big-bang riski yüksek. Kalite: önce sözleşme (doküman/test), sonra kod. |
 | **Kapsam dışı** | Tüm domain’i testsiz taşımak. |
-| **Sonraki etki** | İlk POC: `work` veya `settlement`. AGENTS.md: doküman değişince önce test. |
+| **Sonraki etki** | Sıra: altyapı → `user` factory POC → domain modülleri (person, work, …). AGENTS.md: doküman değişince önce test. |
+
+---
+
+## Uygulama sırası (geçiş)
+
+| Alan | Karar |
+|------|-------|
+| **Karar** | Geçiş **uygulama çalışır haldeyken** faz faz; domain/model taşıması **en son**. |
+| **Tarih** | 2026-08-06 |
+| **Faz 0** | **Database** — `packages/database` (Prisma migrate + Kysely). Modeller **tek tek** humans → yeni DB (`tiktak-v2`); bulk `db pull` yok. Klasör: `prisma/<model>/` + native enum. Detay: `docs/database.md`. İlk model: `user`. |
+| **Faz 1** | **Altyapı** — auth, cache, http/errors, env, logger, … (`tiktak-backend` referans; kararlar araç seçimi). |
+| **Faz 2** | **`module-kit`** — klasör kalır; mount/registry iskeleti user POC ile netleşir (API sonra evrilebilir). |
+| **Faz 3** | **`modules/user` POC** — factory + CRUD; uçtan uca test edilebilir. |
+| **Faz 4** | **Domain / model taşıması** — humans → `modules/` (person, work, organization, …). |
 
 ---
 
@@ -289,12 +321,13 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 | **Gerekçe** | humans’ta v1 + farklı response formatı; greenfield fırsatında v1 kesilir. |
 | **Kapsam dışı** | `/core` legacy path’lerini birebir yeniden yazmak. |
 
-### Kritik bulgu: API path prefix
+### Kural: API path (prefix yok)
 
 | # | Kural |
 |---|-------|
-| 1 | Yeni API path prefix’i cutover öncesi netleştirilir (örn. `/core/v2/...` veya tek prefix). |
-| 2 | web-v2 servis yolları ile birebir uyum taşıma sırasında doğrulanır. |
+| 1 | **`/core` ve `/core/v2` prefix’i yok.** Route’lar app root’tan mount edilir (örn. `/user/search`, `/auth/login`). |
+| 2 | humans’taki `/core/v2/...` yolları **eski sözleşme**; domain taşımasında path eşlemesi yeni sözleşmeye göre yapılır. |
+| 3 | web cutover: Orval / `api-routes` yeni OpenAPI path’lerinden; eski `/core/v2` birebir taşınmaz. |
 
 ---
 
@@ -351,6 +384,7 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 | **Gerekçe** | Success/error aynı zarfta karışmasın. Greenfield + OpenAPI codegen ile FE cutover mümkün. Anlam korunarak yeniden düzenlenir. |
 | **Kapsam dışı** | Eski numerik katalogu birebir kopyalamak. Kullanıcıya stack/SQL sızdırmak. |
 | **Sonraki etki** | `packages/errors` + `schema.prisma` Error modeli. Merkezi boru + PII redaction + persist→Pino fallback. |
+| **Catalog migrasyonu** | Humans `catalog.meta.json` + 6 locale **taşınır** (domain kuralları). Yapı RFC 9457’ye uyarlanır; kodlar korunur. **Zamanlama: en son** — önce altyapı + user POC; seed catalog yeterli. Detay: `.cursor/cross-project/error-catalog.md`. |
 
 ### Kural: response (client’a giden)
 
@@ -400,6 +434,7 @@ Tek tek eklenir; her satır geri alınmadan önce bilinçli tartışılmış olm
 | **Gerekçe** | Uygulama gateway / `crypted-jwt` / `rediskey` proxy gereksiz. Token’da member dump anti-pattern. Kısa access JWT + sunucu session. |
 | **Kapsam dışı** | Uygulama gateway process. Access token’da permission dump. `crypted-jwt`. |
 | **Sonraki etki** | Login/refresh/logout `apps/api`. bcrypt mevcut hash; argon2 kademeli. Permission slug middleware korunur. |
+| **Uygulama referansı** | Session, Redis, auth middleware iskeleti → workspace **`tiktak-backend`** (`packages/auth`, `packages/cache`, `packages/middlewares`). Araç seçimi bu dosyada; bağlantı deseni starter’dan uyarlanır. Stub auth yok. |
 
 ### Kural: token modeli (ince JWT)
 

@@ -1,7 +1,0 @@
-{
-  "name": "@tiktak/tsconfig",
-  "private": true,
-  "exports": {
-    "./base.json": "./base.json"
-  }
-}

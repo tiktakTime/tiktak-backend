@@ -1,0 +1,48 @@
+model User {
+  id                          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  country_id                  String?     @db.Uuid
+  nationality_id              String?     @db.Uuid
+  system_role_id              String?     @db.Uuid
+  first_name                  String      @db.VarChar(255)
+  last_name                   String      @db.VarChar(255)
+  email                       String      @unique(map: "idx_user_email_unique") @db.VarChar(255)
+  password                    String?     @db.VarChar(255)
+  gender                      UserGender  @default(none)
+  birth_location              String?     @db.VarChar(255)
+  birthdate                   DateTime?   @db.Date
+  image                       String?
+  phone_landline              String?     @unique(map: "idx_user_phone_landline_unique") @db.VarChar(15)
+  phone_mobile                String?     @unique(map: "idx_user_phone_mobile_unique") @db.VarChar(50)
+  driver_license_no           String?     @db.VarChar(255)
+  driver_license_type         String?     @db.VarChar(255)
+  driver_license_organization String?     @db.VarChar(255)
+  insurance_company           String?     @db.VarChar(255)
+  insurance_no                String?     @db.VarChar(255)
+  insurance_class             String?     @db.VarChar(255)
+  tax_no                      String?     @db.VarChar(255)
+  tax_id                      String?     @db.VarChar(255)
+  tax_class                   String?     @db.VarChar(255)
+  child_exempt_amount         String?     @db.VarChar(255)
+  health_insurance            String?     @db.VarChar(255)
+  social_health_no            String?     @db.VarChar(255)
+  status                      UserStatus  @default(active)
+  expired_date                DateTime?   @db.Timestamptz(6)
+  notification_key            String?
+  notification_key_web        String?
+  created_at                  DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime    @default(now()) @db.Timestamptz(6)
+  deleted_at                  DateTime?   @db.Timestamptz(6)
+  last_login_at               DateTime?   @db.Timestamptz(6)
+  last_password_change_at     DateTime?   @db.Timestamptz(6)
+  is_email_verified           Boolean     @default(false)
+  is_phone_verified           Boolean     @default(false)
+  is_two_factor_enabled       Boolean     @default(false)
+  recovery_email              String?     @unique(map: "idx_user_recovery_email_unique") @db.VarChar(255)
+  is_recovery_email_verified  Boolean     @default(false)
+
+  @@index([country_id], map: "idx_user_country_id")
+  @@index([nationality_id], map: "idx_user_nationality_id")
+  @@index([status], map: "idx_user_status")
+  @@index([system_role_id], map: "idx_user_system_role_id")
+  @@map("user")
+}

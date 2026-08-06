@@ -1,0 +1,6 @@
+enum InviteStatus {
+  pending
+  accepted
+  expired
+  canceled
+}

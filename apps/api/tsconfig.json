@@ -1,9 +1,16 @@
 {
-  "extends": "@tiktak/tsconfig/base.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "dist",
-    "noEmit": true
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "outDir": "./dist",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["**/*.ts"]
+  "include": ["src", "scripts"],
+  "exclude": ["node_modules", "dist"]
 }

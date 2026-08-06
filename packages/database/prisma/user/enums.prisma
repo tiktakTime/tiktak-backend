@@ -1,0 +1,11 @@
+enum UserStatus {
+  active
+  inactive
+  blocked
+}
+
+enum UserGender {
+  female
+  male
+  none
+}

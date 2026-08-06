@@ -1,0 +1,30 @@
+model Invite {
+  id              String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organization_id String       @db.Uuid
+  user_id         String?      @db.Uuid
+  person_id       String       @db.Uuid
+  email           String       @db.VarChar(255)
+  token           String       @unique(map: "idx_invite_token_unique") @db.VarChar(128)
+  status          InviteStatus @default(pending)
+  description     String?
+  expires_at      DateTime     @db.Timestamptz(6)
+  accepted_at     DateTime?    @db.Timestamptz(6)
+  canceled_at     DateTime?    @db.Timestamptz(6)
+  accept_attempts Int          @default(0)
+  last_attempt_at DateTime?    @db.Timestamptz(6)
+  locked_until    DateTime?    @db.Timestamptz(6)
+  created_by_id   String?      @db.Uuid
+  updated_by_id   String?      @db.Uuid
+  deleted_by_id   String?      @db.Uuid
+  created_at      DateTime     @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime     @default(now()) @db.Timestamptz(6)
+  deleted_at      DateTime?    @db.Timestamptz(6)
+
+  @@index([organization_id], map: "idx_invite_organization_id")
+  @@index([user_id], map: "idx_invite_user_id")
+  @@index([person_id], map: "idx_invite_person_id")
+  @@index([status], map: "idx_invite_status")
+  @@index([expires_at], map: "idx_invite_expires_at")
+  @@index([locked_until], map: "idx_invite_locked_until")
+  @@map("invite")
+}

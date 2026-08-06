@@ -2,23 +2,33 @@
   "name": "@tiktak/database",
   "type": "module",
   "exports": {
-    "./client": "./client/index.ts"
+    ".": {
+      "import": "./src/index.ts"
+    }
   },
   "scripts": {
-    "check": "tsc --noEmit",
-    "db:ping": "tsx scripts/ping.ts"
+    "db:generate": "prisma generate && tsx scripts/patch-json-schema.ts",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:status": "prisma migrate status",
+    "format": "prisma format"
   },
+
   "dependencies": {
     "@tiktak/env": "workspace:*",
+    "@prisma/client": "^7.8.0",
+    "@prisma/client-runtime-utils": "^7.8.0",
     "kysely": "^0.28.17",
-    "pg": "^8.13.3"
+    "pg": "^8.13.3",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@tiktak/tsconfig": "workspace:*",
     "@types/node": "^25.7.0",
     "@types/pg": "^8.20.0",
-    "dotenv": "^17.4.2",
+    "prisma": "^7.8.0",
+    "prisma-kysely": "^3.1.0",
+    "typescript": "~6.0.3",
     "tsx": "^4.21.0",
-    "typescript": "~6.0.3"
+    "zod-prisma-types": "^3.3.11"
   }
 }

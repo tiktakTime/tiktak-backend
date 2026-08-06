@@ -1,0 +1,9 @@
+enum SocialMediaPlatform {
+  instagram
+  facebook
+  linkedin
+  tiktok
+  twitter
+  youtube
+  website
+}

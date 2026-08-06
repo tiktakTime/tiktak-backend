@@ -1,9 +1,10 @@
 {
-  "extends": "@tiktak/tsconfig/base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": ".",
     "outDir": "dist",
-    "noEmit": true
+    "rootDir": "src",
+    "types": ["node"]
   },
-  "include": ["index.ts"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

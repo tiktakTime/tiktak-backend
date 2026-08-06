@@ -1,0 +1,21 @@
+enum OrganizationStatus {
+  active
+  inactive
+  blocked
+}
+
+enum OrganizationBusinessType {
+  sole_proprietorship
+  corporation
+}
+
+enum OrganizationLegalForm {
+  gmbh
+  ug
+  ag
+  kgaa
+  gmbh_co_kg
+  ug_co_kg
+  ag_co_kg
+  se
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@tiktak/core",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./openapi": "./src/openapi.ts",
+    "./router": "./src/router.ts",
+    "./types": "./src/types.ts",
+    "./error-handler": "./src/error-handler.ts",
+    "./paginate": "./src/paginate.ts",
+    "./route-helpers": "./src/route-helpers/index.ts"
+  },
+  "dependencies": {
+    "@hono/zod-openapi": "^1.4.0",
+    "@tiktak/database": "workspace:*",
+    "@tiktak/env": "workspace:*",
+    "hono": "^4.8.3",
+    "kysely": "^0.28.17",
+    "stoker": "^2.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "typescript": "~6.0.3"
+  }
+}

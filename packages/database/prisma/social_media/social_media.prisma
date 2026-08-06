@@ -1,0 +1,17 @@
+model SocialMedia {
+  id              String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organization_id String?             @db.Uuid
+  reference_id    String              @db.Uuid
+  platform        SocialMediaPlatform
+  url             String?             @db.VarChar(500)
+  username        String?             @db.VarChar(255)
+  created_at      DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime            @default(now()) @db.Timestamptz(6)
+  deleted_at      DateTime?           @db.Timestamptz(6)
+
+  @@index([organization_id], map: "idx_social_media_organization_id")
+  @@index([reference_id], map: "idx_social_media_reference_id")
+  @@index([platform], map: "idx_social_media_platform")
+  @@index([reference_id, platform], map: "idx_social_media_reference_platform")
+  @@map("social_media")
+}

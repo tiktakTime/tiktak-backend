@@ -1,9 +1,8 @@
 {
-  "extends": "@tiktak/tsconfig/base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "dist",
-    "noEmit": true
+    "outDir": "dist"
   },
-  "include": ["client/**/*.ts", "scripts/**/*.ts"]
+  "include": ["src", "prisma", "scripts"],
+  "exclude": ["node_modules", "dist"]
 }

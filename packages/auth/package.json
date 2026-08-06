@@ -1,0 +1,27 @@
+{
+  "name": "@tiktak/auth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens": "./src/tokens.ts",
+    "./hash": "./src/hash.ts",
+    "./middlewares/auth": "./src/middlewares/auth.ts",
+    "./middlewares/super-admin": "./src/middlewares/super-admin.ts",
+    "./middlewares/organization": "./src/middlewares/organization.ts",
+    "./middlewares/public-cors": "./src/middlewares/public-cors.ts"
+  },
+  "dependencies": {
+    "@tiktak/core": "workspace:*",
+    "@tiktak/database": "workspace:*",
+    "@tiktak/env": "workspace:*",
+    "bcryptjs": "^3.0.3",
+    "hono": "^4.8.3",
+    "jose": "^6.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "typescript": "~6.0.3"
+  }
+}

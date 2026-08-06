@@ -1,0 +1,27 @@
+{
+  "name": "@tiktak/middlewares",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./auth": "./src/auth.ts",
+    "./organization": "./src/organization.ts",
+    "./public-cors": "./src/public-cors.ts",
+    "./rate-limit": "./src/rate-limit.ts",
+    "./super-admin": "./src/super-admin.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.9",
+    "@tiktak/auth": "workspace:*",
+    "@tiktak/core": "workspace:*",
+    "@tiktak/database": "workspace:*",
+    "@tiktak/env": "workspace:*",
+    "hono": "^4.8.3",
+    "ioredis": "5.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "typescript": "~6.0.3"
+  }
+}

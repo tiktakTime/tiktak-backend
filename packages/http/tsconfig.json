@@ -1,9 +1,0 @@
-{
-  "extends": "@tiktak/tsconfig/base.json",
-  "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "dist",
-    "noEmit": true
-  },
-  "include": ["app/**/*.ts"]
-}
