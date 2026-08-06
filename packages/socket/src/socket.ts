@@ -2,14 +2,13 @@ import type { Server as HttpServer } from "node:http";
 
 import { Server, Socket } from "socket.io";
 
-import { verifyFirebaseToken } from "@tiktak/auth";
+import { type AuthIdentity, verifyFirebaseToken } from "@tiktak/auth";
 import { setSocketEmitter } from "@tiktak/cache";
-import type { User } from "@tiktak/database";
 
 let io: Server | null = null;
 
 interface AuthenticatedSocket extends Socket {
-  user?: User;
+  user?: AuthIdentity;
 }
 
 export function attachSocketServer(httpServer: HttpServer) {

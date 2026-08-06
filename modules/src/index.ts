@@ -1,25 +1,9 @@
-export * from "./types";
-export * from "./invalidator/invalidator.repo";
+/**
+ * Lemonerce starter domains were removed — they targeted OrganizationInvitation /
+ * MembershipRole / User.name which do not exist in humans schema.
+ *
+ * Reimplement against invite / role / person / user (snake_case) in Faz 3–4.
+ * API routers stay unmounted until then (see apps/api/src/app/index.ts).
+ */
 
-export {
-  organizationRouter,
-  organizationRepo,
-  membershipRepo,
-  invitationRepo,
-  roleRepo,
-  OrganizationRepository,
-  MembershipRepository,
-  InvitationRepository,
-  RoleRepository,
-  coreContracts as organizationCoreContracts,
-  membersContracts as organizationMembersContracts,
-  invitationsContracts as organizationInvitationsContracts,
-  rolesContracts as organizationRolesContracts,
-} from "./organization/index";
-
-export {
-  userRouter,
-  userRepo,
-  UserRepository,
-  userContracts,
-} from "./user/index";
+export type { DB, Database } from "./types";

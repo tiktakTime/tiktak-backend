@@ -73,7 +73,7 @@ importers:
         version: link:../../packages/database
       '@tiktak/domains':
         specifier: workspace:*
-        version: link:../../packages/domains
+        version: link:../../modules
       '@tiktak/env':
         specifier: workspace:*
         version: link:../../packages/env
@@ -159,45 +159,12 @@ importers:
 
   modules:
     dependencies:
-      '@tiktak/auth':
-        specifier: workspace:*
-        version: link:../packages/auth
-      '@tiktak/cache':
-        specifier: workspace:*
-        version: link:../packages/cache
-      '@tiktak/constants':
-        specifier: workspace:*
-        version: link:../packages/constants
-      '@tiktak/core':
-        specifier: workspace:*
-        version: link:../packages/core
       '@tiktak/database':
         specifier: workspace:*
         version: link:../packages/database
-      '@tiktak/env':
-        specifier: workspace:*
-        version: link:../packages/env
-      '@tiktak/middlewares':
-        specifier: workspace:*
-        version: link:../packages/middlewares
-      '@tiktak/queue':
-        specifier: workspace:*
-        version: link:../packages/queue
-      '@tiktak/storage':
-        specifier: workspace:*
-        version: link:../packages/storage
-      hono:
-        specifier: ^4.8.3
-        version: 4.13.0
       kysely:
         specifier: ^0.28.17
         version: 0.28.17
-      uuid:
-        specifier: ^13.0.2
-        version: 13.0.2
-      zod:
-        specifier: ^4.4.3
-        version: 4.4.3
     devDependencies:
       '@types/node':
         specifier: ^25.7.0
@@ -338,55 +305,6 @@ importers:
       zod-prisma-types:
         specifier: ^3.3.11
         version: 3.3.11(@prisma/client@7.9.1(prisma@7.9.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3))(typescript@6.0.3))(prisma@7.9.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3))(zod@4.4.3)
-
-  packages/domains:
-    dependencies:
-      '@tiktak/auth':
-        specifier: workspace:*
-        version: link:../auth
-      '@tiktak/cache':
-        specifier: workspace:*
-        version: link:../cache
-      '@tiktak/constants':
-        specifier: workspace:*
-        version: link:../constants
-      '@tiktak/core':
-        specifier: workspace:*
-        version: link:../core
-      '@tiktak/database':
-        specifier: workspace:*
-        version: link:../database
-      '@tiktak/env':
-        specifier: workspace:*
-        version: link:../env
-      '@tiktak/middlewares':
-        specifier: workspace:*
-        version: link:../middlewares
-      '@tiktak/queue':
-        specifier: workspace:*
-        version: link:../queue
-      '@tiktak/storage':
-        specifier: workspace:*
-        version: link:../storage
-      hono:
-        specifier: ^4.8.3
-        version: 4.13.0
-      kysely:
-        specifier: ^0.28.17
-        version: 0.28.17
-      uuid:
-        specifier: ^13.0.2
-        version: 13.0.2
-      zod:
-        specifier: ^4.4.3
-        version: 4.4.3
-    devDependencies:
-      '@types/node':
-        specifier: ^25.7.0
-        version: 25.9.5
-      typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
 
   packages/env:
     dependencies:

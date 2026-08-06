@@ -12,6 +12,17 @@ declare module "hono" {
   }
 }
 
+function splitDisplayName(name: string): { first_name: string; last_name: string } {
+  const trimmed = name.trim();
+  if (!trimmed) {
+    return { first_name: "User", last_name: "-" };
+  }
+  const parts = trimmed.split(/\s+/);
+  const first_name = parts[0] ?? "User";
+  const last_name = parts.slice(1).join(" ") || "-";
+  return { first_name, last_name };
+}
+
 export const authMiddleware: MiddlewareHandler = async (c, next) => {
   const user = c.get("user");
 
@@ -34,33 +45,30 @@ export const authMiddleware: MiddlewareHandler = async (c, next) => {
   }
 
   try {
-    const firebaseUser = await verifyFirebaseToken(token);
+    const identity = await verifyFirebaseToken(token);
 
     let dbUser = await db
-      .selectFrom("User")
+      .selectFrom("user")
       .selectAll()
-      .where("id", "=", firebaseUser.id)
+      .where("id", "=", identity.id)
       .executeTakeFirst();
 
     if (!dbUser) {
       const defaultEmail =
-        firebaseUser.email || `${firebaseUser.id}@noemail.local`;
-      const defaultName =
-        firebaseUser.name || `User ${firebaseUser.id.substring(0, 6)}`;
+        identity.email || `${identity.id}@noemail.local`;
+      const { first_name, last_name } = splitDisplayName(
+        identity.name || `User ${identity.id.substring(0, 6)}`,
+      );
 
       dbUser = await db
-        .insertInto("User")
+        .insertInto("user")
         .values({
-          id: firebaseUser.id,
+          id: identity.id,
           email: defaultEmail,
-          name: defaultName,
-          avatar: firebaseUser.avatar,
-          isVerified: firebaseUser.isVerified,
-          isBanned: false,
-          isDeleted: false,
-          isSuperAdmin: firebaseUser.isSuperAdmin,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          first_name,
+          last_name,
+          image: identity.avatar,
+          is_email_verified: identity.isVerified,
         })
         .returningAll()
         .executeTakeFirst();
@@ -70,16 +78,17 @@ export const authMiddleware: MiddlewareHandler = async (c, next) => {
       }
     }
 
-    if (dbUser.isBanned) {
+    if (dbUser.status === "blocked") {
       throw new AppError("FORBIDDEN", "error.user_banned");
     }
 
-    if (dbUser.isDeleted) {
+    if (dbUser.deleted_at) {
       throw new AppError("UNAUTHORIZED", "error.user_deleted");
     }
 
     c.set("user", dbUser);
-    c.set("isSuperAdmin", dbUser.isSuperAdmin === true);
+    // Super-admin via system_role lands in Faz 1 auth; claim only for now.
+    c.set("isSuperAdmin", identity.isSuperAdmin === true);
 
     await next();
   } catch (error) {

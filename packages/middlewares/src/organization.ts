@@ -59,14 +59,15 @@ export const organizationMiddleware: MiddlewareHandler = async (c, next) => {
 
 async function getUserMemberships(userId: string): Promise<Array<string>> {
   const result = await db
-    .selectFrom("OrganizationMembership")
-    .select(["organizationId"])
-    .where("userId", "=", userId)
+    .selectFrom("person")
+    .select(["organization_id"])
+    .where("user_id", "=", userId)
+    .where("deleted_at", "is", null)
     .execute();
 
   return result
-    .map((row: { organizationId: string }) => row.organizationId)
-    .filter((id: string): id is string => id !== null);
+    .map((row) => row.organization_id)
+    .filter((id): id is string => id !== null);
 }
 
 export function clearAllMembershipCache(userId: string) {

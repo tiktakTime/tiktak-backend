@@ -52,7 +52,8 @@ export const publicCorsMiddleware: MiddlewareHandler = async (c, next) => {
   if (path.includes("/p/") && orgId) {
     try {
       const organization = await db
-        .selectFrom("Organization")
+        .selectFrom("organization")
+        .select("id")
         .where("id", "=", orgId)
         .executeTakeFirst();
 

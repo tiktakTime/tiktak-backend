@@ -3,7 +3,7 @@ import { Pool } from "pg";
 
 import { env } from "@tiktak/env";
 
-import type { DB } from "./generated/kysely/index.js";
+import type { DB } from "./kysely/index.js";
 
 const isSeedMode =
   process.argv.includes("--seed") ||
