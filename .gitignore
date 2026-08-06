@@ -6,6 +6,12 @@ node_modules
 .pnp.js
 
 # Local env files
+.env
+.env.local
+.env.remote
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Testing
 coverage
