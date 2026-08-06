@@ -16,6 +16,8 @@ COPY scripts ./scripts
 COPY .env .env.local ./
 
 RUN pnpm install --frozen-lockfile
+# generated/ is gitignored — must build inside the image
+RUN pnpm db:generate
 
 ENV PORT=7036
 EXPOSE 7036
