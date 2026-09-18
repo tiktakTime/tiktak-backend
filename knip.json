@@ -1,0 +1,24 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["index.ts!", "scripts/**/*.{mjs,ts}!", "server/index.ts!"],
+  "project": ["**/*.{ts,js}", "!**/generated/**", "!docs/**"],
+  "exclude": ["exports", "types", "nsExports", "nsTypes"],
+  "ignore": [
+    "**/generated/**",
+    "prisma.config.ts",
+    "core/files/**",
+    "modules/country/country.repo.ts",
+    "modules/user_device/user_device.repo.ts",
+    "modules/person_permission/person_permission.repo.ts"
+  ],
+  "ignoreDependencies": [
+    "prisma-kysely",
+    "@types/pg",
+    "@aws-sdk/client-s3",
+    "file-type",
+    "heic-convert",
+    "is-svg",
+    "sharp"
+  ],
+  "ignoreBinaries": ["dotenv", "dot"]
+}

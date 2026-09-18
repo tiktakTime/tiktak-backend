@@ -1,0 +1,13 @@
+// Datasource + generators only. Models live in `modules/<entity>/<entity>.prisma`.
+
+generator kysely {
+  provider     = "prisma-kysely"
+  output       = "../core/database/generated/kysely"
+  fileName     = "index.ts"
+  enumFileName = "enums.ts"
+}
+
+// Prisma 7 no longer accepts `url` here — it lives in prisma.config.ts.
+datasource db {
+  provider = "postgresql"
+}

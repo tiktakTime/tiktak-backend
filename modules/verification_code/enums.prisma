@@ -1,0 +1,18 @@
+enum VerificationCodeType {
+  register
+  invite
+  access_confirm
+  password_reset
+  email_change
+  two_factor
+  phone_verification
+  account_recovery
+  login_verification
+}
+
+enum VerificationCodeStatus {
+  pending
+  verified
+  expired
+  cancelled
+}

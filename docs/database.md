@@ -1,67 +1,117 @@
 # Database
 
-Prisma (şema + migrate) + Kysely (runtime query).  
-Yeni DB: `tiktak-v2` / `tiktak-test-v2`. Kaynak modeller: `tiktak-service-humans`.
+Prisma (şema + migrate) + Kysely (runtime query). Minimum setup.
 
-## Kararlar
+Genel mimari: [architecture.md](./architecture.md) · Kararlar: [decisions.md](./decisions.md)
 
-| Konu | Karar |
-|------|--------|
-| Taşıma | Modeller **tek tek** (veya bağımlı paket); bulk `prisma db pull` yok |
-| Klasör | Her model: `prisma/<model>/` |
-| Dosyalar | `<model>.prisma` + `enums.prisma` (gerekirse) + `<model>.md` |
-| Comment / açıklama | Sadece `<model>.md` — migration’a `COMMENT ON` yok |
-| Enum | **Prisma native** — model klasöründe `enums.prisma`; paylaşılan enum ilk tanımlayan klasörde |
-| Tablo adı | Humans ile aynı (`role`, `person`, …); rename yok |
-| Ertelenen FK | Hedef yoksa / audit: düz UUID; `@relation` sonra |
-| Runtime | **Kysely** (`src/kysely/`). `generated/client` + `generated/zod` tooling |
-| Env | `.env.local` (local Docker) / `.env` (remote) — `pnpm dev` / `dev:remote` |
+---
 
-## Klasör şablonu
+## Sorumluluk ayrımı
+
+| Ne                                         | Nerede                                              |
+| ------------------------------------------ | --------------------------------------------------- |
+| Entity `.prisma`, `enums.prisma`, `doc.md` | `modules/<entity>/`                                 |
+| Modül indeksi                              | [`modules/doc.md`](../modules/doc.md)               |
+| Generator tanımı                           | `modules/schema.prisma`                             |
+| Migration SQL                              | `core/database/prisma/migrations/`                  |
+| Kysely pool                                | `core/database/db.ts`                               |
+| Generate çıktısı                           | `core/database/generated/kysely/` (gitignore)       |
+| Modül sabitleri                            | `modules/<entity>/*.ts` (ör. `invite/constants.ts`) |
+
+---
+
+## Ne var / ne yok
+
+| Parça                             | Durum                              |
+| --------------------------------- | ---------------------------------- |
+| `prisma-kysely` generate          | ✅                                 |
+| Prisma migrate / deploy           | ✅                                 |
+| Prisma Client runtime             | ❌                                 |
+| Zod generate (`zod-prisma-types`) | ❌ (şimdilik)                      |
+| Elle `kysely/` kopyası            | ❌ — tek kaynak `generated/kysely` |
+
+---
+
+## Klasör
 
 ```
-prisma/
+modules/
   schema.prisma
-  migrations/
-  <table_or_slug>/
-    <name>.prisma
-    enums.prisma    # optional
-    <name>.md
+  user/
+  country/
+  organization/
+  role/ | permission/ | role_permission/
+  person/ | person_permission/
+  employee/
+  access/
+
+core/database/
+  prisma/migrations/
+  db.ts
+  generated/kysely/
 ```
 
-## Mevcut modeller
+---
 
-| Klasör | Tablo | Humans |
-|--------|-------|--------|
-| `user/` | `user` | `user` |
-| `country/` | `country` | `country` |
-| `organization/` | `organization` | `organization` |
-| `permission/` | `permission` | `permission` |
-| `role/` | `role` | `role` |
-| `role_permission/` | `role_permission` | `role_permission` |
-| `person_permission/` | `person_permission` | `person_permission` |
-| `person/` | `person` | `person` |
-| `company/` | `company` | `company` |
-| `address/` | `address` | `address` |
-| `bank_account/` | `bank_account` | `bank_account` |
-| `social_media/` | `social_media` | `social_media` |
-| `invite/` | `invite` | `invite` |
+## Akış
 
-Migration’lar: `20260806140000_user`, `20260806150000_core_org_models`, `20260806160000_person_permission`.
+```
+modules/*.prisma  →  prisma migrate  →  SQL (migrations/)
+                   →  prisma generate  →  generated/kysely/
+                                              ↓
+                                         db.ts (Kysely<DB>)
+```
+
+---
 
 ## Komutlar
 
 ```bash
-pnpm db:generate
-pnpm db:migrate          # local (.env.local) — migrate dev
-pnpm dev                 # local; migrate otomatik değil
-pnpm start               # deploy; start öncesi migrate deploy
+pnpm db:generate        # Kysely tipleri
+pnpm db:migrate         # local migrate dev (.env.local)
+pnpm db:deploy:local    # local migrate deploy
+pnpm db:deploy          # prod migrate deploy
+pnpm db:status
+pnpm db:studio
 ```
+
+---
 
 ## Yeni model ekleme
 
-1. Humans `model.js` oku.
-2. `prisma/<model>/` — prisma + enums + md.
-3. `prisma/migrations/<timestamp>_.../migration.sql`.
-4. `src/kysely/` tiplerini güncelle + `pnpm db:generate` (Zod).
-5. `db:deploy` (hedef DB’ye göre).
+1. `modules/<entity>/` — `.prisma` + isteğe bağlı `enums.prisma` + `doc.md`
+2. `modules/<entity>/<entity>.repo.ts`
+3. Migration: `pnpm db:migrate` (veya SQL + `db:deploy`)
+4. `pnpm db:generate`
+5. [`modules/doc.md`](../modules/doc.md) listesine satır ekle
+
+---
+
+## Mevcut modeller
+
+Tam liste, alan açıklamaları ve repo yüzeyi → **[`modules/doc.md`](../modules/doc.md)**.
+
+| Modül                                   | Tablo               | Not                                        |
+| --------------------------------------- | ------------------- | ------------------------------------------ |
+| `user`                                  | `user`              | Platform hesabı                            |
+| `organization`                          | `organization`      | Kiracı                                     |
+| `person`                                | `person`            | Org kişi                                   |
+| `employee`                              | `employee`          | Org çalışan (`experience_id` henüz FK’siz) |
+| `access`                                | `access`            | Üyelik köprüsü                             |
+| `role` / `permission`                   | …                   | Yetki                                      |
+| `role_permission` / `person_permission` | …                   | Junction                                   |
+| `invite`                                | `invite`            | Davet                                      |
+| `verification_code`                     | `verification_code` | Token / OTP                                |
+| `country`                               | `country`           | Lookup                                     |
+
+**Bilinçli ertelenen:** `experience` / `company`, `address`, `bank_account`, `social_media`, `file`.
+
+---
+
+## Kurallar
+
+1. **Şema kaynağı** `modules/` — `core/database` domain modeli içermez.
+2. **Kysely tipleri** generate edilir; elle düzenlenmez.
+3. **Prod’da** yalnızca `migrate deploy`.
+4. **Kolon adları** snake_case.
+5. Her modülde **`doc.md`** zorunlu; indeks [`modules/doc.md`](../modules/doc.md).

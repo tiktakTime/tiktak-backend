@@ -1,0 +1,254 @@
+{
+  "ACCESS_ALREADY_EXISTS": {
+    "title": "Access already exists",
+    "message": "Access to this organization already exists."
+  },
+  "ACCESS_INACTIVE": {
+    "title": "Access inactive",
+    "message": "Your access to this organization is not active."
+  },
+  "ACCESS_NOT_FOUND": {
+    "title": "Access not found",
+    "message": "The access record could not be found."
+  },
+  "ALREADY_ACTIVE": {
+    "title": "Already active",
+    "message": "This record is not deleted and cannot be restored."
+  },
+  "BAD_REQUEST": {
+    "title": "Ungültige Anfrage",
+    "message": "Die Anfrage konnte nicht verstanden werden."
+  },
+  "CONFLICT": {
+    "title": "Konflikt",
+    "message": "Die Anfrage steht im Konflikt mit dem aktuellen Zustand."
+  },
+  "CREATOR_REQUIRES_NAME": {
+    "title": "Name required",
+    "message": "First and last name are required to create this record."
+  },
+  "DELETED_RECORD_NOT_FOUND": {
+    "title": "Deleted record not found",
+    "message": "No deleted record was found to restore."
+  },
+  "EMAIL_ALREADY_EXISTS": {
+    "title": "E-Mail bereits vergeben",
+    "message": "Diese E-Mail-Adresse ist bereits registriert."
+  },
+  "EMAIL_CHANGE_REQUIRES_VERIFICATION": {
+    "title": "Email change not allowed",
+    "message": "Change your email through the verification flow."
+  },
+  "EMAIL_REQUIRED": {
+    "title": "Email required",
+    "message": "An email address is required to continue."
+  },
+  "EMAIL_UNCHANGED": {
+    "title": "Email unchanged",
+    "message": "Please enter a different email address."
+  },
+  "EMPLOYEE_ALREADY_EXISTS": {
+    "title": "Employee already exists",
+    "message": "An active employee already exists for this person."
+  },
+  "EMPLOYEE_NOT_FOUND": {
+    "title": "Employee not found",
+    "message": "The employee could not be found."
+  },
+  "EMPLOYEE_NO_IN_USE": {
+    "title": "Employee number in use",
+    "message": "Mitarbeiternummer {no} ist bereits vergeben."
+  },
+  "FORBIDDEN": {
+    "title": "Verboten",
+    "message": "Sie haben keine Berechtigung für diese Aktion."
+  },
+  "INTERNAL_ERROR": {
+    "title": "Etwas ist schiefgelaufen",
+    "message": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "INVALID_CREDENTIALS": {
+    "title": "Ungültige Anmeldedaten",
+    "message": "E-Mail oder Passwort ist falsch."
+  },
+  "INVALID_REFRESH": {
+    "title": "Session expired",
+    "message": "Please sign in again."
+  },
+  "INVALID_TOKEN": {
+    "title": "Ungültiger Link",
+    "message": "Dieser Link ist ungültig oder wurde bereits verwendet."
+  },
+  "INVALID_TOKEN_AUTH": {
+    "title": "Invalid token",
+    "message": "This token is invalid."
+  },
+  "INVITE_ACCESS_EXISTS": {
+    "title": "Access already exists",
+    "message": "This person already has access to the organization."
+  },
+  "INVITE_ALREADY_ACCEPTED": {
+    "title": "Already accepted",
+    "message": "This invitation was already accepted."
+  },
+  "INVITE_CANCELED": {
+    "title": "Invite canceled",
+    "message": "This invitation was canceled."
+  },
+  "INVITE_EXPIRED": {
+    "title": "Invite expired",
+    "message": "This invitation has expired."
+  },
+  "INVITE_LINKED_USER_NOT_FOUND": {
+    "title": "Linked user not found",
+    "message": "The user linked to this invitation could not be found."
+  },
+  "INVITE_NOT_FOUND": {
+    "title": "Invite not found",
+    "message": "This invitation could not be found."
+  },
+  "INVITE_NOT_PENDING": {
+    "title": "Invite not pending",
+    "message": "This invitation is no longer pending."
+  },
+  "INVITE_PASSWORD_REQUIRED": {
+    "title": "Password required",
+    "message": "A password of at least 8 characters is required."
+  },
+  "INVITE_PENDING_EXISTS": {
+    "title": "Pending invite exists",
+    "message": "A pending invitation already exists for this person."
+  },
+  "INVITE_PERSON_EMAIL_MISSING": {
+    "title": "Person email required",
+    "message": "The person must have an email address before inviting."
+  },
+  "INVITE_PERSON_NOT_FOUND": {
+    "title": "Person not found",
+    "message": "The invited person was not found in this organization."
+  },
+  "INVITE_TOKEN_REQUIRED": {
+    "title": "Token required",
+    "message": "An invitation token is required."
+  },
+  "INVITE_USER_NOT_FOUND": {
+    "title": "User not found",
+    "message": "No account was found for this invitation."
+  },
+  "MISSING_BEARER": {
+    "title": "Anmeldung erforderlich",
+    "message": "Bitte melden Sie sich an, um fortzufahren."
+  },
+  "MISSING_SESSION": {
+    "title": "Anmeldung erforderlich",
+    "message": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an."
+  },
+  "NOT_FOUND": {
+    "title": "Nicht gefunden",
+    "message": "Die angeforderte Ressource wurde nicht gefunden."
+  },
+  "NOT_IMPLEMENTED": {
+    "title": "Not available",
+    "message": "This action is not available yet."
+  },
+  "OAUTH_NOT_CONFIGURED": {
+    "title": "Sign-in unavailable",
+    "message": "This sign-in method is not configured. Please try another way."
+  },
+  "ORGANIZATION_ID_REQUIRED": {
+    "title": "Organization required",
+    "message": "Please switch to an organization to continue."
+  },
+  "ORGANIZATION_NAME_EXISTS": {
+    "title": "Organization name taken",
+    "message": "An organization with this name already exists."
+  },
+  "ORGANIZATION_NOT_FOUND": {
+    "title": "Organization not found",
+    "message": "The organization could not be found."
+  },
+  "PERMISSION_LOCKED": {
+    "title": "Permission locked",
+    "message": "This permission is locked and cannot be modified."
+  },
+  "PERMISSION_NOT_FOUND": {
+    "title": "Permission not found",
+    "message": "The permission could not be found."
+  },
+  "PERMISSION_SLUG_EXISTS_GLOBAL": {
+    "title": "Permission slug exists",
+    "message": "A global permission with this slug already exists."
+  },
+  "PERSON_CANNOT_DELETE_SELF": {
+    "title": "Cannot delete yourself",
+    "message": "You cannot delete your own person record."
+  },
+  "PERSON_EMAIL_LOCKED": {
+    "title": "Email locked",
+    "message": "Email cannot be changed for a person linked to a user account."
+  },
+  "PERSON_EMAIL_USER_MISMATCH": {
+    "title": "Email mismatch",
+    "message": "Person email must match the linked user email."
+  },
+  "PERSON_NOT_FOUND": {
+    "title": "Person not found",
+    "message": "The person could not be found."
+  },
+  "PERSON_USER_ALREADY_LINKED": {
+    "title": "Person already linked",
+    "message": "This person is already linked to a user account."
+  },
+  "RECOVERY_EMAIL_ALREADY_EXISTS": {
+    "title": "Recovery email in use",
+    "message": "This recovery email is already used by another account."
+  },
+  "RECOVERY_EMAIL_SAME_AS_PRIMARY": {
+    "title": "Invalid recovery email",
+    "message": "Recovery email must be different from your primary email."
+  },
+  "ROLE_LOCKED": {
+    "title": "Role locked",
+    "message": "This role is locked and cannot be modified."
+  },
+  "ROLE_NOT_FOUND": {
+    "title": "Role not found",
+    "message": "The role could not be found."
+  },
+  "TOKEN_EXPIRED": {
+    "title": "Link abgelaufen",
+    "message": "Dieser Link ist abgelaufen. Bitte fordern Sie einen neuen an."
+  },
+  "TOO_MANY_REQUESTS": {
+    "title": "Zu viele Anfragen",
+    "message": "Ratelimit überschritten. Versuchen Sie es in {retry_after} Sekunden erneut."
+  },
+  "UNAUTHORIZED": {
+    "title": "Nicht autorisiert",
+    "message": "Authentifizierung ist erforderlich."
+  },
+  "USER_ALREADY_EXISTS": {
+    "title": "User already linked",
+    "message": "This user is already linked to a person in the organization."
+  },
+  "USER_INACTIVE": {
+    "title": "Account inactive",
+    "message": "Your account is not active. Please contact support."
+  },
+  "USER_NOT_FOUND": {
+    "title": "User not found",
+    "message": "No account was found for this email address."
+  },
+  "USER_RECORD_NOT_FOUND": {
+    "title": "User not found",
+    "message": "The user could not be found."
+  },
+  "VALIDATION_ERROR": {
+    "title": "Validierung fehlgeschlagen",
+    "message": "Ein oder mehrere Felder sind ungültig."
+  },
+  "WRONG_CURRENT_PASSWORD": {
+    "title": "Wrong password",
+    "message": "Your current password is incorrect."
+  }
+}

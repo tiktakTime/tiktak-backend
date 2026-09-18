@@ -4,13 +4,41 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  # PR'da da koşar — ihlal branch'e girmeden yakalanır.
+  quality:
     runs-on: self-hosted
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Enable pnpm
+        run: corepack enable && corepack prepare pnpm@10.12.1 --activate
+        shell: bash
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+        shell: bash
+
+      - name: Generate Prisma client
+        run: pnpm db:generate:ci
+        shell: bash
+
+      - name: Verify (format + tsc + lint + arch + test)
+        run: pnpm verify
+        shell: bash
+
+  build:
+    runs-on: self-hosted
+    needs: quality
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Build Docker Image
         run: |
@@ -20,6 +48,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     needs: build
+    if: github.event_name == 'push'
     steps:
       - name: Deploy to Server
         run: |

@@ -1,0 +1,31 @@
+model VerificationCode {
+  id              String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organization_id String?                 @db.Uuid
+  user_id         String?                 @db.Uuid
+  type            VerificationCodeType
+  email           String?                 @db.VarChar(255)
+  phone           String?                 @db.VarChar(50)
+  code            String?                 @db.VarChar(10)
+  token           String?                 @unique(map: "idx_verification_code_token_unique") @db.VarChar(255)
+  status          VerificationCodeStatus  @default(pending)
+  expires_at      DateTime                @db.Timestamptz(6)
+  used_at         DateTime?               @db.Timestamptz(6)
+  attempts        Int                     @default(0)
+  max_attempts    Int                     @default(5)
+  ip_address      String?                 @db.VarChar(45)
+  user_agent      String?
+  metadata        Json?
+  created_at      DateTime                @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime                @default(now()) @db.Timestamptz(6)
+
+  @@index([email], map: "idx_verification_code_email")
+  @@index([phone], map: "idx_verification_code_phone")
+  @@index([code], map: "idx_verification_code_code")
+  @@index([type], map: "idx_verification_code_type")
+  @@index([status], map: "idx_verification_code_status")
+  @@index([organization_id], map: "idx_verification_code_organization_id")
+  @@index([user_id], map: "idx_verification_code_user_id")
+  @@index([expires_at], map: "idx_verification_code_expires_at")
+  @@index([email, type, status], map: "idx_verification_code_email_type_status")
+  @@map("verification_code")
+}

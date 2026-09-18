@@ -1,0 +1,254 @@
+{
+  "access.create": {
+    "title": "Access created",
+    "message": "The access was created successfully."
+  },
+  "access.delete": {
+    "title": "Access deleted",
+    "message": "The access was deleted successfully."
+  },
+  "access.get": {
+    "title": "Access",
+    "message": "Access details loaded."
+  },
+  "access.update": {
+    "title": "Access updated",
+    "message": "The access was updated successfully."
+  },
+  "access.upsert": {
+    "title": "Access saved",
+    "message": "The access was saved successfully."
+  },
+  "auth.change-password": {
+    "title": "Password changed",
+    "message": "Your password was changed successfully."
+  },
+  "auth.email-change.request": {
+    "title": "Email change pending",
+    "message": "A verification email was sent to the new address."
+  },
+  "auth.email-change.verify": {
+    "title": "Email updated",
+    "message": "Your email was updated successfully."
+  },
+  "auth.forgot-password": {
+    "title": "Reset email sent",
+    "message": "If an account exists, a password reset email was sent."
+  },
+  "auth.forgot-password-recovery": {
+    "title": "Reset email sent",
+    "message": "If a recovery email exists, a password reset email was sent."
+  },
+  "auth.logout": {
+    "title": "Çıkış yapıldı",
+    "message": "Başarıyla çıkış yaptınız."
+  },
+  "auth.member": {
+    "title": "Member",
+    "message": "Member information loaded."
+  },
+  "auth.oauth": {
+    "title": "Signed in",
+    "message": "You have signed in successfully."
+  },
+  "auth.recovery-email.remove": {
+    "title": "Recovery email removed",
+    "message": "Your recovery email was removed successfully."
+  },
+  "auth.recovery-email.request": {
+    "title": "Recovery email pending",
+    "message": "A verification email was sent to your recovery address."
+  },
+  "auth.recovery-email.verify": {
+    "title": "Recovery email verified",
+    "message": "Your recovery email was verified successfully."
+  },
+  "auth.refresh": {
+    "title": "Session refreshed",
+    "message": "Your session was refreshed successfully."
+  },
+  "auth.reset-password": {
+    "title": "Password updated",
+    "message": "Your password was updated successfully."
+  },
+  "auth.sign-in": {
+    "title": "Giriş yapıldı",
+    "message": "Başarıyla giriş yaptınız."
+  },
+  "auth.sign-up": {
+    "title": "Account created",
+    "message": "Your account was created successfully."
+  },
+  "auth.switch": {
+    "title": "Organization switched",
+    "message": "You switched organization successfully."
+  },
+  "auth.verify-email": {
+    "title": "Email verified",
+    "message": "Your email was verified successfully."
+  },
+  "auth.verify-email.request": {
+    "title": "Verification email sent",
+    "message": "A verification email was sent."
+  },
+  "employee.create": {
+    "title": "Employee created",
+    "message": "The employee was created successfully."
+  },
+  "employee.create-direct": {
+    "title": "Employee created",
+    "message": "The employee was created successfully."
+  },
+  "employee.delete": {
+    "title": "Employee deleted",
+    "message": "The employee was deleted successfully."
+  },
+  "employee.desired-no": {
+    "title": "Employee number",
+    "message": "Desired employee number resolved."
+  },
+  "employee.detail": {
+    "title": "Employee",
+    "message": "Employee details loaded."
+  },
+  "employee.get": {
+    "title": "Employee",
+    "message": "Employee details loaded."
+  },
+  "employee.next-no": {
+    "title": "Employee number",
+    "message": "Next employee number resolved."
+  },
+  "employee.update": {
+    "title": "Employee updated",
+    "message": "The employee was updated successfully."
+  },
+  "invite.accept": {
+    "title": "Invitation accepted",
+    "message": "You joined the organization successfully."
+  },
+  "invite.by-token": {
+    "title": "Invitation",
+    "message": "Invitation details loaded."
+  },
+  "invite.cancel": {
+    "title": "Invitation canceled",
+    "message": "The invitation was canceled successfully."
+  },
+  "invite.create": {
+    "title": "Invitation sent",
+    "message": "The invitation was created successfully."
+  },
+  "invite.get": {
+    "title": "Invitation",
+    "message": "Invitation details loaded."
+  },
+  "invite.resend": {
+    "title": "Invitation resent",
+    "message": "The invitation was resent successfully."
+  },
+  "organization.create": {
+    "title": "Organizasyon oluşturuldu",
+    "message": "Organizasyon başarıyla oluşturuldu."
+  },
+  "organization.delete": {
+    "title": "Organizasyon silindi",
+    "message": "Organizasyon başarıyla silindi."
+  },
+  "organization.get": {
+    "title": "Organization",
+    "message": "Organization details loaded."
+  },
+  "organization.restore": {
+    "title": "Organization restored",
+    "message": "The organization was restored successfully."
+  },
+  "organization.update": {
+    "title": "Organization updated",
+    "message": "The organization was updated successfully."
+  },
+  "permission.create": {
+    "title": "Permission created",
+    "message": "The permission was created successfully."
+  },
+  "permission.delete": {
+    "title": "Permission deleted",
+    "message": "The permission was deleted successfully."
+  },
+  "permission.get": {
+    "title": "Permission",
+    "message": "Permission details loaded."
+  },
+  "permission.update": {
+    "title": "Permission updated",
+    "message": "The permission was updated successfully."
+  },
+  "person.compare-with-user": {
+    "title": "Comparison",
+    "message": "Person and user comparison loaded."
+  },
+  "person.create": {
+    "title": "Person added",
+    "message": "The person was created successfully."
+  },
+  "person.delete": {
+    "title": "Person deleted",
+    "message": "The person was deleted successfully."
+  },
+  "person.get": {
+    "title": "Person",
+    "message": "Person details loaded."
+  },
+  "person.match-with-user": {
+    "title": "Match complete",
+    "message": "Person was matched with the user successfully."
+  },
+  "person.restore": {
+    "title": "Person restored",
+    "message": "The person was restored successfully."
+  },
+  "person.role-permission.get": {
+    "title": "Permissions",
+    "message": "Person role permissions loaded."
+  },
+  "person.role-permission.update": {
+    "title": "Permissions updated",
+    "message": "Person role permissions were updated successfully."
+  },
+  "person.update": {
+    "title": "Person updated",
+    "message": "The person was updated successfully."
+  },
+  "role.create": {
+    "title": "Role created",
+    "message": "The role was created successfully."
+  },
+  "role.delete": {
+    "title": "Role deleted",
+    "message": "The role was deleted successfully."
+  },
+  "role.get": {
+    "title": "Role",
+    "message": "Role details loaded."
+  },
+  "role.update": {
+    "title": "Role updated",
+    "message": "The role was updated successfully."
+  },
+  "user.create": {
+    "title": "User created",
+    "message": "The user was created successfully."
+  },
+  "user.delete": {
+    "title": "Kullanıcı silindi",
+    "message": "Kullanıcı başarıyla silindi."
+  },
+  "user.get": {
+    "title": "User",
+    "message": "User details loaded."
+  },
+  "user.update": {
+    "title": "User updated",
+    "message": "The user was updated successfully."
+  }
+}

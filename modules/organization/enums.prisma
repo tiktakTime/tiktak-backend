@@ -1,0 +1,29 @@
+enum OrganizationStatus {
+  active
+  inactive
+  blocked
+}
+
+enum OrganizationBusinessType {
+  sole_proprietorship
+  partnership
+  corporation
+  cooperative
+  association
+  civil_law_foundation
+  public_authority
+  public_law_institution
+  public_law_corporation
+  state_municipal_enterprise
+}
+
+enum OrganizationLegalForm {
+  gmbh
+  ug
+  ag
+  kgaa
+  gmbh_co_kg
+  ug_co_kg
+  ag_co_kg
+  se
+}

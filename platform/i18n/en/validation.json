@@ -1,0 +1,68 @@
+{
+  "invalid_type": {
+    "message": "This value is not valid."
+  },
+  "too_big.string": {
+    "message": "Must be at most {maximum} characters."
+  },
+  "too_big.number": {
+    "message": "Must be at most {maximum}."
+  },
+  "too_big.array": {
+    "message": "Must contain at most {maximum} items."
+  },
+  "too_big.date": {
+    "message": "Must be on or before the allowed date."
+  },
+  "too_small.string": {
+    "message": "Must be at least {minimum} characters."
+  },
+  "too_small.number": {
+    "message": "Must be at least {minimum}."
+  },
+  "too_small.array": {
+    "message": "Must contain at least {minimum} items."
+  },
+  "too_small.date": {
+    "message": "Must be on or after the allowed date."
+  },
+  "invalid_format.email": {
+    "message": "Must be a valid email address."
+  },
+  "invalid_format.uuid": {
+    "message": "Must be a valid id."
+  },
+  "invalid_format.url": {
+    "message": "Must be a valid URL."
+  },
+  "invalid_format.datetime": {
+    "message": "Must be a valid date and time."
+  },
+  "invalid_format.regex": {
+    "message": "This value is not in the expected format."
+  },
+  "not_multiple_of": {
+    "message": "Must be a multiple of {divisor}."
+  },
+  "unrecognized_keys": {
+    "message": "Unexpected fields were provided."
+  },
+  "invalid_union": {
+    "message": "This value is not valid."
+  },
+  "invalid_key": {
+    "message": "This key is not valid."
+  },
+  "invalid_element": {
+    "message": "This item is not valid."
+  },
+  "invalid_value": {
+    "message": "This value is not allowed."
+  },
+  "custom": {
+    "message": "This value is not valid."
+  },
+  "unknown": {
+    "message": "This value is not valid."
+  }
+}

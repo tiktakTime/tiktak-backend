@@ -8,18 +8,23 @@ RUN apt-get update \
 
 RUN corepack enable && corepack prepare pnpm@10.12.1 --activate
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
+COPY package.json pnpm-lock.yaml tsconfig.json prisma.config.ts ./
+COPY index.ts app.config.ts ./
 COPY apps ./apps
-COPY packages ./packages
+COPY core ./core
+COPY middlewares ./middlewares
 COPY modules ./modules
-COPY scripts ./scripts
-COPY .env .env.local ./
+COPY platform ./platform
+COPY server ./server
+# Yalnız prod env; .env.local dev içindir ve image'a girmez.
+COPY .env ./
 
 RUN pnpm install --frozen-lockfile
-# generated/ is gitignored — must build inside the image
-RUN pnpm db:generate
+# core/database/generated is gitignored — must be built inside the image.
+# `db:generate` dev script'i `.env.local` ister; image'da yok → env'siz varyant.
+RUN pnpm db:generate:ci
 
 ENV PORT=7036
 EXPOSE 7036
 
-CMD ["pnpm", "--filter", "api", "start"]
+CMD ["pnpm", "start"]

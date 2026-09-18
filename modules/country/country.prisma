@@ -1,0 +1,24 @@
+model Country {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String    @unique(map: "idx_country_name_unique") @db.VarChar(255)
+  native_name      String?   @db.VarChar(255)
+  official_name    String?   @db.VarChar(255)
+  iso              String    @unique(map: "idx_country_iso_unique") @db.VarChar(2)
+  phone_code       String?   @db.VarChar(10)
+  currency_code    String?   @db.VarChar(5)
+  currency_symbol  String?   @db.VarChar(10)
+  region           String?   @db.VarChar(100)
+  subregion        String?   @db.VarChar(100)
+  capital          String?   @db.VarChar(100)
+  timezones        String[]
+  created_by_id    String?   @db.Uuid
+  updated_by_id    String?   @db.Uuid
+  deleted_by_id    String?   @db.Uuid
+  created_at       DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime  @default(now()) @db.Timestamptz(6)
+  deleted_at       DateTime? @db.Timestamptz(6)
+
+  @@index([region], map: "idx_country_region")
+  @@index([subregion], map: "idx_country_subregion")
+  @@map("country")
+}

@@ -1,23 +1,8 @@
 node_modules
-**/node_modules
-.turbo
+core/database/generated
+docs
 .git
 .github
-.cursor
-docs
-game-client
-# Root .env / .env.local must ship in the image (branch-specific).
-**/.env
-**/.env.*
-!.env
-!.env.local
-!.env.example
-!.env.local.example
-*.md
+.idea
+*.log
 .DS_Store
-coverage
-dist
-build
-out
-apps/api/openapi.json
-packages/api-hooks/src/generated

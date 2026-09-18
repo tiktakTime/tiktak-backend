@@ -1,0 +1,68 @@
+{
+  "invalid_type": {
+    "message": "Dieser Wert ist ungültig."
+  },
+  "too_big.string": {
+    "message": "Darf höchstens {maximum} Zeichen lang sein."
+  },
+  "too_big.number": {
+    "message": "Darf höchstens {maximum} sein."
+  },
+  "too_big.array": {
+    "message": "Darf höchstens {maximum} Elemente enthalten."
+  },
+  "too_big.date": {
+    "message": "Darf nicht nach dem erlaubten Datum liegen."
+  },
+  "too_small.string": {
+    "message": "Muss mindestens {minimum} Zeichen lang sein."
+  },
+  "too_small.number": {
+    "message": "Muss mindestens {minimum} sein."
+  },
+  "too_small.array": {
+    "message": "Muss mindestens {minimum} Elemente enthalten."
+  },
+  "too_small.date": {
+    "message": "Darf nicht vor dem erlaubten Datum liegen."
+  },
+  "invalid_format.email": {
+    "message": "Muss eine gültige E-Mail-Adresse sein."
+  },
+  "invalid_format.uuid": {
+    "message": "Muss eine gültige ID sein."
+  },
+  "invalid_format.url": {
+    "message": "Muss eine gültige URL sein."
+  },
+  "invalid_format.datetime": {
+    "message": "Muss ein gültiges Datum und eine gültige Uhrzeit sein."
+  },
+  "invalid_format.regex": {
+    "message": "Dieser Wert hat nicht das erwartete Format."
+  },
+  "not_multiple_of": {
+    "message": "Muss ein Vielfaches von {divisor} sein."
+  },
+  "unrecognized_keys": {
+    "message": "Unerwartete Felder wurden übermittelt."
+  },
+  "invalid_union": {
+    "message": "Dieser Wert ist ungültig."
+  },
+  "invalid_key": {
+    "message": "Dieser Schlüssel ist ungültig."
+  },
+  "invalid_element": {
+    "message": "Dieses Element ist ungültig."
+  },
+  "invalid_value": {
+    "message": "Dieser Wert ist nicht erlaubt."
+  },
+  "custom": {
+    "message": "Dieser Wert ist ungültig."
+  },
+  "unknown": {
+    "message": "Dieser Wert ist ungültig."
+  }
+}

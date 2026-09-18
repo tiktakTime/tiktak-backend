@@ -1,67 +1,104 @@
 # Getting Started
 
-## Prerequisites
+Mimari: [architecture.md](./architecture.md) · Kararlar: [decisions.md](./decisions.md) · Kalite: [quality-tools.md](./quality-tools.md)
+
+---
+
+## Gereksinimler
 
 - **Node.js** 24 LTS
-- **pnpm** (see `packageManager` in root `package.json`)
-- **Docker** — only for **local** mode (`pnpm dev`)
+- **pnpm** (sürüm kök `package.json` → `packageManager`)
+- **Docker / OrbStack** — local Postgres + Redis
 
-## Env files
+---
 
-| File | Use |
-|------|-----|
-| `.env.local` | Docker Postgres/Redis/MinIO on localhost (default for `dev` / `db:*`) |
-| `.env` | Remote host (publish / `*:remote`) |
+## Env dosyaları
 
-`pnpm dev` dosya yoksa example’dan kopyalamaz; branch’te commit’li `.env` / `.env.local` kullanılır.
+| Dosya        | Kullanım                                        |
+| ------------ | ----------------------------------------------- |
+| `.env.local` | Local Docker (`pnpm dev`, tüm `db:*` komutları) |
+| `.env`       | Remote / deploy (`pnpm start`)                  |
 
-**Env politikası:** Dosyalar image içinde olmalı. Her branch’te bir kez commit edilir; `.gitignore`’da kalırlar (yeni untracked kopyaları engeller). `test` / `main` env’leri farklıdır — merge sırasında `.gitattributes` (`merge=ours`) ile üzerine yazılmaz. Bilinçli güncelleme: `git add -f .env .env.local`.
+Bağlantı `LIVE` / `TEST` çifti olarak tutulur; `NODE_ENV=test` iken TEST tarafı seçilir. Seçim iki yerde yapılır: uygulama için `core/env/index.ts`, Prisma CLI için `prisma.config.ts`.
 
-## Install
+> Her iki dosya da git'te **takipli** — Docker image build'i onlara bağlı. Secret eklerken bunu unutma.
+
+---
+
+## İlk kurulum
 
 ```bash
 pnpm install
-pnpm db:generate
-```
-
-## Run — local (Docker)
-
-1. Start OrbStack / Docker Desktop.
-2. Migrate once:
-
-```bash
-pnpm db:deploy:local
-```
-
-3. Dev server:
-
-```bash
+pnpm local:up      # postgres + redis
+pnpm db:generate   # Kysely tipleri → core/database/generated/
+pnpm db:migrate    # şemayı uygula
 pnpm dev
 ```
 
-API: `http://localhost:3001` (see `PORT` in `.env.local`).
+Ayağa kalkınca:
 
-## Run — remote / deploy
+| Ne                         | Nerede                                                           |
+| -------------------------- | ---------------------------------------------------------------- |
+| API                        | `http://localhost:3001/api-test`                                 |
+| OpenAPI spec               | `{API_BASE_PATH}/openapi.json`                                   |
+| Scalar UI (prod'da kapalı) | `{API_BASE_PATH}/docs`                                           |
+| Health / readiness         | `{API_BASE_PATH}/health`, `.../health/ready`                     |
+| Socket.IO                  | `http://localhost:3001/socket.io` (JWT gerekli; API prefix dışı) |
+| Auth                       | `POST {API_BASE_PATH}/auth/sign-in` → access + refresh           |
 
-`pnpm start` (and Docker `CMD`) runs **`prisma migrate deploy`** against the active `DIRECT_URL`, then starts the API. Local `pnpm dev` does **not** migrate.
+Port ve prefix `.env.local` içindeki `PORT` / `API_BASE_PATH` ile değişir. `REDIS_URL` cache + session + rate-limit + BullMQ için; `JWT_SECRET` access token imzası için gerekli.
 
-Optional: `SKIP_DB_MIGRATE=1` to skip migrations on start.
+---
 
-```bash
-pnpm start
+## Script'ler
+
+| Script                         | Env          | Ne yapar                                |
+| ------------------------------ | ------------ | --------------------------------------- |
+| `pnpm dev`                     | `.env.local` | `tsx watch` ile server                  |
+| `pnpm start`                   | `.env`       | `migrate deploy` + server (deploy yolu) |
+| `pnpm check`                   | —            | `tsc --noEmit`                          |
+| `pnpm verify`                  | —            | format + check + lint + arch + dead + test |
+| `pnpm format`                  | —            | Prettier                                |
+| `pnpm local:up` / `local:down` | —            | Docker compose                          |
+| `pnpm local:reset`             | —            | Volume dahil sıfırla                    |
+| `pnpm db:generate`             | `.env.local` | prisma-kysely tipleri                   |
+| `pnpm db:migrate`              | `.env.local` | `migrate dev`                           |
+| `pnpm db:deploy`               | `.env`       | `migrate deploy`                        |
+| `pnpm db:status`               | `.env.local` | Migration durumu                        |
+| `pnpm db:studio`               | `.env.local` | Prisma Studio                           |
+
+---
+
+## Proje yapısı
+
+```
+index.ts            # süreç entry — listen + graceful shutdown
+app.config.ts       # uygulama kararları (cache, pagination, surfaces)
+prisma.config.ts    # schema klasörü, migration yolu, CLI bağlantısı
+server/             # buildServer() — server/doc.md
+platform/           # auth · scope · notifications · i18n — platform/doc.md
+apps/               # apps/doc.md
+  public/           # authsuz + domain
+  common/<entity>/  # schema + routes + domain
+  web/<entity>/     # schema + routes + domain
+  mobile/ | admin/
+  auth/             # melez + domain
+  system/
+modules/<entity>/   # prisma + repo — modules/doc.md
+middlewares/        # middlewares/doc.md
+core/               # core/doc.md
+scripts/            # scripts/doc.md
 ```
 
-## Scripts
+`core/database/generated/` gitignore'da — `pnpm db:generate` üretir.
 
-| Script | Docker | Env file | Migrate |
-|--------|--------|----------|---------|
-| `pnpm dev` | Required (compose up) | `.env.local` | Hayır — elle `pnpm db:migrate` |
-| `pnpm start` | — | `.env` / container env | Evet — `migrate deploy` |
-| `pnpm db:migrate` | — | `.env.local` | Local geliştirme (`migrate dev`) |
-| `pnpm db:studio` | — | `.env.local` | — |
+Katman belgeleri: [apps](../apps/doc.md) · [modules](../modules/doc.md) · [core](../core/doc.md) · [platform](../platform/doc.md) · [middlewares](../middlewares/doc.md) · [server](../server/doc.md) · [scripts](../scripts/doc.md)
 
-## Renaming template
+---
 
-```bash
-./scripts/setup.sh --name tiktak-backend --scope tiktak --skip-git
-```
+## Prisma notları
+
+- Şema **klasör** olarak okunur (`modules/`); her modül kendi `*.prisma` dosyasını taşır.
+- Datasource `url` Prisma 7'de şemadan kaldırıldı; `prisma.config.ts` → `datasource.url`.
+- Migration'lar `core/database/prisma/migrations/` altında.
+- Runtime'da Prisma Client **yok** — sadece Kysely.

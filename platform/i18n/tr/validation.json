@@ -1,0 +1,68 @@
+{
+  "invalid_type": {
+    "message": "Bu değer geçerli değil."
+  },
+  "too_big.string": {
+    "message": "En fazla {maximum} karakter olabilir."
+  },
+  "too_big.number": {
+    "message": "En fazla {maximum} olabilir."
+  },
+  "too_big.array": {
+    "message": "En fazla {maximum} öğe içerebilir."
+  },
+  "too_big.date": {
+    "message": "İzin verilen tarihten sonra olamaz."
+  },
+  "too_small.string": {
+    "message": "En az {minimum} karakter olmalı."
+  },
+  "too_small.number": {
+    "message": "En az {minimum} olmalı."
+  },
+  "too_small.array": {
+    "message": "En az {minimum} öğe içermeli."
+  },
+  "too_small.date": {
+    "message": "İzin verilen tarihten önce olamaz."
+  },
+  "invalid_format.email": {
+    "message": "Geçerli bir e-posta adresi olmalı."
+  },
+  "invalid_format.uuid": {
+    "message": "Geçerli bir kimlik olmalı."
+  },
+  "invalid_format.url": {
+    "message": "Geçerli bir URL olmalı."
+  },
+  "invalid_format.datetime": {
+    "message": "Geçerli bir tarih ve saat olmalı."
+  },
+  "invalid_format.regex": {
+    "message": "Bu değer beklenen biçimde değil."
+  },
+  "not_multiple_of": {
+    "message": "{divisor} katı olmalı."
+  },
+  "unrecognized_keys": {
+    "message": "Beklenmeyen alanlar gönderildi."
+  },
+  "invalid_union": {
+    "message": "Bu değer geçerli değil."
+  },
+  "invalid_key": {
+    "message": "Bu anahtar geçerli değil."
+  },
+  "invalid_element": {
+    "message": "Bu öğe geçerli değil."
+  },
+  "invalid_value": {
+    "message": "Bu değere izin verilmiyor."
+  },
+  "custom": {
+    "message": "Bu değer geçerli değil."
+  },
+  "unknown": {
+    "message": "Bu değer geçerli değil."
+  }
+}

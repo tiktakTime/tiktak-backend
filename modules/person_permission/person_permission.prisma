@@ -1,0 +1,16 @@
+model PersonPermission {
+  id              String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organization_id String                  @db.Uuid
+  person_id       String                  @db.Uuid
+  permission_id   String                  @db.Uuid
+  effect          PersonPermissionEffect  @default(grant)
+  created_by_id   String?                 @db.Uuid
+  updated_by_id   String?                 @db.Uuid
+  created_at      DateTime                @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime                @default(now()) @db.Timestamptz(6)
+
+  @@unique([organization_id, person_id, permission_id], map: "idx_person_permission_org_person_permission_unique")
+  @@index([person_id], map: "idx_person_permission_person_id")
+  @@index([permission_id], map: "idx_person_permission_permission_id")
+  @@map("person_permission")
+}
