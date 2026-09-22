@@ -25,7 +25,7 @@ Bilinçli yok: Turborepo, pnpm workspaces, Prisma Client runtime, `defineModule`
 | `pnpm lint`         | ESLint + sonarjs                                 | Katman/barrel import yasakları + cognitive complexity |
 | `pnpm arch`         | dependency-cruiser                               | Döngü + katman ihlali + self-barrel + orphan          |
 | `pnpm dead`         | knip                                             | Kullanılmayan dosya + bağımlılık + duplicate export   |
-| `pnpm test`         | vitest                                           | Birim testleri                                        |
+| `pnpm test`         | vitest                                           | Birim + entegrasyon testleri — [`testing.md`](./testing.md) |
 | `pnpm verify`       | format:check + check + lint + arch + dead + test | CI kalite kapısı                                      |
 
 CI her iki workflow'da (`test`, `main`) **push ve pull_request** üzerinde `verify`

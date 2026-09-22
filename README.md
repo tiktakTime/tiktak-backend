@@ -60,6 +60,7 @@ pnpm dev             # http://localhost:3001/api-test
 | [docs/api-standards.md](./docs/api-standards.md)     | Slice, `defineRoute`, zarf |
 | [docs/database.md](./docs/database.md)               | Prisma + Kysely            |
 | [docs/quality-tools.md](./docs/quality-tools.md)     | `pnpm verify` kalite kapısı|
+| [docs/testing.md](./docs/testing.md)                 | Test stratejisi + yol haritası |
 | [docs/auth-identity.md](./docs/auth-identity.md)     | User/profile/identity plan |
 | [docs/README.md](./docs/README.md)                   | Tam indeks                 |
 

@@ -10,6 +10,7 @@
 | [decisions.md](./decisions.md)             | Ürün / teknoloji kararları                          |
 | [inceleme-sirasi.md](./inceleme-sirasi.md) | Kod inceleme yolu                                   |
 | [quality-tools.md](./quality-tools.md)     | ESLint / depcruise / knip / vitest / `pnpm verify`  |
+| [testing.md](./testing.md)                 | Test stratejisi, katmanlar, local, yol haritası     |
 
 ## Geliştirme
 
