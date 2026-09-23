@@ -2,28 +2,28 @@
 
 ## Başlangıç
 
-| Dosya                                      | İçerik                                              |
-| ------------------------------------------ | --------------------------------------------------- |
-| [getting-started.md](./getting-started.md) | Kurulum, env, script’ler                            |
-| [architecture.md](./architecture.md)       | Ana mimari — kök yapı, bağımlılık                   |
-| [layers.md](./layers.md)                   | Katman detayı, anti-pattern                         |
-| [decisions.md](./decisions.md)             | Ürün / teknoloji kararları                          |
-| [inceleme-sirasi.md](./inceleme-sirasi.md) | Kod inceleme yolu                                   |
-| [quality-tools.md](./quality-tools.md)     | ESLint / depcruise / knip / vitest / `pnpm verify`  |
-| [testing.md](./testing.md)                 | Test stratejisi, katmanlar, local, yol haritası     |
+| Dosya                                      | İçerik                                             |
+| ------------------------------------------ | -------------------------------------------------- |
+| [getting-started.md](./getting-started.md) | Kurulum, env, script’ler                           |
+| [architecture.md](./architecture.md)       | Ana mimari — kök yapı, bağımlılık                  |
+| [layers.md](./layers.md)                   | Katman detayı, anti-pattern                        |
+| [decisions.md](./decisions.md)             | Ürün / teknoloji kararları                         |
+| [inceleme-sirasi.md](./inceleme-sirasi.md) | Kod inceleme yolu                                  |
+| [quality-tools.md](./quality-tools.md)     | ESLint / depcruise / knip / vitest / `pnpm verify` |
+| [testing.md](./testing.md)                 | Test stratejisi, katmanlar, local, yol haritası    |
 
 ## Geliştirme
 
-| Dosya                                  | İçerik                                      |
-| -------------------------------------- | ------------------------------------------- |
-| [api-standards.md](./api-standards.md) | Slice, `defineRoute`, zarf, cache, OpenAPI  |
-| [database.md](./database.md)           | Prisma + Kysely                             |
+| Dosya                                  | İçerik                                     |
+| -------------------------------------- | ------------------------------------------ |
+| [api-standards.md](./api-standards.md) | Slice, `defineRoute`, zarf, cache, OpenAPI |
+| [database.md](./database.md)           | Prisma + Kysely                            |
 
 ## Aktif plan
 
-| Dosya                                  | İçerik                                                         |
-| -------------------------------------- | -------------------------------------------------------------- |
-| [auth-identity.md](./auth-identity.md) | User slim + profile + identity; OAuth (**migrate PENDING**)    |
+| Dosya                                  | İçerik                                                      |
+| -------------------------------------- | ----------------------------------------------------------- |
+| [auth-identity.md](./auth-identity.md) | User slim + profile + identity; OAuth (**migrate PENDING**) |
 
 ## Katman indeksleri (`doc.md`)
 

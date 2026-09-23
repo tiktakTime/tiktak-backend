@@ -16,14 +16,14 @@ Kullanıcı ↔ organizasyon üyelik (`access`) satırları: arama, CRUD, upsert
 
 ## Endpoint'ler
 
-| Method | Path                                 | tenant   | policy            | HTTP | code            |
-| ------ | ------------------------------------ | -------- | ----------------- | ---- | --------------- |
-| GET    | `/organization/access/search`        | `member` | —                 | 200  | (Page)          |
-| GET    | `/organization/access/{id}`          | `member` | —                 | 200  | `access.get`    |
-| PATCH  | `/organization/access/upsert-access` | `none`   | `access.patch`    | 200  | `access.upsert` |
-| POST   | `/organization/access`               | `none`   | `access.post`     | 200  | `access.create` |
-| PATCH  | `/organization/access/{id}`          | `none`   | `access.patch`    | 200  | `access.update` |
-| DELETE | `/organization/access/{id}`          | `none`   | `access.delete`   | 200  | `access.delete` |
+| Method | Path                                 | tenant   | policy          | HTTP | code            |
+| ------ | ------------------------------------ | -------- | --------------- | ---- | --------------- |
+| GET    | `/organization/access/search`        | `member` | —               | 200  | (Page)          |
+| GET    | `/organization/access/{id}`          | `member` | —               | 200  | `access.get`    |
+| PATCH  | `/organization/access/upsert-access` | `none`   | `access.patch`  | 200  | `access.upsert` |
+| POST   | `/organization/access`               | `none`   | `access.post`   | 200  | `access.create` |
+| PATCH  | `/organization/access/{id}`          | `none`   | `access.patch`  | 200  | `access.update` |
+| DELETE | `/organization/access/{id}`          | `none`   | `access.delete` | 200  | `access.delete` |
 
 **Not:** `search` / `get` org tenant kullanmaz — `actorId` (session `user_id`) ile kendi üyeliklerini listeler. Mutation’larda tenant default `none`.
 

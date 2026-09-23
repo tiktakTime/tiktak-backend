@@ -2,12 +2,12 @@
 
 Tek paket (`package.json`), tek API süreci.
 
-| Katman               | Rol                                                  |
-| -------------------- | ---------------------------------------------------- |
-| `core/`              | Motor — mekanizma + port (npm paketi gibi)           |
-| `platform/`          | Motoru TikTak’a bağlayan sağlayıcı katman            |
-| `apps/` + `modules/` | HTTP yüzey + use-case · prisma/repo                  |
-| `server/`            | Composition root                                     |
+| Katman               | Rol                                        |
+| -------------------- | ------------------------------------------ |
+| `core/`              | Motor — mekanizma + port (npm paketi gibi) |
+| `platform/`          | Motoru TikTak’a bağlayan sağlayıcı katman  |
+| `apps/` + `modules/` | HTTP yüzey + use-case · prisma/repo        |
+| `server/`            | Composition root                           |
 
 **Stack:** Node.js 24 · Hono · Prisma (migrate) · Kysely (query) · Redis · BullMQ · Socket.IO · Zod-OpenAPI
 
@@ -37,15 +37,15 @@ Kararlar: [decisions.md](./decisions.md) · Katman detayı: [layers.md](./layers
 
 ## Katman sorumlulukları
 
-| Katman              | Ne yapar                                                         |
-| ------------------- | ---------------------------------------------------------------- |
-| `apps/*/<slice>/`   | `.schema.ts` + `.routes.ts` + `domain/`                          |
-| `modules/<entity>/` | `.prisma` + `.repo.ts` (+ sabitler)                              |
-| `platform/*`        | Claims, scope anahtarları, i18n içeriği, bildirim sözleşmesi     |
-| `middlewares/`      | auth, permission, rate-limit                                     |
-| `core/`             | Port + mekanizma (`router`, `http`, `crypto`, redis, cache, …)   |
-| `server/`           | Tüm `configureX` / wiring                                        |
-| `app.config.ts`     | Ürün sabitleri (git’te; secret değil)                            |
+| Katman              | Ne yapar                                                       |
+| ------------------- | -------------------------------------------------------------- |
+| `apps/*/<slice>/`   | `.schema.ts` + `.routes.ts` + `domain/`                        |
+| `modules/<entity>/` | `.prisma` + `.repo.ts` (+ sabitler)                            |
+| `platform/*`        | Claims, scope anahtarları, i18n içeriği, bildirim sözleşmesi   |
+| `middlewares/`      | auth, permission, rate-limit                                   |
+| `core/`             | Port + mekanizma (`router`, `http`, `crypto`, redis, cache, …) |
+| `server/`           | Tüm `configureX` / wiring                                      |
+| `app.config.ts`     | Ürün sabitleri (git’te; secret değil)                          |
 
 ---
 

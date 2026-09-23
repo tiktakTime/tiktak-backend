@@ -8,19 +8,19 @@ Kaynaklar: `create.ts`, `get.ts`, `search.ts`, `update.ts`, `soft-delete.ts`, `r
 
 ## Zincir
 
-| Endpoint                         | Guard                          | Domain             | Repo                                  |
-| -------------------------------- | ------------------------------ | ------------------ | ------------------------------------- |
-| `GET .../search`                 | org + `person.get`             | `searchPersons`    | `person.search`                       |
-| `GET .../search-with-user`       | org                            | —                  | ⚠ `not_implemented` (route)           |
-| `GET .../dashboard`              | org                            | —                  | ⚠ `not_implemented`                   |
-| `GET .../compare-with-user`      | org                            | —                  | ⚠ `not_implemented`                   |
-| `POST .../match-with-user`       | org                            | —                  | ⚠ `not_implemented`                   |
-| `GET .../{id}/role-permission`   | org                            | —                  | ⚠ `not_implemented`                   |
-| `PATCH .../{id}/role-permission` | org                            | —                  | ⚠ `not_implemented`                   |
-| `GET .../{id}`                   | org + `person.get`             | `getPerson`        | `person`                              |
-| `POST .../`                      | org + `person.post`            | `createPerson`     | `person` · `user`                     |
-| `PATCH .../{id}`                 | org + `person.patch`           | `updatePerson`     | `person` · revoke                     |
-| `PATCH .../{id}/restore`         | org + `person.patch`           | `restorePerson`    | `person`                              |
+| Endpoint                         | Guard                                     | Domain             | Repo                                  |
+| -------------------------------- | ----------------------------------------- | ------------------ | ------------------------------------- |
+| `GET .../search`                 | org + `person.get`                        | `searchPersons`    | `person.search`                       |
+| `GET .../search-with-user`       | org                                       | —                  | ⚠ `not_implemented` (route)           |
+| `GET .../dashboard`              | org                                       | —                  | ⚠ `not_implemented`                   |
+| `GET .../compare-with-user`      | org                                       | —                  | ⚠ `not_implemented`                   |
+| `POST .../match-with-user`       | org                                       | —                  | ⚠ `not_implemented`                   |
+| `GET .../{id}/role-permission`   | org                                       | —                  | ⚠ `not_implemented`                   |
+| `PATCH .../{id}/role-permission` | org                                       | —                  | ⚠ `not_implemented`                   |
+| `GET .../{id}`                   | org + `person.get`                        | `getPerson`        | `person`                              |
+| `POST .../`                      | org + `person.post`                       | `createPerson`     | `person` · `user`                     |
+| `PATCH .../{id}`                 | org + `person.patch`                      | `updatePerson`     | `person` · revoke                     |
+| `PATCH .../{id}/restore`         | org + `person.patch`                      | `restorePerson`    | `person`                              |
 | `DELETE .../{id}`                | org + `person.delete` (handler `actorId`) | `softDeletePerson` | `person` · access · employee · revoke |
 
 ---

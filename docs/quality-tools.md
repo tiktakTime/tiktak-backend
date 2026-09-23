@@ -4,32 +4,53 @@ Kod kalitesi denetimi — tip, lint, mimari, ölü kod, test.
 
 ## Stack (özet)
 
-| Alan               | Araç                                                         |
-| ------------------ | ------------------------------------------------------------ |
-| Runtime            | Node.js 24 LTS                                               |
-| Paket              | pnpm (tek root `package.json`)                               |
-| HTTP / OpenAPI     | Hono + `@hono/zod-openapi` + Scalar                          |
-| Validation         | Zod (`apps/*/*.schema.ts` + `core/fields`)                   |
-| DB                 | PostgreSQL · Prisma migrate · Kysely · `prisma-kysely`       |
-| Cache / queue      | Redis · BullMQ                                               |
-| Realtime           | Socket.IO                                                    |
-| Storage            | AWS S3 SDK + Sharp                                           |
-| Env                | `@t3-oss/env-core` + Zod (`core/env`)                        |
+| Alan           | Araç                                                   |
+| -------------- | ------------------------------------------------------ |
+| Runtime        | Node.js 24 LTS                                         |
+| Paket          | pnpm (tek root `package.json`)                         |
+| HTTP / OpenAPI | Hono + `@hono/zod-openapi` + Scalar                    |
+| Validation     | Zod (`apps/*/*.schema.ts` + `core/fields`)             |
+| DB             | PostgreSQL · Prisma migrate · Kysely · `prisma-kysely` |
+| Cache / queue  | Redis · BullMQ                                         |
+| Realtime       | Socket.IO                                              |
+| Storage        | AWS S3 SDK + Sharp                                     |
+| Env            | `@t3-oss/env-core` + Zod (`core/env`)                  |
 
 Bilinçli yok: Turborepo, pnpm workspaces, Prisma Client runtime, `defineModule` factory.
 
-| Komut               | Araç                                             | Ne yapar                                              |
-| ------------------- | ------------------------------------------------ | ----------------------------------------------------- |
-| `pnpm format:check` | prettier                                         | Format denetimi (yazmaz)                              |
-| `pnpm check`        | `tsc --noEmit`                                   | Tip güvenliği                                         |
-| `pnpm lint`         | ESLint + sonarjs                                 | Katman/barrel import yasakları + cognitive complexity |
-| `pnpm arch`         | dependency-cruiser                               | Döngü + katman ihlali + self-barrel + orphan          |
-| `pnpm dead`         | knip                                             | Kullanılmayan dosya + bağımlılık + duplicate export   |
+| Komut               | Araç                                             | Ne yapar                                                    |
+| ------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
+| `pnpm format:check` | prettier                                         | Format denetimi (yazmaz)                                    |
+| `pnpm check`        | `tsc --noEmit`                                   | Tip güvenliği                                               |
+| `pnpm lint`         | ESLint + sonarjs                                 | Katman/barrel import yasakları + cognitive complexity       |
+| `pnpm arch`         | dependency-cruiser                               | Döngü + katman ihlali + self-barrel + orphan                |
+| `pnpm dead`         | knip                                             | Kullanılmayan dosya + bağımlılık + duplicate export         |
 | `pnpm test`         | vitest                                           | Birim + entegrasyon testleri — [`testing.md`](./testing.md) |
-| `pnpm verify`       | format:check + check + lint + arch + dead + test | CI kalite kapısı                                      |
+| `pnpm verify`       | format:check + check + lint + arch + dead + test | CI kalite kapısı                                            |
 
 CI her iki workflow'da (`test`, `main`) **push ve pull_request** üzerinde `verify`
 koşar; `build` / `deploy` yalnızca push'ta çalışır (`if: github.event_name == 'push'`).
+
+## Derleme zamanı korumalar
+
+Bazı hata sınıfları test gerektirmez — `tsc` yazarken söyler. Test yükünü
+azalttığı için bunlar **testten önce** kurulur. Detay: [`testing.md`](./testing.md).
+
+| Desen                            | Yakaladığı                              | Nerede                                         |
+| -------------------------------- | --------------------------------------- | ---------------------------------------------- |
+| `satisfies Record<K, V>`         | Eksik anahtar                           | `platform/i18n/catalog.meta.ts` (`ERROR_META`) |
+| Enum tek kaynak (`@/modules/db`) | Enum değeri silindi / adı değişti       | [`database.md`](./database.md)                 |
+| `Record<Enum, …>` karar tablosu  | Enum'a **yeni değer eklendi**           | `modules/` kontrol noktası                     |
+| `Pick<Selectable<T>, COLUMNS>`   | Kolon silindi / tipi değişti            | [`database.md`](./database.md)                 |
+| Şema ↔ model tip köprüsü         | Kolon eklendi/silindi, sözleşme ayrıştı | [`api-standards.md`](./api-standards.md) §9    |
+
+Kural: **derleyicinin yakalayabildiği şey için test yazılmaz.**
+
+`satisfies Record` deseni şu an yalnızca iki yerde (`platform/i18n`). Yaygınlaştırma
+adayı: `server/index.ts` `surfaceRouters` → `satisfies Record<SurfaceName, AppOpenAPI>`
+(yeni yüzey eklenince router yazmayı unutmak çalışma zamanı hatası yerine derleme hatası olur).
+
+---
 
 ## Katman kuralları — iki katmanlı savunma
 

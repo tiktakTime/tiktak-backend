@@ -14,11 +14,11 @@ Barrel: `@/middlewares`
 
 ## Kurallar
 
-| Kural       | Anlam                                                               |
-| ----------- | ------------------------------------------------------------------- |
-| İnce katman | Context set / erken reddet; repo/domain çağrısı yok                 |
+| Kural       | Anlam                                                                      |
+| ----------- | -------------------------------------------------------------------------- |
+| İnce katman | Context set / erken reddet; repo/domain çağrısı yok                        |
 | Bağımlılık  | `middlewares` → `platform` / `core` (+ `app.config`); ↛ `apps` / `modules` |
-| Mount yeri  | Global → `server/`; yüzey → `apps/*/index.ts`; route → tek endpoint |
+| Mount yeri  | Global → `server/`; yüzey → `apps/*/index.ts`; route → tek endpoint        |
 
 ---
 

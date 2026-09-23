@@ -16,10 +16,10 @@ Web / mobile / admin için **ortak contract**: global `user` ve `organization` s
 
 ## Slice'lar
 
-| Slice        | Base            | Guard özeti                                                                                          | Belge                                        |
-| ------------ | --------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| user         | `/user`         | `tenant: "member"`; read: `policy: user.get`                                                         | [user/doc.md](./user/doc.md)                 |
-| organization | `/organization` | search/create: `member`; get/restore/delete: `orgParam` + `organization.*` policy                    | [organization/doc.md](./organization/doc.md) |
+| Slice        | Base            | Guard özeti                                                                       | Belge                                        |
+| ------------ | --------------- | --------------------------------------------------------------------------------- | -------------------------------------------- |
+| user         | `/user`         | `tenant: "member"`; read: `policy: user.get`                                      | [user/doc.md](./user/doc.md)                 |
+| organization | `/organization` | search/create: `member`; get/restore/delete: `orgParam` + `organization.*` policy | [organization/doc.md](./organization/doc.md) |
 
 ---
 

@@ -16,13 +16,13 @@ Org yöneticisi davet oluşturma, listeleme, yeniden gönderme ve iptal. Public 
 
 ## Endpoint'ler
 
-| Method | Path                               | tenant | policy         | HTTP | code             |
-| ------ | ---------------------------------- | ------ | -------------- | ---- | ---------------- |
-| GET    | `/organization/invite/search`      | `org`  | `invite.get`   | 200  | (Page)           |
-| GET    | `/organization/invite/{id}`        | `org`  | `invite.get`   | 200  | `invite.get`     |
-| POST   | `/organization/invite`             | `org`  | `invite.post`  | 200  | `invite.create`  |
-| POST   | `/organization/invite/{id}/resend` | `org`  | `invite.post`  | 200  | `invite.resend`  |
-| POST   | `/organization/invite/{id}/cancel` | `org`  | `invite.patch` | 200  | `invite.cancel`  |
+| Method | Path                               | tenant | policy         | HTTP | code            |
+| ------ | ---------------------------------- | ------ | -------------- | ---- | --------------- |
+| GET    | `/organization/invite/search`      | `org`  | `invite.get`   | 200  | (Page)          |
+| GET    | `/organization/invite/{id}`        | `org`  | `invite.get`   | 200  | `invite.get`    |
+| POST   | `/organization/invite`             | `org`  | `invite.post`  | 200  | `invite.create` |
+| POST   | `/organization/invite/{id}/resend` | `org`  | `invite.post`  | 200  | `invite.resend` |
+| POST   | `/organization/invite/{id}/cancel` | `org`  | `invite.patch` | 200  | `invite.cancel` |
 
 ---
 

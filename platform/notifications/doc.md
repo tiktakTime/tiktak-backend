@@ -17,12 +17,12 @@ Barrel: `@/platform/notifications`
 
 ## `MailJob`
 
-| Alan | Zorunlu | Anlam |
-| ---- | ------- | ----- |
-| `key` | ✓ | Şablon anahtarı — örn. `v2:verifyEmail`, `v2:invite` |
-| `mail` | ✓ | Alıcı e-posta |
-| `payload` | ✓ | Şablona giden serbest JSON |
-| `userId` | | Queue `meta.userId` olarak yazılır |
+| Alan      | Zorunlu | Anlam                                                |
+| --------- | ------- | ---------------------------------------------------- |
+| `key`     | ✓       | Şablon anahtarı — örn. `v2:verifyEmail`, `v2:invite` |
+| `mail`    | ✓       | Alıcı e-posta                                        |
+| `payload` | ✓       | Şablona giden serbest JSON                           |
+| `userId`  |         | Queue `meta.userId` olarak yazılır                   |
 
 Domain (`apps/auth`, invite) bu tipi doldurur; ham `addMailJob` çağırmaz.
 
@@ -43,10 +43,10 @@ Hata: queue/Redis hatası yukarı fırlar — çağıran domain yakalar veya rou
 
 ### `resolvePlatform(input?)`
 
-| Girdi (lowercase) | Sonuç |
-| ----------------- | ----- |
+| Girdi (lowercase)            | Sonuç      |
+| ---------------------------- | ---------- |
 | `ios` / `android` / `mobile` | `"mobile"` |
-| diğer / boş | `"web"` |
+| diğer / boş                  | `"web"`    |
 
 ### `buildVerificationLink(path, token, platform = "web")`
 

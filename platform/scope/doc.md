@@ -16,22 +16,22 @@ Barrel: `@/platform/scope`
 
 ## Kurallar
 
-| Kural | Anlam |
-| ----- | ----- |
+| Kural           | Anlam                                                                                                                                     |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | Tenant vs aktör | Yalnız **tenant** (`organization_id`) istekten çözülür. Aktör (`user_id`) asla body/query’den okunmaz — oturumdan gelir (`assertMember`). |
-| Hydrate ≠ yetki | `hydrateScope` context’e org yazar; authorization yerine geçmez. |
-| Org oda | Katılım oturumun **aktif** organizasyonuyla sınırlı (süper admin muaf). |
+| Hydrate ≠ yetki | `hydrateScope` context’e org yazar; authorization yerine geçmez.                                                                          |
+| Org oda         | Katılım oturumun **aktif** organizasyonuyla sınırlı (süper admin muaf).                                                                   |
 
 ---
 
 ## Sabitler (`constants.ts`)
 
-| Sembol | Değer |
-| ------ | ----- |
-| `SOCKET_ROOM_PREFIX.user` / `.org` | `"user"` / `"org"` |
-| `SOCKET_EVENT.joinOrganization` | `"join:organization"` |
-| `SOCKET_EVENT.leaveOrganization` | `"leave:organization"` |
-| `SCOPE_ORG_KEYS` | `organization_id`, `org_id`, `orgId` (öncelik sırası) |
+| Sembol                             | Değer                                                 |
+| ---------------------------------- | ----------------------------------------------------- |
+| `SOCKET_ROOM_PREFIX.user` / `.org` | `"user"` / `"org"`                                    |
+| `SOCKET_EVENT.joinOrganization`    | `"join:organization"`                                 |
+| `SOCKET_EVENT.leaveOrganization`   | `"leave:organization"`                                |
+| `SCOPE_ORG_KEYS`                   | `organization_id`, `org_id`, `orgId` (öncelik sırası) |
 
 ---
 
@@ -62,10 +62,10 @@ Barrel: `@/platform/scope`
 
 ## Odalar (`rooms.ts`)
 
-| Fonksiyon | Dönüş |
-| --------- | ----- |
-| `userRoom(userId)` | `user:{userId}` — bağlantıda otomatik join (`index.ts` `room:`) |
-| `orgRoom(organizationId)` | `org:{organizationId}` |
+| Fonksiyon                 | Dönüş                                                           |
+| ------------------------- | --------------------------------------------------------------- |
+| `userRoom(userId)`        | `user:{userId}` — bağlantıda otomatik join (`index.ts` `room:`) |
+| `orgRoom(organizationId)` | `org:{organizationId}`                                          |
 
 ### `socketRoomBindings`
 
@@ -88,12 +88,12 @@ Wiring: kök `index.ts` → `attachSocketServer({ rooms: socketRoomBindings, …
 
 `hydrateScope` ürün anahtarlarını doldurur; **tenant middleware’ler** `server/buildServer` içinde tanımlı:
 
-| Tenant | Middleware özeti | `cacheKey` |
-| ------ | ---------------- | ---------- |
-| `org` | `assertOrganization` → `org_id` | `org:{id}` |
-| `member` | `requireMember` | `user:{userId}` |
-| `orgParam` | `requireOrganization` (+ path `id`) | `org:{param\|session}` |
-| `none` | no-op | `undefined` (scoped cache yazılmaz) |
+| Tenant     | Middleware özeti                    | `cacheKey`                          |
+| ---------- | ----------------------------------- | ----------------------------------- |
+| `org`      | `assertOrganization` → `org_id`     | `org:{id}`                          |
+| `member`   | `requireMember`                     | `user:{userId}`                     |
+| `orgParam` | `requireOrganization` (+ path `id`) | `org:{param\|session}`              |
+| `none`     | no-op                               | `undefined` (scoped cache yazılmaz) |
 
 Detay: [`server/doc.md`](../../server/doc.md).
 

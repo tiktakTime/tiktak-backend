@@ -10,13 +10,13 @@ Org içi davet yönetimi. Kabul: [`apps/public/invite/domain/doc.md`](../../../p
 
 ## Zincir
 
-| Endpoint                          | Guard          | Domain          | Repo                                             |
-| --------------------------------- | -------------- | --------------- | ------------------------------------------------ |
-| `GET /organization/invite/search` | `invite.get`   | `searchInvites` | `invite.search`                                  |
-| `GET /organization/invite/{id}`   | `invite.get`   | `getInvite`     | `invite.findById`                                |
+| Endpoint                          | Guard          | Domain          | Repo                                                               |
+| --------------------------------- | -------------- | --------------- | ------------------------------------------------------------------ |
+| `GET /organization/invite/search` | `invite.get`   | `searchInvites` | `invite.search`                                                    |
+| `GET /organization/invite/{id}`   | `invite.get`   | `getInvite`     | `invite.findById`                                                  |
 | `POST /organization/invite`       | `invite.post`  | `createInvite`  | `person` · `user` · `access` · `invite` · `platform/notifications` |
 | `POST .../{id}/resend`            | `invite.post`  | `resendInvite`  | `invite` · `platform/notifications`                                |
-| `POST .../{id}/cancel`            | `invite.patch` | `cancelInvite`  | `invite`                                         |
+| `POST .../{id}/cancel`            | `invite.patch` | `cancelInvite`  | `invite`                                                           |
 
 Hepsi yüzeyde `authMiddleware`; org id session’dan (route).
 

@@ -7,11 +7,11 @@
 
 Barrel: `@/platform/i18n`
 
-| Dosya / klasör    | Rol                                               |
-| ----------------- | ------------------------------------------------- |
-| `index.ts`        | `bundles`, tip augmentation, dil eşliği assert    |
-| `catalog.meta.ts` | `ERROR_META` — status (+ severity opsiyonel tip)  |
-| `en\|tr\|de/*.json` | `errors` / `success` / `validation` metinleri   |
+| Dosya / klasör      | Rol                                              |
+| ------------------- | ------------------------------------------------ |
+| `index.ts`          | `bundles`, tip augmentation, dil eşliği assert   |
+| `catalog.meta.ts`   | `ERROR_META` — status (+ severity opsiyonel tip) |
+| `en\|tr\|de/*.json` | `errors` / `success` / `validation` metinleri    |
 
 ---
 
@@ -21,9 +21,9 @@ Her locale:
 
 ```ts
 {
-  errors: Record<ErrorKey, { title, message }>
-  success: Record<SuccessKey, { title, message }>
-  validation: Record<ValidationKey, { message }>
+  errors: Record<ErrorKey, { title; message }>;
+  success: Record<SuccessKey, { title; message }>;
+  validation: Record<ValidationKey, { message }>;
 }
 ```
 

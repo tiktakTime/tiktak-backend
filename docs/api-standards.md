@@ -37,14 +37,15 @@ Mimari: [architecture.md](./architecture.md) · Katman: [layers.md](./layers.md)
 
 ## 2. Katman kuralları
 
-| Kural                         | Açıklama                                                    |
-| ----------------------------- | ----------------------------------------------------------- |
-| Handler → domain → repo       | Route handler doğrudan Kysely yazmaz                        |
-| Use-case kuralı → apps domain | Akışlar `apps/*/domain`                                     |
-| Repo tipi → modules           | apps şema tipi import edilmez                               |
-| Kardeş import                 | `apps/web`↛`apps/*`. `core` içi OK (ADP). `modules` serbest |
-| DB row ≠ API DTO              | Validation elle; Prisma Zod generate yok                    |
-| Parse sınırı                  | Handler öncesi OpenAPI / Zod middleware                     |
+| Kural                         | Açıklama                                                                        |
+| ----------------------------- | ------------------------------------------------------------------------------- |
+| Handler → domain → repo       | Route handler doğrudan Kysely yazmaz                                            |
+| Use-case kuralı → apps domain | Akışlar `apps/*/domain`                                                         |
+| Repo tipi → modules           | apps şema tipi import edilmez                                                   |
+| Kardeş import                 | `apps/web`↛`apps/*`. `core` içi OK (ADP). `modules` serbest                     |
+| DB row ≠ API DTO              | Validation elle; Prisma Zod generate yok — bağ **tip köprüsü** ile kurulur (§9) |
+| Enum kaynağı                  | `@/modules/db` — şemada literal dizi yazılmaz (§9)                              |
+| Parse sınırı                  | Handler öncesi OpenAPI / Zod middleware                                         |
 
 ---
 
@@ -82,13 +83,13 @@ const create = defineRoute({
 export const employeeRouter = createSlice([search, create]);
 ```
 
-| Alan        | Anlam                                                                  |
-| ----------- | ---------------------------------------------------------------------- |
-| `name`      | Katalog anahtarı + success mesajı (`platform/i18n/*/success.json`)     |
-| `tenant`    | Scope anahtarı (`org` / `member` / `none` / …) — boot’ta resolve       |
-| `policy`    | AND permission slug’ları                                               |
-| `cache`     | GET `read` (ttl + tags) · mutation `write.purge`                       |
-| `handle`    | `RouteCtx`: `params`, `query`, `body`, `tenantId`, `actorId`, `c`      |
+| Alan     | Anlam                                                              |
+| -------- | ------------------------------------------------------------------ |
+| `name`   | Katalog anahtarı + success mesajı (`platform/i18n/*/success.json`) |
+| `tenant` | Scope anahtarı (`org` / `member` / `none` / …) — boot’ta resolve   |
+| `policy` | AND permission slug’ları                                           |
+| `cache`  | GET `read` (ttl + tags) · mutation `write.purge`                   |
+| `handle` | `RouteCtx`: `params`, `query`, `body`, `tenantId`, `actorId`, `c`  |
 
 Boot: `configureRoutePlatform` + `configureI18n` (`server/`). Dosya bölümü: [`core/http/doc.md`](../core/http/doc.md).
 
@@ -194,6 +195,85 @@ Yanıt başlıkları: `Content-Language`, `X-Trace-Id`.
 - GET contract’ta `cache.read` (`ttl`, `tags`)
 - Mutation contract’ta `cache.write.purge`
 - Tag’ler scope ile nitelenir (`platform/scope`)
+
+---
+
+## 9. Şema ↔ model bağı
+
+Zod şeması modelin **aynası değildir** — sözleşme bilinçli olarak farklıdır: bazı
+kolonlar gizli (`token`, `refresh_hash`), `Date` yerine ISO string gider, ek
+doğrulama kuralları vardır. Bu yüzden Prisma'dan Zod üretilmez.
+
+Hedef: **model değiştiğinde karar vermeye zorlanmak.** Bunun yolu derleme zamanı
+tip köprüsüdür.
+
+### Enum — tek kaynak
+
+Zod v4'te `z.enum()` enum benzeri nesneleri kabul eder (`nativeEnum` yerine):
+
+```ts
+import { PersonStatus } from "@/modules/db";
+
+const PersonStatusSchema = z.enum(PersonStatus).openapi("PersonStatus");
+```
+
+Literal dizi yazılmaz (`z.enum(["active", "inactive", "blocked"])`). Aksi halde DB
+ile şema sessizce ayrışır: yeni değer 422 ile reddedilir, kaldırılan değer 500 üretir.
+
+### Kolon köprüsü
+
+Her şema dosyasının sonunda, "hangi kolon açık, hangisi bilinçli gizli" kararı tip olarak yazılır:
+
+```ts
+import type { Selectable } from "kysely";
+
+import type { Employee } from "@/modules/db";
+import type { Equal, Expect } from "@/tests/types";
+
+type Row = Selectable<Employee>;
+
+/** API'de görünen alanlar — şemadan türetilir. */
+type Exposed = keyof z.infer<typeof EmployeeSchema>;
+
+/** Bilinçli olarak dışarı verilmeyen kolonlar. */
+type Internal =
+  "created_by_id" | "updated_by_id" | "deleted_by_id" | "deleted_at";
+
+/** Her kolon ya açık ya gizli olmalı. */
+type _ColumnsAccountedFor = Expect<Equal<Exposed | Internal, keyof Row>>;
+```
+
+| Prisma'da ne oldu           | Sonuç                                            |
+| --------------------------- | ------------------------------------------------ |
+| Yeni kolon eklendi          | **Derleme hatası** — "aç veya `Internal`'a ekle" |
+| Kolon silindi / adı değişti | Derleme hatası                                   |
+| Kolon tipi değişti          | Tip köprüsü (aşağıda)                            |
+
+Bu bir test değil, `tsc --noEmit` — editörde yazarken görünür. `Internal` listesi
+aynı zamanda **karar kaydıdır**: "bu kolonu bilerek vermiyoruz".
+
+### Tip köprüsü (ikinci aşama)
+
+Alan tipleri için tel çevirisi gerekir (DB `Date` → wire `string`):
+
+```ts
+type Wire<T> = {
+  [K in keyof T]: T[K] extends Date
+    ? string
+    : T[K] extends Date | null
+      ? string | null
+      : T[K];
+};
+
+type _TypesMatch = Expect<
+  Extends<z.infer<typeof EmployeeSchema>, Wire<Pick<Row, Exposed & keyof Row>>>
+>;
+```
+
+Önce kolon köprüsünü kur; oturduktan sonra tip köprüsünü ekle (hata mesajları
+daha zor okunur).
+
+Model tarafı: [`database.md`](./database.md) · Test tarafı: [`testing.md`](./testing.md).
 
 ---
 

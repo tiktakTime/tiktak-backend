@@ -10,26 +10,26 @@ Kimlik ve e-posta akışları. Token motoru [`platform/auth`](../../../platform/
 
 ## Zincir (endpoint → guard → domain → repo)
 
-| Endpoint                              | Guard             | Domain                                     | Repo / motor                                                                  |
-| ------------------------------------- | ----------------- | ------------------------------------------ | ----------------------------------------------------------------------------- |
-| `POST /auth/sign-in`                  | `rate_limit.auth` | `authenticateUser` → route `issueSessionForUser` | `user.findAuthByEmail` · domain `issueSessionForUser` → `platform/auth` |
-| `POST /auth/oauth`                    | `rate_limit.auth` | `resolveOAuthUser` → route `issueSessionForUser` | `user` / `user_identity` · `platform/auth`                          |
-| `POST /auth/sign-up`                  | —                 | `signUpUser`                               | `user` · `verification_code` · `platform/notifications`                       |
-| `POST /auth/verify-email`             | —                 | `verifyEmail`                              | `verification_code` · `user`                                                  |
-| `POST /auth/forgot-password`          | —                 | `forgotPassword`                           | aynı                                                                          |
-| `POST /auth/reset-password`           | —                 | `resetPassword`                            | aynı                                                                          |
-| `POST /auth/recovery-email/verify`    | —                 | `verifyRecoveryEmail`                      | aynı                                                                          |
-| `POST /auth/forgot-password-recovery` | —                 | `forgotPasswordRecovery`                   | aynı                                                                          |
-| `POST /auth/email-change/verify`      | —                 | `verifyEmailChange`                        | aynı                                                                          |
-| `POST /auth/refresh`                  | `rate_limit.auth` | (route) `rotateRefreshToken`               | `platform/auth`                                                               |
-| `POST /auth/verify-email/request`     | `authMiddleware`  | `requestEmailVerification`                 | `user` · `verification_code` · `platform/notifications`                       |
-| `POST /auth/change-password`          | `authMiddleware`  | (route inline)                             | `user` doğrudan Kysely                                                        |
-| `POST /auth/recovery-email/request`   | `authMiddleware`  | `requestRecoveryEmail`                     | …                                                                             |
-| `DELETE /auth/recovery-email`         | `authMiddleware`  | `removeRecoveryEmail`                      | `user.clearRecoveryEmail`                                                     |
-| `POST /auth/email-change/request`     | `authMiddleware`  | `requestEmailChange`                       | …                                                                             |
-| `POST /auth/logout`                   | `authMiddleware`  | (route) `revokeSession`                    | `platform/auth`                                                               |
-| `GET /auth/member`                    | `authMiddleware`  | (route inline)                             | `user` select                                                                 |
-| `GET /auth/switch/{id}`               | `authMiddleware`  | `switchOrganization`                       | `access` · `person` · `role_permission` · `platform/auth.updateSessionFields` |
+| Endpoint                              | Guard             | Domain                                           | Repo / motor                                                                  |
+| ------------------------------------- | ----------------- | ------------------------------------------------ | ----------------------------------------------------------------------------- |
+| `POST /auth/sign-in`                  | `rate_limit.auth` | `authenticateUser` → route `issueSessionForUser` | `user.findAuthByEmail` · domain `issueSessionForUser` → `platform/auth`       |
+| `POST /auth/oauth`                    | `rate_limit.auth` | `resolveOAuthUser` → route `issueSessionForUser` | `user` / `user_identity` · `platform/auth`                                    |
+| `POST /auth/sign-up`                  | —                 | `signUpUser`                                     | `user` · `verification_code` · `platform/notifications`                       |
+| `POST /auth/verify-email`             | —                 | `verifyEmail`                                    | `verification_code` · `user`                                                  |
+| `POST /auth/forgot-password`          | —                 | `forgotPassword`                                 | aynı                                                                          |
+| `POST /auth/reset-password`           | —                 | `resetPassword`                                  | aynı                                                                          |
+| `POST /auth/recovery-email/verify`    | —                 | `verifyRecoveryEmail`                            | aynı                                                                          |
+| `POST /auth/forgot-password-recovery` | —                 | `forgotPasswordRecovery`                         | aynı                                                                          |
+| `POST /auth/email-change/verify`      | —                 | `verifyEmailChange`                              | aynı                                                                          |
+| `POST /auth/refresh`                  | `rate_limit.auth` | (route) `rotateRefreshToken`                     | `platform/auth`                                                               |
+| `POST /auth/verify-email/request`     | `authMiddleware`  | `requestEmailVerification`                       | `user` · `verification_code` · `platform/notifications`                       |
+| `POST /auth/change-password`          | `authMiddleware`  | (route inline)                                   | `user` doğrudan Kysely                                                        |
+| `POST /auth/recovery-email/request`   | `authMiddleware`  | `requestRecoveryEmail`                           | …                                                                             |
+| `DELETE /auth/recovery-email`         | `authMiddleware`  | `removeRecoveryEmail`                            | `user.clearRecoveryEmail`                                                     |
+| `POST /auth/email-change/request`     | `authMiddleware`  | `requestEmailChange`                             | …                                                                             |
+| `POST /auth/logout`                   | `authMiddleware`  | (route) `revokeSession`                          | `platform/auth`                                                               |
+| `GET /auth/member`                    | `authMiddleware`  | (route inline)                                   | `user` select                                                                 |
+| `GET /auth/switch/{id}`               | `authMiddleware`  | `switchOrganization`                             | `access` · `person` · `role_permission` · `platform/auth.updateSessionFields` |
 
 ⚠ `change-password` ve `member` domain’e taşınmamış — mantık `apps/auth/index.ts` içinde.
 

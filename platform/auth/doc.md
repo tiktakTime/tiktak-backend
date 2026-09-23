@@ -7,14 +7,14 @@ TikTak oturum motoru: JWT access + Redis session + refresh rotate. İş kuralı
 
 Barrel: `@/platform/auth`
 
-| Dosya                    | Export / rol                                              |
-| ------------------------ | --------------------------------------------------------- |
+| Dosya                    | Export / rol                                               |
+| ------------------------ | ---------------------------------------------------------- |
 | `claims.ts`              | `AccessClaims`, `SessionRecord`, `TokenPair`, org/user tip |
-| `keys.ts`                | Redis key düzeni                                          |
-| `session.ts`             | CRUD / rotate / update / revoke                           |
-| `verify.ts`              | `verifyAccessToken`                                       |
-| `revoke-organization.ts` | Org bağlam düşürme (logout değil)                         |
-| `context.d.ts`           | `AppVariables` RBAC augmentation (runtime import yok)     |
+| `keys.ts`                | Redis key düzeni                                           |
+| `session.ts`             | CRUD / rotate / update / revoke                            |
+| `verify.ts`              | `verifyAccessToken`                                        |
+| `revoke-organization.ts` | Org bağlam düşürme (logout değil)                          |
+| `context.d.ts`           | `AppVariables` RBAC augmentation (runtime import yok)      |
 
 Mekanizma: `@/core/crypto` (JWT/hash/token), `@/core/redis`, `@/core/http` bearer.
 
@@ -24,27 +24,27 @@ Mekanizma: `@/core/crypto` (JWT/hash/token), `@/core/redis`, `@/core/http` beare
 
 ### JWT (`AccessClaims`) — kısa ömürlü, ince
 
-| Claim | Kaynak                         | Anlam                |
-| ----- | ------------------------------ | -------------------- |
-| `sub` | `userId`                       | Kullanıcı id         |
-| `sid` | session uuid                   | Redis oturum anahtarı |
-| `jti` | her access için yeni uuid      | Token tekilliği      |
+| Claim | Kaynak                    | Anlam                 |
+| ----- | ------------------------- | --------------------- |
+| `sub` | `userId`                  | Kullanıcı id          |
+| `sid` | session uuid              | Redis oturum anahtarı |
+| `jti` | her access için yeni uuid | Token tekilliği       |
 
 TTL: `ACCESS_TOKEN_TTL_SECONDS` (default 900). Org / permission **JWT’de yok** —
 her istekte Redis session’dan okunur.
 
 ### Redis `SessionRecord` — uzun ömürlü, zengin
 
-| Alan              | Anlam                                          |
-| ----------------- | ---------------------------------------------- |
-| `user_id`         | Sahip                                          |
-| `organization_id` | Aktif org (null = seçilmemiş)                  |
-| `permissions`     | Slug listesi                                   |
-| `person_id` / `role_id` | Org kişi / rol                          |
-| `is_super_admin`  | Policy bypass                                  |
-| `email` / `first_name` / `last_name` / `picture` | Login snapshot |
-| `refresh_hash`    | Ham refresh’in SHA-256                         |
-| `created_at` / `expires_at` | ms epoch                              |
+| Alan                                             | Anlam                         |
+| ------------------------------------------------ | ----------------------------- |
+| `user_id`                                        | Sahip                         |
+| `organization_id`                                | Aktif org (null = seçilmemiş) |
+| `permissions`                                    | Slug listesi                  |
+| `person_id` / `role_id`                          | Org kişi / rol                |
+| `is_super_admin`                                 | Policy bypass                 |
+| `email` / `first_name` / `last_name` / `picture` | Login snapshot                |
+| `refresh_hash`                                   | Ham refresh’in SHA-256        |
+| `created_at` / `expires_at`                      | ms epoch                      |
 
 TTL: `REFRESH_TOKEN_TTL_SECONDS` (default 30 gün) — session + refresh key aynı PX.
 
@@ -56,11 +56,11 @@ TTL: `REFRESH_TOKEN_TTL_SECONDS` (default 30 gün) — session + refresh key ayn
 
 ## Redis anahtarları (`keys.ts`)
 
-| Fonksiyon              | Key                      | Değer                          |
-| ---------------------- | ------------------------ | ------------------------------ |
-| `sessionKey(sid)`      | `session:{sid}`          | JSON `SessionRecord`           |
-| `refreshKey(hash)`     | `refresh:{sha256}`       | `sid` string                   |
-| `userSessionsKey(uid)` | `user_sessions:{userId}` | SET of `sid` (çoklu cihaz)     |
+| Fonksiyon              | Key                      | Değer                      |
+| ---------------------- | ------------------------ | -------------------------- |
+| `sessionKey(sid)`      | `session:{sid}`          | JSON `SessionRecord`       |
+| `refreshKey(hash)`     | `refresh:{sha256}`       | `sid` string               |
+| `userSessionsKey(uid)` | `user_sessions:{userId}` | SET of `sid` (çoklu cihaz) |
 
 `user_sessions` set’i de session TTL ile `PEXPIRE` alır (create sırasında).
 

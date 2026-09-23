@@ -16,14 +16,14 @@ Org bağlamında yönetim slice'ları. Handler'lar `tenant: "org"` (session `org
 
 ## Slice'lar
 
-| Slice      | Base                       | Permission prefix                   | Belge                                    |
-| ---------- | -------------------------- | ----------------------------------- | ---------------------------------------- |
-| person     | `/organization/person`     | `person.*`                          | [person/doc.md](./person/doc.md)         |
-| employee   | `/organization/employee`   | `employee.*`                        | [employee/doc.md](./employee/doc.md)     |
+| Slice      | Base                       | Permission prefix                           | Belge                                    |
+| ---------- | -------------------------- | ------------------------------------------- | ---------------------------------------- |
+| person     | `/organization/person`     | `person.*`                                  | [person/doc.md](./person/doc.md)         |
+| employee   | `/organization/employee`   | `employee.*`                                | [employee/doc.md](./employee/doc.md)     |
 | access     | `/organization/access`     | `access.*` (search/get: `tenant: "member"`) | [access/doc.md](./access/doc.md)         |
-| role       | `/organization/role`       | `role.*`                            | [role/doc.md](./role/doc.md)             |
-| permission | `/organization/permission` | `permission.*`                      | [permission/doc.md](./permission/doc.md) |
-| invite     | `/organization/invite`     | `invite.*`                          | [invite/doc.md](./invite/doc.md)         |
+| role       | `/organization/role`       | `role.*`                                    | [role/doc.md](./role/doc.md)             |
+| permission | `/organization/permission` | `permission.*`                              | [permission/doc.md](./permission/doc.md) |
+| invite     | `/organization/invite`     | `invite.*`                                  | [invite/doc.md](./invite/doc.md)         |
 
 **Mount sırası (`web/index.ts`):** person → employee → access → role → permission → invite
 

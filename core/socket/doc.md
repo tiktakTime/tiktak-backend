@@ -11,11 +11,11 @@ Barrel: `@/core/socket`
 
 ## Tipler
 
-| Tip | Anlam |
-| --- | ----- |
-| `SocketIdentity` | `{ id, session? }` — `id` = userId, `session` = sid |
-| `SocketRoomBinding` | `{ join, leave, prefix, canJoin? }` |
-| `AttachSocketOptions` | `authenticate`, `room?`, `rooms?` |
+| Tip                   | Anlam                                               |
+| --------------------- | --------------------------------------------------- |
+| `SocketIdentity`      | `{ id, session? }` — `id` = userId, `session` = sid |
+| `SocketRoomBinding`   | `{ join, leave, prefix, canJoin? }`                 |
+| `AttachSocketOptions` | `authenticate`, `room?`, `rooms?`                   |
 
 `canJoin` yoksa odaya katılım serbest; `false` / throw → join yok.
 
@@ -53,21 +53,21 @@ attachSocketServer(httpServer, {
 
 ## Diğer export’lar
 
-| Fonksiyon | Davranış |
-| --------- | -------- |
-| `getIO()` | Init edilmemişse throw |
-| `closeSocket()` | disconnectSockets + close (shutdown) |
+| Fonksiyon                   | Davranış                               |
+| --------------------------- | -------------------------------------- |
+| `getIO()`                   | Init edilmemişse throw                 |
+| `closeSocket()`             | disconnectSockets + close (shutdown)   |
 | `setInvalidateDebugLog(fn)` | Dev: emit öncesi log (oda + queryKeys) |
 
 ---
 
 ## Event sözleşmesi (FE)
 
-| Event | Yön | Payload |
-| ----- | --- | ------- |
-| `invalidate` | server → client | `queryKeys` (react-query / unity key dizileri) |
-| `join:organization` | client → server | `organizationId` string |
-| `leave:organization` | client → server | `organizationId` string |
+| Event                | Yön             | Payload                                        |
+| -------------------- | --------------- | ---------------------------------------------- |
+| `invalidate`         | server → client | `queryKeys` (react-query / unity key dizileri) |
+| `join:organization`  | client → server | `organizationId` string                        |
+| `leave:organization` | client → server | `organizationId` string                        |
 
 Oda adları: `user:{userId}`, `org:{organizationId}` — [`platform/scope`](../../platform/scope/doc.md).
 

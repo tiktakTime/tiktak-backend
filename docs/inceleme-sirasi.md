@@ -86,12 +86,12 @@ Omurga oturunca ⚠’li ve transaction’lı parçalar:
 
 ## İlgili belgeler
 
-| Belge                                  | İçerik                                |
-| -------------------------------------- | ------------------------------------- |
-| [`apps/doc.md`](../apps/doc.md)        | Yüzey / slice indeksi, okuma sırası   |
-| [`modules/doc.md`](../modules/doc.md)  | Repo + alan belgeleri                 |
-| [`core/doc.md`](../core/doc.md)        | Motor paketleri                       |
-| [`architecture.md`](./architecture.md) | Bağımlılık yönü, kardeş import yasağı |
-| [`layers.md`](./layers.md)             | Katman detayı                         |
-| [`api-standards.md`](./api-standards.md) | `defineRoute` sözleşmesi            |
-| [`platform/doc.md`](../platform/doc.md)| auth · scope · notifications · i18n   |
+| Belge                                    | İçerik                                |
+| ---------------------------------------- | ------------------------------------- |
+| [`apps/doc.md`](../apps/doc.md)          | Yüzey / slice indeksi, okuma sırası   |
+| [`modules/doc.md`](../modules/doc.md)    | Repo + alan belgeleri                 |
+| [`core/doc.md`](../core/doc.md)          | Motor paketleri                       |
+| [`architecture.md`](./architecture.md)   | Bağımlılık yönü, kardeş import yasağı |
+| [`layers.md`](./layers.md)               | Katman detayı                         |
+| [`api-standards.md`](./api-standards.md) | `defineRoute` sözleşmesi              |
+| [`platform/doc.md`](../platform/doc.md)  | auth · scope · notifications · i18n   |

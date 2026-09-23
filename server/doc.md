@@ -18,7 +18,13 @@ Composition root: uygulamayı **kurar**, dinlemez.
 export function buildServer() {
   // 1 — i18n + route platform + cache
   configureI18n({ bundles, defaultLocale: "en", errorMeta: ERROR_META });
-  configureRoutePlatform({ hydrateScope, scopes, checkPolicy, resolveTenantId, resolveActorId });
+  configureRoutePlatform({
+    hydrateScope,
+    scopes,
+    checkPolicy,
+    resolveTenantId,
+    resolveActorId,
+  });
   configureCache({ invalidate_key_type: app_config.cache.invalidate_key_type });
 
   // 2
@@ -86,17 +92,17 @@ Production’da spec erişilebilir kalır; browsable UI kapalı.
 
 ## Bağımlılık listesi
 
-| Kaynak         | Import                                                                     |
-| -------------- | -------------------------------------------------------------------------- |
-| Kararlar       | `app.config`                                                               |
-| Router’lar     | `apps/admin`, `auth`, `common`, `mobile`, `public`, `system/health`, `web` |
-| Cache boot     | `core/cache` (`configureCache`)                                            |
-| Env            | `core/env` (`API_BASE_PATH`)                                               |
-| Router         | `core/router` (`createApp`, `createRouter`, `AppOpenAPI`)                  |
-| HTTP boot      | `core/http` (`configureI18n`, `configureRoutePlatform`)                    |
-| i18n içerik    | `platform/i18n` (`bundles`, `ERROR_META`)                                  |
-| Scope          | `platform/scope` (`hydrateScope`)                                          |
-| Rate limit     | `middlewares/rate-limit`                                                   |
+| Kaynak      | Import                                                                     |
+| ----------- | -------------------------------------------------------------------------- |
+| Kararlar    | `app.config`                                                               |
+| Router’lar  | `apps/admin`, `auth`, `common`, `mobile`, `public`, `system/health`, `web` |
+| Cache boot  | `core/cache` (`configureCache`)                                            |
+| Env         | `core/env` (`API_BASE_PATH`)                                               |
+| Router      | `core/router` (`createApp`, `createRouter`, `AppOpenAPI`)                  |
+| HTTP boot   | `core/http` (`configureI18n`, `configureRoutePlatform`)                    |
+| i18n içerik | `platform/i18n` (`bundles`, `ERROR_META`)                                  |
+| Scope       | `platform/scope` (`hydrateScope`)                                          |
+| Rate limit  | `middlewares/rate-limit`                                                   |
 
 Domain/repo import **yok** — yalnızca app barrel router’ları.
 

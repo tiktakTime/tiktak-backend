@@ -52,20 +52,20 @@ Port ve prefix `.env.local` içindeki `PORT` / `API_BASE_PATH` ile değişir. `R
 
 ## Script'ler
 
-| Script                         | Env          | Ne yapar                                |
-| ------------------------------ | ------------ | --------------------------------------- |
-| `pnpm dev`                     | `.env.local` | `tsx watch` ile server                  |
-| `pnpm start`                   | `.env`       | `migrate deploy` + server (deploy yolu) |
-| `pnpm check`                   | —            | `tsc --noEmit`                          |
+| Script                         | Env          | Ne yapar                                   |
+| ------------------------------ | ------------ | ------------------------------------------ |
+| `pnpm dev`                     | `.env.local` | `tsx watch` ile server                     |
+| `pnpm start`                   | `.env`       | `migrate deploy` + server (deploy yolu)    |
+| `pnpm check`                   | —            | `tsc --noEmit`                             |
 | `pnpm verify`                  | —            | format + check + lint + arch + dead + test |
-| `pnpm format`                  | —            | Prettier                                |
-| `pnpm local:up` / `local:down` | —            | Docker compose                          |
-| `pnpm local:reset`             | —            | Volume dahil sıfırla                    |
-| `pnpm db:generate`             | `.env.local` | prisma-kysely tipleri                   |
-| `pnpm db:migrate`              | `.env.local` | `migrate dev`                           |
-| `pnpm db:deploy`               | `.env`       | `migrate deploy`                        |
-| `pnpm db:status`               | `.env.local` | Migration durumu                        |
-| `pnpm db:studio`               | `.env.local` | Prisma Studio                           |
+| `pnpm format`                  | —            | Prettier                                   |
+| `pnpm local:up` / `local:down` | —            | Docker compose                             |
+| `pnpm local:reset`             | —            | Volume dahil sıfırla                       |
+| `pnpm db:generate`             | `.env.local` | prisma-kysely tipleri                      |
+| `pnpm db:migrate`              | `.env.local` | `migrate dev`                              |
+| `pnpm db:deploy`               | `.env`       | `migrate deploy`                           |
+| `pnpm db:status`               | `.env.local` | Migration durumu                           |
+| `pnpm db:studio`               | `.env.local` | Prisma Studio                              |
 
 ---
 

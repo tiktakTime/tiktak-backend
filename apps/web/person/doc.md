@@ -16,14 +16,14 @@ Org kişi kaydı CRUD. Çoğu uç `tenant: "org"` + `person.*` policy; delete ha
 
 ## Endpoint'ler (implemente)
 
-| Method | Path                                | tenant | policy           | HTTP | code              |
-| ------ | ----------------------------------- | ------ | ---------------- | ---- | ----------------- |
-| GET    | `/organization/person/search`       | `org`  | `person.get`     | 200  | (Page)            |
-| GET    | `/organization/person/{id}`         | `org`  | `person.get`     | 200  | `person.get`      |
-| POST   | `/organization/person`              | `org`  | `person.post`    | 200  | `person.create`   |
-| PATCH  | `/organization/person/{id}`         | `org`  | `person.patch`   | 200  | `person.update`   |
-| PATCH  | `/organization/person/{id}/restore` | `org`  | `person.patch`   | 200  | `person.restore`  |
-| DELETE | `/organization/person/{id}`         | `org`  | `person.delete`  | 200  | `person.delete`   |
+| Method | Path                                | tenant | policy          | HTTP | code             |
+| ------ | ----------------------------------- | ------ | --------------- | ---- | ---------------- |
+| GET    | `/organization/person/search`       | `org`  | `person.get`    | 200  | (Page)           |
+| GET    | `/organization/person/{id}`         | `org`  | `person.get`    | 200  | `person.get`     |
+| POST   | `/organization/person`              | `org`  | `person.post`   | 200  | `person.create`  |
+| PATCH  | `/organization/person/{id}`         | `org`  | `person.patch`  | 200  | `person.update`  |
+| PATCH  | `/organization/person/{id}/restore` | `org`  | `person.patch`  | 200  | `person.restore` |
+| DELETE | `/organization/person/{id}`         | `org`  | `person.delete` | 200  | `person.delete`  |
 
 ## Endpoint'ler (stub — NOT IMPLEMENTED)
 

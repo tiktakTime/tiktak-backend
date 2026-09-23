@@ -49,16 +49,16 @@ Rotalar `defineRoute` + `createSlice`; rate-limit ve `authMiddleware` dış `aut
 
 ## Schema özeti
 
-| Schema               | Alanlar / kısıt                                                                                                              |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `SignInBody`         | `email`, `password`                                                                                                          |
-| `SignUpBody`         | `first_name`, `last_name`, `email`, `password` (min 6)                                                                       |
-| `ResetPasswordBody`  | `token`, `new_password` (min 6)                                                                                              |
-| `ChangePasswordBody` | `current_password`, `new_password` (min 6)                                                                                   |
-| `RefreshBody`        | `refresh_token`                                                                                                              |
-| `TokenPair`          | `access_token`, `refresh_token`, `token_type` (`Bearer`), `expires_in`                                                       |
+| Schema               | Alanlar / kısıt                                                                                                                          |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `SignInBody`         | `email`, `password`                                                                                                                      |
+| `SignUpBody`         | `first_name`, `last_name`, `email`, `password` (min 6)                                                                                   |
+| `ResetPasswordBody`  | `token`, `new_password` (min 6)                                                                                                          |
+| `ChangePasswordBody` | `current_password`, `new_password` (min 6)                                                                                               |
+| `RefreshBody`        | `refresh_token`                                                                                                                          |
+| `TokenPair`          | `access_token`, `refresh_token`, `token_type` (`Bearer`), `expires_in`                                                                   |
 | `Member`             | `user_id`, `session_id`, `organization_id?`, `person_id?`, `role_id?`, `permissions?`, `email?`, `first_name?`, `last_name?`, `picture?` |
-| Token body'ler       | `VerifyEmail`, `ForgotPassword`, `RecoveryEmail*`, `EmailChange*` — `token` veya `email` / `recovery_email`                  |
+| Token body'ler       | `VerifyEmail`, `ForgotPassword`, `RecoveryEmail*`, `EmailChange*` — `token` veya `email` / `recovery_email`                              |
 
 ---
 

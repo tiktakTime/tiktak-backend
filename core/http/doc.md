@@ -37,12 +37,12 @@ tek render hunisi. Ürün scope/policy **port** ile gelir (`configureRoutePlatfo
 
 ### `configureRoutePlatform(config)`
 
-| Alan | Amaç |
-| ---- | ---- |
-| `scopes` | `tenant` adı → `{ middleware, cacheKey }` |
-| `checkPolicy` | `policy: string[]` AND izin kontrolü |
-| `hydrateScope` | Cache öncesi context’e org yaz |
-| `resolveTenantId` / `resolveActorId` | `RouteCtx.tenantId` / `actorId` |
+| Alan                                 | Amaç                                      |
+| ------------------------------------ | ----------------------------------------- |
+| `scopes`                             | `tenant` adı → `{ middleware, cacheKey }` |
+| `checkPolicy`                        | `policy: string[]` AND izin kontrolü      |
+| `hydrateScope`                       | Cache öncesi context’e org yaz            |
+| `resolveTenantId` / `resolveActorId` | `RouteCtx.tenantId` / `actorId`           |
 
 Slice’lar modül yüklenirken `createSlice` çağırır; platform **istek anında**
 `requirePlatform()` ile okunur (boot sırası: önce `buildServer`).
@@ -55,18 +55,18 @@ Gerçek wiring: [`server/doc.md`](../../server/doc.md) (`org` / `member` / `orgP
 
 ## `defineRoute` — ne tanımlar?
 
-| Alan | Default | Anlam |
-| ---- | ------- | ----- |
-| `name` | — | Global benzersiz + success katalog anahtarı |
-| `method` / `path` | — | HTTP |
-| `security` | `"bearer"` | OpenAPI security; `"none"` public |
-| `tenant` | `"none"` | Scope middleware + cache prefix kuralı |
-| `policy` | — | AND slug listesi → `checkPolicy` |
-| `request` | — | Zod params/query/body |
-| `response` | — | `Result` / `Page` / … |
-| `cache.read` | — | `{ ttl, tags? }` — GET önbellek |
-| `cache.write.purge` | — | Mutation sonrası tag purge |
-| `handle(ctx)` | — | Domain; `Response` veya data / `ok()` |
+| Alan                | Default    | Anlam                                       |
+| ------------------- | ---------- | ------------------------------------------- |
+| `name`              | —          | Global benzersiz + success katalog anahtarı |
+| `method` / `path`   | —          | HTTP                                        |
+| `security`          | `"bearer"` | OpenAPI security; `"none"` public           |
+| `tenant`            | `"none"`   | Scope middleware + cache prefix kuralı      |
+| `policy`            | —          | AND slug listesi → `checkPolicy`            |
+| `request`           | —          | Zod params/query/body                       |
+| `response`          | —          | `Result` / `Page` / …                       |
+| `cache.read`        | —          | `{ ttl, tags? }` — GET önbellek             |
+| `cache.write.purge` | —          | Mutation sonrası tag purge                  |
+| `handle(ctx)`       | —          | Domain; `Response` veya data / `ok()`       |
 
 `RouteCtx`: `params`, `query`, `body` (lazy `req.valid`), `tenantId`, `actorId`, `c`.
 
@@ -91,12 +91,12 @@ Her `def` için:
 
 `handle` sonucu:
 
-| Sonuç | Wire |
-| ----- | ---- |
-| `Response` | olduğu gibi |
-| `page` mode | JSON olduğu gibi (zarf domain’de) |
-| `ok(code, data)` / named success | `renderSuccess` |
-| düz data | `renderSuccess` ile `code: def.name` |
+| Sonuç                            | Wire                                 |
+| -------------------------------- | ------------------------------------ |
+| `Response`                       | olduğu gibi                          |
+| `page` mode                      | JSON olduğu gibi (zarf domain’de)    |
+| `ok(code, data)` / named success | `renderSuccess`                      |
+| düz data                         | `renderSuccess` ile `code: def.name` |
 
 ---
 
@@ -124,15 +124,15 @@ Detay anahtar/tag: [`cache/doc.md`](../cache/doc.md).
 
 ## Public yardımcılar
 
-| Sembol | Rol |
-| ------ | --- |
-| `Result` / `Page` / `Failure` | OpenAPI yanıt spec |
-| `tenantId` / `actorId` | Context üzerinden ürün çözücü |
-| `extractBearerToken` | `Authorization: Bearer …` |
-| `renderSuccess` / `renderError` / `renderValidation` | Tek huni |
-| `ok(code, data)` | Domain success override |
-| `toPage` / `paginate` | Liste zarfı |
-| `negotiateLocale` / `interpolate` | Accept-Language + `{param}` |
+| Sembol                                               | Rol                           |
+| ---------------------------------------------------- | ----------------------------- |
+| `Result` / `Page` / `Failure`                        | OpenAPI yanıt spec            |
+| `tenantId` / `actorId`                               | Context üzerinden ürün çözücü |
+| `extractBearerToken`                                 | `Authorization: Bearer …`     |
+| `renderSuccess` / `renderError` / `renderValidation` | Tek huni                      |
+| `ok(code, data)`                                     | Domain success override       |
+| `toPage` / `paginate`                                | Liste zarfı                   |
+| `negotiateLocale` / `interpolate`                    | Accept-Language + `{param}`   |
 
 ---
 

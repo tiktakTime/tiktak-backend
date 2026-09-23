@@ -16,14 +16,14 @@ Org özel veya sistem permission tanımları: arama, CRUD. Rol ilişkili liste u
 
 ## Endpoint'ler
 
-| Method | Path                                 | tenant | policy              | HTTP | code                 |
-| ------ | ------------------------------------ | ------ | ------------------- | ---- | -------------------- |
-| GET    | `/organization/permission/search`    | `org`  | `permission.get`    | 200  | (Page)               |
-| GET    | `/organization/permission/{id}`      | `org`  | `permission.get`    | 200  | `permission.get`     |
-| GET    | `/organization/permission/with/role` | `org`  | —                   | —    | **NOT IMPLEMENTED**  |
-| POST   | `/organization/permission`           | `org`  | `permission.post`   | 200  | `permission.create`  |
-| PATCH  | `/organization/permission/{id}`      | `org`  | `permission.patch`  | 200  | `permission.update`  |
-| DELETE | `/organization/permission/{id}`      | `org`  | `permission.delete` | 200  | `permission.delete`  |
+| Method | Path                                 | tenant | policy              | HTTP | code                |
+| ------ | ------------------------------------ | ------ | ------------------- | ---- | ------------------- |
+| GET    | `/organization/permission/search`    | `org`  | `permission.get`    | 200  | (Page)              |
+| GET    | `/organization/permission/{id}`      | `org`  | `permission.get`    | 200  | `permission.get`    |
+| GET    | `/organization/permission/with/role` | `org`  | —                   | —    | **NOT IMPLEMENTED** |
+| POST   | `/organization/permission`           | `org`  | `permission.post`   | 200  | `permission.create` |
+| PATCH  | `/organization/permission/{id}`      | `org`  | `permission.patch`  | 200  | `permission.update` |
+| DELETE | `/organization/permission/{id}`      | `org`  | `permission.delete` | 200  | `permission.delete` |
 
 **Not:** `with/role` ucu `permission.get` policy **yapmaz** — yalnızca `tenant: "org"`.
 
@@ -31,12 +31,12 @@ Org özel veya sistem permission tanımları: arama, CRUD. Rol ilişkili liste u
 
 ## Schema özeti
 
-| Schema                  | Alanlar                                                                                                          |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Schema                  | Alanlar                                                                                                     |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `PermissionCreate`      | `organization_id`, `slug`, `name`, `description?`, `is_locked?` — route ayrıca `tenantId` ile `insert` eder |
-| `PermissionUpdate`      | `slug?`, `name?`, `description?`, `is_locked?`                                                                   |
-| `PermissionSchema`      | `id`, `organization_id`, `slug`, `name`, `description`, `is_locked`, timestamps                                  |
-| `PermissionSearchQuery` | pagination + `organization_id?`                                                                                  |
+| `PermissionUpdate`      | `slug?`, `name?`, `description?`, `is_locked?`                                                              |
+| `PermissionSchema`      | `id`, `organization_id`, `slug`, `name`, `description`, `is_locked`, timestamps                             |
+| `PermissionSearchQuery` | pagination + `organization_id?`                                                                             |
 
 ---
 

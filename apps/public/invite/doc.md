@@ -16,10 +16,10 @@ Davet token'ı ile org bilgisini okuma ve daveti kabul etme. Oturum açılmaz; a
 
 ## Endpoint'ler
 
-| Method | Path               | security | tenant | HTTP | code               |
-| ------ | ------------------ | -------- | ------ | ---- | ------------------ |
-| GET    | `/invite/by-token` | `none`   | `none` | 200  | `invite.by-token`  |
-| POST   | `/invite/accept`   | `none`   | `none` | 200  | `invite.accept`    |
+| Method | Path               | security | tenant | HTTP | code              |
+| ------ | ------------------ | -------- | ------ | ---- | ----------------- |
+| GET    | `/invite/by-token` | `none`   | `none` | 200  | `invite.by-token` |
+| POST   | `/invite/accept`   | `none`   | `none` | 200  | `invite.accept`   |
 
 **Query / body:**
 

@@ -16,13 +16,13 @@ Organizasyon (kiracı) arama, okuma, oluşturma, restore ve soft-delete. Create 
 
 ## Endpoint'ler
 
-| Method | Path                         | tenant     | policy                | HTTP | code                    |
-| ------ | ---------------------------- | ---------- | --------------------- | ---- | ----------------------- |
-| GET    | `/organization/search`       | `member`   | `organization.get`    | 200  | (Page)                  |
-| GET    | `/organization/{id}`         | `orgParam` | `organization.get`    | 200  | `organization.get`      |
-| POST   | `/organization`              | `member`   | —                     | 200  | `organization.create`   |
-| PATCH  | `/organization/{id}/restore` | `orgParam` | `organization.patch`  | 200  | `organization.restore`  |
-| DELETE | `/organization/{id}`         | `orgParam` | `organization.delete` | 200  | `organization.delete`   |
+| Method | Path                         | tenant     | policy                | HTTP | code                   |
+| ------ | ---------------------------- | ---------- | --------------------- | ---- | ---------------------- |
+| GET    | `/organization/search`       | `member`   | `organization.get`    | 200  | (Page)                 |
+| GET    | `/organization/{id}`         | `orgParam` | `organization.get`    | 200  | `organization.get`     |
+| POST   | `/organization`              | `member`   | —                     | 200  | `organization.create`  |
+| PATCH  | `/organization/{id}/restore` | `orgParam` | `organization.patch`  | 200  | `organization.restore` |
+| DELETE | `/organization/{id}`         | `orgParam` | `organization.delete` | 200  | `organization.delete`  |
 
 ---
 

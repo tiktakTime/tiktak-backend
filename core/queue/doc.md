@@ -13,30 +13,30 @@ Bağlantı: `getRedis()` → BullMQ `ConnectionOptions` (aynı ioredis instance)
 
 ## Kuyruklar
 
-| Queue         | Job adı           | Payload                                              |
-| ------------- | ----------------- | ---------------------------------------------------- |
-| `mail-queue`  | `send-mail`       | `EnqueueMailJob`                                     |
-| `image-queue` | `process-image`   | `{ path, reference_id }`                             |
+| Queue         | Job adı         | Payload                  |
+| ------------- | --------------- | ------------------------ |
+| `mail-queue`  | `send-mail`     | `EnqueueMailJob`         |
+| `image-queue` | `process-image` | `{ path, reference_id }` |
 
 ### `EnqueueMailJob`
 
-| Alan | Anlam |
-| ---- | ----- |
-| `key` | Şablon anahtarı |
-| `mail` | Alıcı |
-| `payload` | Şablon verisi |
-| `meta?` | Örn. `{ userId }` — ürün `MailJob.userId` buraya map’lenir |
+| Alan      | Anlam                                                      |
+| --------- | ---------------------------------------------------------- |
+| `key`     | Şablon anahtarı                                            |
+| `mail`    | Alıcı                                                      |
+| `payload` | Şablon verisi                                              |
+| `meta?`   | Örn. `{ userId }` — ürün `MailJob.userId` buraya map’lenir |
 
 ---
 
 ## Public API
 
-| Fonksiyon | Davranış |
-| --------- | -------- |
-| `addMailJob(data)` | `mailQueue.add("send-mail", data)` |
-| `addImageJob({ path, reference_id })` | `imageQueue.add("process-image", …)` |
-| `closeQueues()` | Her iki queue `close()` — shutdown (`index.ts`) |
-| `mailQueue` / `imageQueue` | Ham BullMQ Queue (nadiren) |
+| Fonksiyon                             | Davranış                                        |
+| ------------------------------------- | ----------------------------------------------- |
+| `addMailJob(data)`                    | `mailQueue.add("send-mail", data)`              |
+| `addImageJob({ path, reference_id })` | `imageQueue.add("process-image", …)`            |
+| `closeQueues()`                       | Her iki queue `close()` — shutdown (`index.ts`) |
+| `mailQueue` / `imageQueue`            | Ham BullMQ Queue (nadiren)                      |
 
 Ürün kodu genelde `platform/notifications.sendEmail` kullanır; `addMailJob`
 doğrudan çağrı nadirdir.

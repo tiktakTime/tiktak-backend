@@ -8,15 +8,16 @@ Genel mimari: [architecture.md](./architecture.md) · Kararlar: [decisions.md](.
 
 ## Sorumluluk ayrımı
 
-| Ne                                         | Nerede                                              |
-| ------------------------------------------ | --------------------------------------------------- |
-| Entity `.prisma`, `enums.prisma`, `doc.md` | `modules/<entity>/`                                 |
-| Modül indeksi                              | [`modules/doc.md`](../modules/doc.md)               |
-| Generator tanımı                           | `modules/schema.prisma`                             |
-| Migration SQL                              | `core/database/prisma/migrations/`                  |
-| Kysely pool                                | `core/database/db.ts`                               |
-| Generate çıktısı                           | `core/database/generated/kysely/` (gitignore)       |
-| Modül sabitleri                            | `modules/<entity>/*.ts` (ör. `invite/constants.ts`) |
+| Ne                                         | Nerede                                                     |
+| ------------------------------------------ | ---------------------------------------------------------- |
+| Entity `.prisma`, `enums.prisma`, `doc.md` | `modules/<entity>/`                                        |
+| Modül indeksi                              | [`modules/doc.md`](../modules/doc.md)                      |
+| Generator tanımı                           | `modules/schema.prisma`                                    |
+| Migration SQL                              | `core/database/prisma/migrations/`                         |
+| Kysely pool                                | `core/database/db.ts`                                      |
+| Generate çıktısı                           | `core/database/generated/kysely/` (gitignore)              |
+| Enum değeri + tipi                         | `generated/kysely/enums` → `@/modules/db` (**tek kaynak**) |
+| Ürün sabitleri (enum değil)                | `app.config.ts` (ör. invite TTL)                           |
 
 ---
 
@@ -87,6 +88,58 @@ pnpm db:studio
 
 ---
 
+## Tek kaynak — enum ve satır tipleri
+
+`prisma-kysely` her enum için **hem değer hem tip** üretir ve `core/database/index.ts`
+ikisini de dışarı verir. Elle kopya yazılmaz.
+
+```ts
+// generated/kysely/enums.ts
+export const InviteStatus = { pending: "pending", accepted: "accepted", … } as const;
+export type InviteStatus = (typeof InviteStatus)[keyof typeof InviteStatus];
+```
+
+| Yanlış                                                   | Doğru                                                             |
+| -------------------------------------------------------- | ----------------------------------------------------------------- |
+| `export const INVITE_STATUS = { PENDING: "pending", … }` | `import { InviteStatus } from "@/modules/db"`                     |
+| `export type PersonStatus = "active" \| "inactive" \| …` | `import type { PersonStatus } from "@/modules/db"`                |
+| `z.enum(["active", "inactive", "blocked"])`              | `z.enum(PersonStatus)` — [`api-standards.md`](./api-standards.md) |
+
+Referans doğru kullanım: `modules/user/user.repo.ts` → `import type { UserStatus } from "@/modules/db"`.
+
+### Satır tipleri
+
+Repo `COLUMNS` sabitleri `.select(COLUMNS)` üzerinden zaten tip kontrolünden geçer.
+Satır tipi de elle yazılmaz, aynı kaynaktan türetilir:
+
+```ts
+import type { Selectable } from "kysely";
+
+import type { Invite } from "@/modules/db";
+
+export type InviteRow = Pick<Selectable<Invite>, (typeof COLUMNS)[number]>;
+```
+
+`Selectable` gerekli — üretilen tipler `Generated<T>` / `Timestamp` sarmalayıcıları
+kullanır; `Selectable` bunları okuma şekline (`string`, `Date`) açar.
+
+Böylece zincir kapanır:
+
+```
+prisma → generated DB tipi → COLUMNS → Row → domain → zod şeması
+         ✅ otomatik        ✅ tsc    ✅     ✅       tip köprüsü (api-standards)
+```
+
+### Enum değişikliği ne yakalanır
+
+| Değişiklik                    | Sonuç                                                                               |
+| ----------------------------- | ----------------------------------------------------------------------------------- |
+| Değer silindi / adı değişti   | `tsc` kırılır (tek kaynak)                                                          |
+| Kolon silindi / tipi değişti  | `tsc` kırılır (`COLUMNS` + `Selectable`)                                            |
+| Enum'a **yeni değer eklendi** | Sessiz — karar tablosu `Record<Enum, …>` ile korunur ([`testing.md`](./testing.md)) |
+
+---
+
 ## Mevcut modeller
 
 Tam liste, alan açıklamaları ve repo yüzeyi → **[`modules/doc.md`](../modules/doc.md)**.
@@ -112,6 +165,9 @@ Tam liste, alan açıklamaları ve repo yüzeyi → **[`modules/doc.md`](../modu
 
 1. **Şema kaynağı** `modules/` — `core/database` domain modeli içermez.
 2. **Kysely tipleri** generate edilir; elle düzenlenmez.
-3. **Prod’da** yalnızca `migrate deploy`.
-4. **Kolon adları** snake_case.
-5. Her modülde **`doc.md`** zorunlu; indeks [`modules/doc.md`](../modules/doc.md).
+3. **Enum değeri ve tipi** yalnızca `@/modules/db`'den okunur — kopya sabit yazılmaz.
+4. **Satır tipleri** `Pick<Selectable<T>, COLUMNS>` ile türetilir; elle yazılmaz.
+5. **Prod’da** yalnızca `migrate deploy`.
+6. **Kolon adları** snake_case.
+7. Her modülde **`doc.md`** zorunlu; indeks [`modules/doc.md`](../modules/doc.md).
+8. Her modülün `doc.md`'sinde **"Değişmezler"** bölümü — testler oradan yazılır ([`testing.md`](./testing.md)).

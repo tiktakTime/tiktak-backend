@@ -77,12 +77,12 @@ modules/user/
 
 ## 3. `platform/` — motoru ürüne bağlar
 
-| Klasör          | Rol                                              |
-| --------------- | ------------------------------------------------ |
-| `auth`          | Claims, session, JWT+Redis verify                |
-| `scope`         | Org/member anahtarları, hydrate, socket odası    |
-| `notifications` | MailJob, şablon anahtarları, FE link             |
-| `i18n`          | EN/TR/DE bundles + catalog.meta                  |
+| Klasör          | Rol                                           |
+| --------------- | --------------------------------------------- |
+| `auth`          | Claims, session, JWT+Redis verify             |
+| `scope`         | Org/member anahtarları, hydrate, socket odası |
+| `notifications` | MailJob, şablon anahtarları, FE link          |
+| `i18n`          | EN/TR/DE bundles + catalog.meta               |
 
 `platform` → `core` ✅ · `platform` ↛ `apps` / `modules`.
 
@@ -92,11 +92,11 @@ modules/user/
 
 ## 4. `middlewares/` / `server/` / `core/`
 
-| Katman         | Rol                                                                |
-| -------------- | ------------------------------------------------------------------ |
-| `middlewares/` | auth, permission, rate-limit — ince; `platform` + `core` kullanır  |
-| `server/`      | Composition root — `configureX`, mount; domain/Kysely yazmaz       |
-| `core/`        | Motor — domain yok; yukarı bakmaz                                  |
+| Katman         | Rol                                                               |
+| -------------- | ----------------------------------------------------------------- |
+| `middlewares/` | auth, permission, rate-limit — ince; `platform` + `core` kullanır |
+| `server/`      | Composition root — `configureX`, mount; domain/Kysely yazmaz      |
+| `core/`        | Motor — domain yok; yukarı bakmaz                                 |
 
 ---
 
@@ -115,11 +115,11 @@ Paylaşım (HTTP zarfı, enum) → tercihen `core/`. Apps yüzeyleri birbirinden
 
 ## 6. Anti-pattern
 
-| Yapma                                  | Neden                              |
-| -------------------------------------- | ---------------------------------- |
-| `modules/*/domain`                     | Domain `apps` altında              |
-| `modules` → `apps` şema tipi           | Repo kendi tipini tanımlar         |
-| `apps/web` → `apps/common`             | Kardeş yasağı (`apps`)             |
-| `core` → `platform` / `apps` / …       | Motor yukarı bakmaz                |
-| Handler içinde Kysely                  | Sadece repo                        |
-| Public route’u auth’lu common’a gömmek | `apps/public` kullan               |
+| Yapma                                  | Neden                      |
+| -------------------------------------- | -------------------------- |
+| `modules/*/domain`                     | Domain `apps` altında      |
+| `modules` → `apps` şema tipi           | Repo kendi tipini tanımlar |
+| `apps/web` → `apps/common`             | Kardeş yasağı (`apps`)     |
+| `core` → `platform` / `apps` / …       | Motor yukarı bakmaz        |
+| Handler içinde Kysely                  | Sadece repo                |
+| Public route’u auth’lu common’a gömmek | `apps/public` kullan       |
