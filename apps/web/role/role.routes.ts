@@ -86,7 +86,7 @@ const update = defineRoute({
   tenant: "org",
   policy: ["role.patch"],
   cache: { write: { purge: ["role"] } },
-  handle: ({ params, body }) => updateRole(params.id, body),
+  handle: ({ tenantId, params, body }) => updateRole(tenantId, params.id, body),
 });
 
 const remove = defineRoute({
@@ -114,7 +114,7 @@ const get = defineRoute({
   tenant: "org",
   policy: ["role.get"],
   cache: { read: { ttl: TTL.LONG, tags: ["role"] } },
-  handle: ({ params }) => getRole(params.id),
+  handle: ({ tenantId, params }) => getRole(tenantId, params.id),
 });
 
 export const roleRouter = createSlice([

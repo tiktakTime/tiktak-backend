@@ -1,19 +1,35 @@
 import { z } from "@hono/zod-openapi";
+import type { Selectable } from "kysely";
 
 import { IdParamSchema } from "@/core/fields";
 import { PaginationQuerySchema } from "@/core/http";
+import { type Permission as PermissionRow } from "@/modules/db";
+
+type PermissionPublic = Pick<
+  Selectable<PermissionRow>,
+  | "id"
+  | "organization_id"
+  | "slug"
+  | "name"
+  | "description"
+  | "is_locked"
+  | "created_at"
+  | "updated_at"
+>;
 
 export const PermissionSchema = z
-  .object({
-    id: z.uuid(),
-    organization_id: z.uuid().nullable(),
-    slug: z.string(),
-    name: z.string(),
-    description: z.string().nullable(),
-    is_locked: z.boolean(),
-    created_at: z.date(),
-    updated_at: z.date(),
-  })
+  .toZod<PermissionPublic>()(
+    z.object({
+      id: z.uuid(),
+      organization_id: z.uuid().nullable(),
+      slug: z.string(),
+      name: z.string(),
+      description: z.string().nullable(),
+      is_locked: z.boolean(),
+      created_at: z.date(),
+      updated_at: z.date(),
+    }),
+  )
   .openapi("Permission");
 
 export const PermissionCreateSchema = z

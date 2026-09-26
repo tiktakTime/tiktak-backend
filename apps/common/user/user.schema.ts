@@ -1,38 +1,77 @@
 import { z } from "@hono/zod-openapi";
+import type { Selectable } from "kysely";
 
 import { DateOnlySchema, IdParamSchema, IsoInstantSchema } from "@/core/fields";
 import { PaginationQuerySchema } from "@/core/http";
+import {
+  UserGender,
+  type UserProfile,
+  type User as UserRow,
+  UserStatus,
+} from "@/modules/db";
 
-const UserStatusSchema = z.enum(["active", "inactive", "blocked"]);
-const UserGenderSchema = z.enum(["female", "male", "none"]);
+const UserStatusSchema = z.enum(UserStatus);
+const UserGenderSchema = z.enum(UserGender);
 
-/** Platform user on the wire. Secrets / push tokens never appear here. */
+/** User satırı + profil. Kimlik sırları ve push token telde yok. */
+type UserPublic = Pick<
+  Selectable<UserRow>,
+  | "id"
+  | "system_role_id"
+  | "email"
+  | "status"
+  | "first_name"
+  | "last_name"
+  | "display_name"
+  | "picture"
+  | "locale"
+  | "timezone"
+  | "expires_at"
+  | "email_verified_at"
+  | "two_factor_enabled_at"
+  | "created_at"
+  | "updated_at"
+> &
+  Pick<
+    Selectable<UserProfile>,
+    | "country_id"
+    | "nationality_id"
+    | "gender"
+    | "birth_location"
+    | "birthdate"
+    | "phone_landline"
+    | "phone_number"
+    | "phone_verified_at"
+  >;
+
 export const UserSchema = z
-  .object({
-    id: z.uuid(),
-    system_role_id: z.uuid().nullable().optional(),
-    email: z.email().max(255).nullable(),
-    status: UserStatusSchema,
-    first_name: z.string().max(255),
-    last_name: z.string().max(255),
-    display_name: z.string().max(255).nullable(),
-    picture: z.string().nullable(),
-    locale: z.string().max(35).nullable(),
-    timezone: z.string().max(64).nullable(),
-    expires_at: z.date().nullable(),
-    email_verified_at: z.date().nullable(),
-    two_factor_enabled_at: z.date().nullable(),
-    country_id: z.uuid().nullable(),
-    nationality_id: z.uuid().nullable(),
-    gender: UserGenderSchema,
-    birth_location: z.string().max(255).nullable(),
-    birthdate: z.string().nullable(),
-    phone_landline: z.string().max(15).nullable(),
-    phone_number: z.string().max(50).nullable(),
-    phone_verified_at: z.date().nullable(),
-    created_at: z.date(),
-    updated_at: z.date(),
-  })
+  .toZod<UserPublic>()(
+    z.object({
+      id: z.uuid(),
+      system_role_id: z.uuid().nullable(),
+      email: z.email().max(255).nullable(),
+      status: UserStatusSchema,
+      first_name: z.string().max(255),
+      last_name: z.string().max(255),
+      display_name: z.string().max(255).nullable(),
+      picture: z.string().nullable(),
+      locale: z.string().max(35).nullable(),
+      timezone: z.string().max(64).nullable(),
+      expires_at: z.date().nullable(),
+      email_verified_at: z.date().nullable(),
+      two_factor_enabled_at: z.date().nullable(),
+      country_id: z.uuid().nullable(),
+      nationality_id: z.uuid().nullable(),
+      gender: UserGenderSchema,
+      birth_location: z.string().max(255).nullable(),
+      birthdate: z.coerce.date().nullable(),
+      phone_landline: z.string().max(15).nullable(),
+      phone_number: z.string().max(50).nullable(),
+      phone_verified_at: z.date().nullable(),
+      created_at: z.date(),
+      updated_at: z.date(),
+    }),
+  )
   .openapi("User");
 
 export const UserCreateSchema = z

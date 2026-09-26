@@ -255,6 +255,12 @@ function wrapHandler(
 
 /** Global `name` benzersizliği — slice'lar arası çakışmayı yakalar. */
 const registeredRouteNames = new Set<string>();
+const registeredRoutes: RouteDef[] = [];
+
+/** Yüklenmiş route tanımları. Bütünlük testleri buradan okur. */
+export function listRegisteredRoutes(): readonly RouteDef[] {
+  return registeredRoutes;
+}
 
 /** `createRouter` + derleme + cache wrap. `name` global benzersiz olmalı. */
 export function createSlice(defs: readonly RouteDef[]): AppOpenAPI {
@@ -263,6 +269,7 @@ export function createSlice(defs: readonly RouteDef[]): AppOpenAPI {
       throw new Error(`Duplicate route name "${def.name}" in createSlice`);
     }
     registeredRouteNames.add(def.name);
+    registeredRoutes.push(def);
     if (def.method !== "get") {
       registerMutationSuccessKey(def.name);
     }

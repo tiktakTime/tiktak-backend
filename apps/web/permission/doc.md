@@ -42,7 +42,7 @@ Org özel veya sistem permission tanımları: arama, CRUD. Rol ilişkili liste u
 
 ## Domain
 
-[`domain/doc.md`](./domain/doc.md) — create, update, soft-delete, search, guards.
+[`domain/doc.md`](./domain/doc.md) — create, update, soft-delete, search.
 
 ---
 

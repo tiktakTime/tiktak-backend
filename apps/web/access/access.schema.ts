@@ -1,29 +1,41 @@
 import { z } from "@hono/zod-openapi";
+import type { Selectable } from "kysely";
 
 import { IdParamSchema, IsoInstantSchema } from "@/core/fields";
 import { PaginationQuerySchema } from "@/core/http";
+import { type Access as AccessRow, AccessStatus } from "@/modules/db";
 
-const AccessStatusSchema = z.enum([
-  "pending",
-  "active",
-  "inactive",
-  "blocked",
-  "canceled",
-]);
+const AccessStatusSchema = z.enum(AccessStatus);
+
+type AccessPublic = Pick<
+  Selectable<AccessRow>,
+  | "id"
+  | "organization_id"
+  | "user_id"
+  | "person_id"
+  | "role_id"
+  | "status"
+  | "expired_date"
+  | "description"
+  | "created_at"
+  | "updated_at"
+>;
 
 export const AccessSchema = z
-  .object({
-    id: z.uuid(),
-    organization_id: z.uuid(),
-    user_id: z.uuid().nullable(),
-    person_id: z.uuid().nullable(),
-    role_id: z.uuid().nullable(),
-    status: AccessStatusSchema,
-    expired_date: z.date().nullable(),
-    description: z.string().nullable(),
-    created_at: z.date(),
-    updated_at: z.date(),
-  })
+  .toZod<AccessPublic>()(
+    z.object({
+      id: z.uuid(),
+      organization_id: z.uuid(),
+      user_id: z.uuid().nullable(),
+      person_id: z.uuid().nullable(),
+      role_id: z.uuid().nullable(),
+      status: AccessStatusSchema,
+      expired_date: z.date().nullable(),
+      description: z.string().nullable(),
+      created_at: z.date(),
+      updated_at: z.date(),
+    }),
+  )
   .openapi("Access");
 
 export const AccessCreateSchema = z

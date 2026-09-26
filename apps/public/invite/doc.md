@@ -4,7 +4,8 @@
 
 **Dosyalar:** `invite.schema.ts`, `invite-public.routes.ts`, `domain/`  
 **Base path:** `/invite`  
-**Mount:** `publicRouter` — **auth yok**
+**Mount:** `publicRouter` — **auth yok**  
+**Testler:** `invite.integration.test.ts`
 
 ---
 

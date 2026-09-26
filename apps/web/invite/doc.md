@@ -4,7 +4,8 @@
 
 **Dosyalar:** `invite.schema.ts`, `invite.routes.ts`, `domain/`  
 **Base path:** `/organization/invite`  
-**Mount:** `webRouter` → `authMiddleware`
+**Mount:** `webRouter` → `authMiddleware`  
+**Testler:** `apps/public/invite/invite.integration.test.ts`
 
 ---
 

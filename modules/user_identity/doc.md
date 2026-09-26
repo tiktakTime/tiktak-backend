@@ -25,7 +25,7 @@ Her satır bir giriş yolu: e-posta/şifre, Google veya Apple. Kalıcı dış ki
 | `id`                  | uuid           | PK   | Identity satır kimliği                                                |
 | `user_id`             | uuid           |      | Sahip hesap → `user.id`                                               |
 | `provider`            | `AuthProvider` |      | `password` \| `google` \| `apple`                                     |
-| `provider_subject`    | varchar(255)   |      | IdP `sub`. Password için sabit `"local"`. Unique with provider        |
+| `provider_subject`    | varchar(255)   |      | IdP `sub`. Password için user id. Unique with provider                |
 | `provider_email`      | varchar(255)   | ✓    | Provider’ın o an verdiği e-posta (audit / debug; `user.email` değil)  |
 | `password_hash`       | varchar(255)   | ✓    | bcrypt hash. Sadece `password` provider’da dolu                       |
 | `password_changed_at` | timestamptz    | ✓    | Son şifre değişimi. Password policy / “şifreni değiştir” hatırlatması |
@@ -40,7 +40,7 @@ Her satır bir giriş yolu: e-posta/şifre, Google veya Apple. Kalıcı dış ki
 
 | Değer      | `provider_subject`    | Not                              |
 | ---------- | --------------------- | -------------------------------- |
-| `password` | `"local"`             | `password_hash` zorunlu pratikte |
+| `password` | user id               | `password_hash` zorunlu pratikte |
 | `google`   | Google ID token `sub` |                                  |
 | `apple`    | Apple ID token `sub`  |                                  |
 
@@ -63,7 +63,7 @@ Her satır bir giriş yolu: e-posta/şifre, Google veya Apple. Kalıcı dış ki
 | `upsertPassword`        | Password identity yoksa insert, varsa hash + `password_changed_at` güncelle |
 | `touchLastUsed`         | Login sonrası `last_used_at`                                                |
 
-Sabit: `PASSWORD_SUBJECT = "local"`.
+Password konusu user id'dir. Giriş `findPasswordByUserId` ile okunur.
 
 ---
 

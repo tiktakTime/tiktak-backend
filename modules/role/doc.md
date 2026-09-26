@@ -13,7 +13,7 @@
 
 ## Amaç
 
-`organization_id = null` → global rol (ör. owner seed, `OWNER_ROLE_ID`). Org rolü slug org içinde unique. `is_locked` true ise domain güncellemeyi reddeder ([`apps/web/role/domain/guards.ts`](../../apps/web/role/domain/doc.md)).
+`organization_id = null` → global rol (ör. owner seed, `OWNER_ROLE_ID`). Org rolü slug org içinde unique. `is_locked` true ise domain güncellemeyi reddeder ([`apps/web/role/domain`](../../apps/web/role/domain/doc.md)).
 
 ---
 

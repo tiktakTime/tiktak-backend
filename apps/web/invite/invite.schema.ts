@@ -1,30 +1,45 @@
 import { z } from "@hono/zod-openapi";
+import type { Selectable } from "kysely";
 
 import { PaginationQuerySchema } from "@/core/http";
-import { InviteStatus } from "@/modules/db";
+import { type Invite, InviteStatus } from "@/modules/db";
 
-const InviteStatusSchema = z.enum([
-  InviteStatus.pending,
-  InviteStatus.accepted,
-  InviteStatus.expired,
-  InviteStatus.canceled,
-]);
+const InviteStatusSchema = z.enum(InviteStatus);
+
+/** Token ve deneme sayaçları telde yok. */
+type InvitePublic = Pick<
+  Selectable<Invite>,
+  | "id"
+  | "organization_id"
+  | "user_id"
+  | "person_id"
+  | "email"
+  | "status"
+  | "description"
+  | "expires_at"
+  | "accepted_at"
+  | "canceled_at"
+  | "created_at"
+  | "updated_at"
+>;
 
 export const InviteSchema = z
-  .object({
-    id: z.uuid(),
-    organization_id: z.uuid(),
-    user_id: z.uuid().nullable(),
-    person_id: z.uuid(),
-    email: z.string(),
-    status: InviteStatusSchema,
-    description: z.string().nullable(),
-    expires_at: z.coerce.date(),
-    accepted_at: z.coerce.date().nullable(),
-    canceled_at: z.coerce.date().nullable(),
-    created_at: z.coerce.date(),
-    updated_at: z.coerce.date(),
-  })
+  .toZod<InvitePublic>()(
+    z.object({
+      id: z.uuid(),
+      organization_id: z.uuid(),
+      user_id: z.uuid().nullable(),
+      person_id: z.uuid(),
+      email: z.string(),
+      status: InviteStatusSchema,
+      description: z.string().nullable(),
+      expires_at: z.coerce.date(),
+      accepted_at: z.coerce.date().nullable(),
+      canceled_at: z.coerce.date().nullable(),
+      created_at: z.coerce.date(),
+      updated_at: z.coerce.date(),
+    }),
+  )
   .openapi("Invite");
 
 export const InviteCreateSchema = z

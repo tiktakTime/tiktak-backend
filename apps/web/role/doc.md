@@ -42,7 +42,7 @@ Org rol tanımları ve (create/update'te) permission ataması. Permission'lı li
 
 ## Domain
 
-[`domain/doc.md`](./domain/doc.md) — create (permission sync), update, soft-delete, search, guards.
+[`domain/doc.md`](./domain/doc.md) — create (permission sync), update, soft-delete, search.
 
 ---
 

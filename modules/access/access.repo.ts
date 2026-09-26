@@ -1,5 +1,5 @@
 import { type PaginationParams, paginate, toPaginateSort } from "@/core/http";
-import { db } from "@/modules/db";
+import { type AccessStatus, db } from "@/modules/db";
 
 export type AccessSearchParams = PaginationParams & {
   organization_id?: string;
@@ -7,9 +7,6 @@ export type AccessSearchParams = PaginationParams & {
   sort?: string;
   order?: "ASC" | "DESC";
 };
-
-export type AccessStatus =
-  "pending" | "active" | "inactive" | "blocked" | "canceled";
 
 export type AccessUpdateInput = {
   person_id?: string | null;

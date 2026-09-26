@@ -99,9 +99,11 @@ export function buildServer() {
   // Cast: deep OpenAPI route unions exceed TS instantiation limits.
   const mount = (router: AppOpenAPI, path = "/") => api.route(path, router);
 
-  // Sistem + melez auth — surfaces döngüsü dışında.
+  // Sistem + melez auth + spec — surfaces döngüsü dışında.
+  // Spec, web/common `use("*", auth)` öncesinde durur; yoksa her istek 401 alır.
   mount(healthRouter);
   mount(authRouter);
+  mountOpenAPI(api);
 
   for (const [name, surface] of Object.entries(app_config.surfaces) as Array<
     [keyof typeof surfaceRouters, (typeof app_config.surfaces)["common"]]
@@ -110,8 +112,6 @@ export function buildServer() {
       mount(surfaceRouters[name], surface.prefix || "/");
     }
   }
-
-  mountOpenAPI(api);
 
   return createApp().route(env.API_BASE_PATH, api);
 }

@@ -26,6 +26,8 @@
   "include": [
     "index.ts",
     "app.config.ts",
+    "tests",
+    "scripts",
     "apps",
     "core",
     "middlewares",

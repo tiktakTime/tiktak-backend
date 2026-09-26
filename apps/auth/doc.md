@@ -4,7 +4,8 @@
 
 **Dosyalar:** `index.ts` (routes), `auth.schema.ts`, `domain/`  
 **Mount:** surfaces **dışı** — `server` doğrudan `mount(authRouter)`  
-**Auth:** melez — public uçlar + `authMiddleware` korumalı session uçları
+**Auth:** melez — public uçlar + `authMiddleware` korumalı session uçları  
+**Testler:** `auth.integration.test.ts`
 
 ---
 

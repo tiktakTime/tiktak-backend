@@ -37,15 +37,15 @@ Mimari: [architecture.md](./architecture.md) · Katman: [layers.md](./layers.md)
 
 ## 2. Katman kuralları
 
-| Kural                         | Açıklama                                                                        |
-| ----------------------------- | ------------------------------------------------------------------------------- |
-| Handler → domain → repo       | Route handler doğrudan Kysely yazmaz                                            |
-| Use-case kuralı → apps domain | Akışlar `apps/*/domain`                                                         |
-| Repo tipi → modules           | apps şema tipi import edilmez                                                   |
-| Kardeş import                 | `apps/web`↛`apps/*`. `core` içi OK (ADP). `modules` serbest                     |
-| DB row ≠ API DTO              | Validation elle; Prisma Zod generate yok — bağ **tip köprüsü** ile kurulur (§9) |
-| Enum kaynağı                  | `@/modules/db` — şemada literal dizi yazılmaz (§9)                              |
-| Parse sınırı                  | Handler öncesi OpenAPI / Zod middleware                                         |
+| Kural                         | Açıklama                                                                                 |
+| ----------------------------- | ---------------------------------------------------------------------------------------- |
+| Handler → domain → repo       | Route handler doğrudan Kysely yazmaz                                                     |
+| Use-case kuralı → apps domain | Akışlar `apps/*/domain`                                                                  |
+| Repo tipi → modules           | apps şema tipi import edilmez                                                            |
+| Kardeş import                 | `apps/web`↛`apps/*`. `core` içi OK (ADP). `modules` serbest                              |
+| DB row ≠ API DTO              | Validation elle; Prisma Zod generate yok — şema `z.toZod` ile hedef tipe kilitlenir (§9) |
+| Enum kaynağı                  | `@/modules/db` — şemada literal dizi yazılmaz (§9)                                       |
+| Parse sınırı                  | Handler öncesi OpenAPI / Zod middleware                                                  |
 
 ---
 
@@ -200,16 +200,22 @@ Yanıt başlıkları: `Content-Language`, `X-Trace-Id`.
 
 ## 9. Şema ↔ model bağı
 
-Zod şeması modelin **aynası değildir** — sözleşme bilinçli olarak farklıdır: bazı
-kolonlar gizli (`token`, `refresh_hash`), `Date` yerine ISO string gider, ek
-doğrulama kuralları vardır. Bu yüzden Prisma'dan Zod üretilmez.
+Zod şeması elle yazılır. `.min()`, `.max()`, `.email()`, `.refine()` şemada kalır.
+Prisma'dan Zod üretilmez — sözleşme tablonun kopyası değildir.
 
-Hedef: **model değiştiğinde karar vermeye zorlanmak.** Bunun yolu derleme zamanı
-tip köprüsüdür.
+Şekil `z.toZod` ile kilitlenir (Zod **4.5+**). Çalışma anında no-op'tur; derleme
+şemanın **çıktı tipinin** hedef tiple birebir aynı olduğunu zorlar. Eksik alan,
+fazla alan ve yanlış tip `tsc` hatasıdır.
+
+Çeviri şemaya gömülmez. `.message("…")` yazılmaz. Metin Zod issue kodundan
+`platform/i18n/*/validation.json` kataloğuna gider (`too_small.string`,
+`invalid_format.email`).
+
+Hedef tip, telde giden şekildir. `z.coerce.date()` çıktısı `Date` ise
+`Selectable` ile oturur. `z.iso.datetime()` çıktısı `string` ise hedef de `string`
+olmalıdır.
 
 ### Enum — tek kaynak
-
-Zod v4'te `z.enum()` enum benzeri nesneleri kabul eder (`nativeEnum` yerine):
 
 ```ts
 import { PersonStatus } from "@/modules/db";
@@ -217,61 +223,91 @@ import { PersonStatus } from "@/modules/db";
 const PersonStatusSchema = z.enum(PersonStatus).openapi("PersonStatus");
 ```
 
-Literal dizi yazılmaz (`z.enum(["active", "inactive", "blocked"])`). Aksi halde DB
-ile şema sessizce ayrışır: yeni değer 422 ile reddedilir, kaldırılan değer 500 üretir.
+Literal dizi yazılmaz (`z.enum(["active", "inactive", "blocked"])`).
 
-### Kolon köprüsü
+### Tek tablo
 
-Her şema dosyasının sonunda, "hangi kolon açık, hangisi bilinçli gizli" kararı tip olarak yazılır:
+Görünen kolonlar `Pick` ile seçilir. Listede olmayan kolon API'de yoktur; ayrı
+"gizli kolon" listesi yazılmaz.
 
 ```ts
 import type { Selectable } from "kysely";
 
-import type { Employee } from "@/modules/db";
-import type { Equal, Expect } from "@/tests/types";
+import { type Access, AccessStatus } from "@/modules/db";
 
-type Row = Selectable<Employee>;
+type AccessPublic = Pick<
+  Selectable<Access>,
+  | "id"
+  | "organization_id"
+  | "status"
+  | "description"
+  | "created_at"
+  | "updated_at"
+>;
 
-/** API'de görünen alanlar — şemadan türetilir. */
-type Exposed = keyof z.infer<typeof EmployeeSchema>;
-
-/** Bilinçli olarak dışarı verilmeyen kolonlar. */
-type Internal =
-  "created_by_id" | "updated_by_id" | "deleted_by_id" | "deleted_at";
-
-/** Her kolon ya açık ya gizli olmalı. */
-type _ColumnsAccountedFor = Expect<Equal<Exposed | Internal, keyof Row>>;
+export const AccessSchema = z.toZod<AccessPublic>()(
+  z.object({
+    id: z.uuid(),
+    organization_id: z.uuid(),
+    status: z.enum(AccessStatus),
+    description: z.string().nullable(),
+    created_at: z.coerce.date(),
+    updated_at: z.coerce.date(),
+  }),
+);
 ```
 
-| Prisma'da ne oldu           | Sonuç                                            |
-| --------------------------- | ------------------------------------------------ |
-| Yeni kolon eklendi          | **Derleme hatası** — "aç veya `Internal`'a ekle" |
-| Kolon silindi / adı değişti | Derleme hatası                                   |
-| Kolon tipi değişti          | Tip köprüsü (aşağıda)                            |
+`Pick` içindeki kolon silinir veya tipi değişirse derleme kırılır. Tabloya **yeni**
+kolon eklenmesi bu şemayı kırmaz — o kolon seçilmediği sürece sözleşme dışıdır.
 
-Bu bir test değil, `tsc --noEmit` — editörde yazarken görünür. `Internal` listesi
-aynı zamanda **karar kaydıdır**: "bu kolonu bilerek vermiyoruz".
-
-### Tip köprüsü (ikinci aşama)
-
-Alan tipleri için tel çevirisi gerekir (DB `Date` → wire `string`):
+Oluşturma / güncelleme gövdesi satırın tamamı değildir. Hedef, kabul edilen
+kolonlar artı kolon olmayan alanlardır (`password` gibi):
 
 ```ts
-type Wire<T> = {
-  [K in keyof T]: T[K] extends Date
-    ? string
-    : T[K] extends Date | null
-      ? string | null
-      : T[K];
+type UserCreateInput = Pick<
+  Selectable<User>,
+  "first_name" | "last_name" | "email"
+> & {
+  password?: string;
 };
-
-type _TypesMatch = Expect<
-  Extends<z.infer<typeof EmployeeSchema>, Wire<Pick<Row, Exposed & keyof Row>>>
->;
 ```
 
-Önce kolon köprüsünü kur; oturduktan sonra tip köprüsünü ekle (hata mesajları
-daha zor okunur).
+### Çok tablo
+
+Hedef, parçaların birleşimidir. Şema tek bir `Selectable<Employee>` ile
+kilitlenmez — creator bir employee satırı değildir.
+
+```ts
+type EmployeeCreatorInput = Partial<
+  Pick<Selectable<Person>, "first_name" | "last_name" | "email">
+> &
+  Partial<Pick<Selectable<Employee>, "employee_no">> & {
+    person_id?: string;
+    user_id?: string;
+  };
+```
+
+### Aynı alan adı
+
+Düz birleştirmede (`&`) aynı isim tek alana iner. Tipler aynıysa susar; domain
+hangi tabloya yazacağına karar verir. Tipler uyuşmazsa alan `never` olur ve
+derleme kırılır.
+
+İki anlam birden gerekiyorsa isim ayrılır (`person_id` / `user_id`) veya iç
+nesneye konur:
+
+```ts
+type Input = {
+  person: Pick<Selectable<Person>, "email" | "first_name">;
+  user: Pick<Selectable<User>, "email">;
+};
+```
+
+### Tablo satırı olmayan şema
+
+Arama sorgusu bir satır değildir. `z.toZod<Selectable<Employee>>()` yazılmaz.
+Hedef, sorgunun kendi tipidir (`page`, `q` dahil). Yeni employee kolonu bu
+sorguyu kırmaz.
 
 Model tarafı: [`database.md`](./database.md) · Test tarafı: [`testing.md`](./testing.md).
 

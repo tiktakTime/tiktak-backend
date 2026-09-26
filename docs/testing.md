@@ -148,14 +148,16 @@ Domain mantığı (`resolveOAuthUser`: identity bul, blocked, inactive→active,
 
 Transaction rollback **kullanılmıyor** — `apps/public/invite/domain/flows.ts` ve `apps/auth/domain/oauth.ts` kendi içinde `db.transaction()` + `forUpdate()` çalıştırıyor; dıştan sarmak bu akışları bozar.
 
-Her testten önce ilgili tablolar `TRUNCATE … RESTART IDENTITY CASCADE`. Redis test DB: `FLUSHDB` (ayrı Redis DB index veya test-only instance).
+Tablolar test bitince durur; incelemek için yerinde kalır. Temizlik elle: `pnpm db:test:clean` (`tiktak-test-v2` + Redis db 15). Canlı veritabanına dokunmaz.
+
+Redis test DB'si (db 15) her testten önce `FLUSHDB` olur — rate-limit sayacı birikmesin diye. Tablo satırları silinmez.
 
 ### Yardımcılar (`tests/`)
 
 | Helper                                                        | Görev                                                         |
 | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `assertTestDatabase()`                                        | URL `-test` içermiyorsa process exit                          |
-| `resetDb()`                                                   | Truncate + Redis flush                                        |
+| `resetDb()`                                                   | `pnpm db:test:clean` — truncate + Redis db 15                 |
 | `makeOrganization` / `makePerson` / `makeUser` / `makeAccess` | Veri fabrikaları — test sadece önemsediği alanı override eder |
 | `signInAs(user)`                                              | Gerçek `createSession` → `Bearer` token                       |
 | `request(app, path, { token })`                               | `app.request` sarmalayıcısı, zarf parse                       |
@@ -380,13 +382,13 @@ Slice'tan bağımsız iddialar. Her biri 5–10 satır, kalıcı koruma.
 
 Bazı hatalar test gerektirmez — derleyici anında söyler. Test yükünü azalttığı için **önce bunlar kurulur.**
 
-| Koruma                               | Yakaladığı                            | Detay                                    |
-| ------------------------------------ | ------------------------------------- | ---------------------------------------- |
-| Enum tek kaynak (`@/modules/db`)     | Enum değeri silindi / adı değişti     | [`database.md`](./database.md)           |
-| Karar tablosu `Record<Enum, …>`      | Enum'a **yeni değer eklendi**         | aşağıda                                  |
-| `Row = Pick<Selectable<T>, COLUMNS>` | Kolon silindi / tipi değişti          | [`database.md`](./database.md)           |
-| Şema ↔ model tip köprüsü             | Kolon eklendi / silindi, şema ayrıştı | [`api-standards.md`](./api-standards.md) |
-| `satisfies Record<K, V>`             | Eksik anahtar (ör. `ERROR_META`)      | [`quality-tools.md`](./quality-tools.md) |
+| Koruma                               | Yakaladığı                        | Detay                                    |
+| ------------------------------------ | --------------------------------- | ---------------------------------------- |
+| Enum tek kaynak (`@/modules/db`)     | Enum değeri silindi / adı değişti | [`database.md`](./database.md)           |
+| Karar tablosu `Record<Enum, …>`      | Enum'a **yeni değer eklendi**     | aşağıda                                  |
+| `Row = Pick<Selectable<T>, COLUMNS>` | Kolon silindi / tipi değişti      | [`database.md`](./database.md)           |
+| `z.toZod<Hedef>()`                   | Şema çıktısı hedef tipten saptı   | [`api-standards.md`](./api-standards.md) |
+| `satisfies Record<K, V>`             | Eksik anahtar (ör. `ERROR_META`)  | [`quality-tools.md`](./quality-tools.md) |
 
 ### Enum tamlığı — kontrol noktası
 
@@ -465,7 +467,7 @@ Günlük kullanım parça parçadır; tamamı yalnızca commit öncesi koşar.
 | Değişenle ilgili | `pnpm test --changed`                               |
 | Hepsi            | `pnpm test`                                         |
 
-### Hızlı / yavaş ayrımı (planlanan script'ler)
+### Hızlı / yavaş ayrımı
 
 | Script      | Ne koşar                | Gereksinim               |
 | ----------- | ----------------------- | ------------------------ |
@@ -481,14 +483,14 @@ Günlük kullanım parça parçadır; tamamı yalnızca commit öncesi koşar.
 
 ### Görme
 
-| İhtiyaç                | Yol                                                                             |
-| ---------------------- | ------------------------------------------------------------------------------- |
-| Hangi test geçti/kaldı | `pnpm test --reporter=verbose` — doküman adımları ekrana dökülür                |
-| Ne bekledim / ne geldi | Vitest otomatik diff                                                            |
-| DB'de ne oluştu        | `onTestFailed` kancasıyla ilgili tabloları bas                                  |
-| Veriyi inceleyeyim     | `KEEP_TEST_DATA=1 pnpm test <yol>` → truncate atlanır, `pnpm db:studio` ile bak |
-| Görsel panel           | `pnpm test --ui` (`@vitest/ui`)                                                 |
-| Satırda durup bakayım  | `pnpm test --inspect-brk --no-file-parallelism <yol>`                           |
+| İhtiyaç                | Yol                                                                                                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Hangi test geçti/kaldı | `pnpm test --reporter=verbose` — doküman adımları ekrana dökülür                                                            |
+| Ne bekledim / ne geldi | Vitest otomatik diff                                                                                                        |
+| DB'de ne oluştu        | `onTestFailed` kancasıyla ilgili tabloları bas                                                                              |
+| Veriyi inceleyeyim     | Testten sonra satırlar durur. `NODE_ENV=test pnpm exec dotenv -e .env.local -- prisma studio`. Bitince `pnpm db:test:clean` |
+| Görsel panel           | `pnpm test --ui` (`@vitest/ui`)                                                                                             |
+| Satırda durup bakayım  | `pnpm test --inspect-brk --no-file-parallelism <yol>`                                                                       |
 
 ```ts
 onTestFailed(async () => {
@@ -532,14 +534,14 @@ Mutation testing (Stryker) yalnızca `apps/auth/domain` ve `apps/public/invite/d
 
 | Aşama | İş                                                                                 | Durum |
 | ----- | ---------------------------------------------------------------------------------- | ----- |
-| 0     | Derleme zamanı korumalar: enum tek kaynak, `Row` türetme, tip köprüsü              | ⬜    |
-| 1     | Altyapı: `assertTestDatabase`, `resetDb`, fabrikalar, `signInAs`, `tests/types.ts` | ⬜    |
-| 2     | Bütünlük testleri                                                                  | ⬜    |
-| 3     | OpenAPI snapshot                                                                   | ⬜    |
-| 4     | `apps/auth` uçtan uca                                                              | ⬜    |
-| 5     | Yetki matrisi                                                                      | ⬜    |
-| 6     | Davet akışı + race + değişmezler                                                   | ⬜    |
-| 7     | Kalan slice'lar                                                                    | ⬜    |
+| 0     | Derleme zamanı korumalar: enum tek kaynak, `Row` türetme, `z.toZod`                | ✅    |
+| 1     | Altyapı: `assertTestDatabase`, `resetDb`, fabrikalar, `signInAs`, `tests/types.ts` | ✅    |
+| 2     | Bütünlük testleri                                                                  | ✅    |
+| 3     | OpenAPI snapshot                                                                   | ✅    |
+| 4     | `apps/auth` uçtan uca                                                              | ✅    |
+| 5     | Yetki matrisi (`tests/integrity/policy.integration.test.ts`)                       | ✅    |
+| 6     | Davet akışı + race + değişmezler (`apps/public/invite/invite.integration.test.ts`) | ✅    |
+| 7     | Kalan slice'lar (person, employee, access, role, permission, organization, user)   | ✅    |
 | 8     | Schemathesis CI                                                                    | ⬜    |
 | 9     | Property-based + mutation                                                          | ⬜    |
 
@@ -554,11 +556,10 @@ Test yazılınca doğrulanacak:
 | #   | Risk                                                                      | Konum                                     |
 | --- | ------------------------------------------------------------------------- | ----------------------------------------- |
 | 1   | `hydrateScope` cache prefix'ini query/body'den alıyor — prefix kirlenmesi | `platform/scope/resolve.ts`               |
-| 2   | Davet kabul yarışı — `forUpdate()` doğrulanmamış                          | `apps/public/invite/domain/flows.ts`      |
-| 3   | `revokeOrganizationSessions` sessiz başarısızlık (catch + devam)          | `platform/auth/revoke-organization.ts`    |
-| 4   | Eşzamanlı refresh meşru oturumu düşürebilir                               | `platform/auth/session.ts`                |
-| 5   | `purge` yazılmamış mutation'lar → bayat cache                             | `apps/**/*.routes.ts`                     |
-| 6   | `employee_no` tahsis yarışı                                               | `apps/web/employee/domain/employee-no.ts` |
+| 2   | `revokeOrganizationSessions` sessiz başarısızlık (catch + devam)          | `platform/auth/revoke-organization.ts`    |
+| 3   | Eşzamanlı refresh meşru oturumu düşürebilir                               | `platform/auth/session.ts`                |
+| 4   | `purge` yazılmamış mutation'lar → bayat cache                             | `apps/**/*.routes.ts`                     |
+| 5   | `employee_no` tahsis yarışı                                               | `apps/web/employee/domain/employee-no.ts` |
 
 ## Karar bekleyen domain soruları
 

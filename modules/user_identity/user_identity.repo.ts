@@ -3,8 +3,6 @@ import type { AuthProvider } from "@/modules/db";
 
 type Executor = typeof db;
 
-export const PASSWORD_SUBJECT = "local";
-
 export const COLUMNS = [
   "id",
   "user_id",
@@ -67,7 +65,7 @@ export async function insert(
     .executeTakeFirstOrThrow();
 }
 
-/** Password identity upsert (subject = local). */
+/** Password identity upsert. Konu kullanıcı kimliğidir; sabit "local" ikinci hesabı unique'de keser. */
 export async function upsertPassword(
   userId: string,
   passwordHash: string,
@@ -92,7 +90,7 @@ export async function upsertPassword(
     {
       user_id: userId,
       provider: "password",
-      provider_subject: PASSWORD_SUBJECT,
+      provider_subject: userId,
       password_hash: passwordHash,
       password_changed_at: now,
     },
