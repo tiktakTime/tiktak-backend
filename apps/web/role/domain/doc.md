@@ -2,7 +2,7 @@
 
 İndeks: [`apps/web/role/doc.md`](../doc.md) · [`apps/doc.md`](../../../doc.md)
 
-Kaynaklar: `create.ts`, `get.ts`, `search.ts`, `update.ts`, `soft-delete.ts`, `guards.ts`
+Kaynaklar: `create.ts`, `get.ts`, `search.ts`, `update.ts`, `soft-delete.ts`
 
 ---
 
@@ -14,14 +14,14 @@ Kaynaklar: `create.ts`, `get.ts`, `search.ts`, `update.ts`, `soft-delete.ts`, `g
 | `GET .../with/permission` | org   | (route)          | role + `role_permission` join |
 | `POST .../`               | org   | `createRole`     | `role.insert`                 |
 | `GET .../{id}`            | org   | `getRole`        | `role`                        |
-| `PATCH .../{id}`          | org   | `updateRole`     | `role` + guard                |
-| `DELETE .../{id}`         | org   | `softDeleteRole` | `role` + guard                |
+| `PATCH .../{id}`          | org   | `updateRole`     | `role`                        |
+| `DELETE .../{id}`         | org   | `softDeleteRole` | `role`                        |
 
 ---
 
 ## getRole `get.ts:5`
 
-`findById` — yoksa `NOT_FOUND / role`.
+`findById(orgId, id)` — yoksa `NOT_FOUND / role`. Global satır repoda görünür.
 
 ## searchRoles `search.ts:5`
 
@@ -33,27 +33,18 @@ Kaynaklar: `create.ts`, `get.ts`, `search.ts`, `update.ts`, `soft-delete.ts`, `g
 
 ---
 
-## assertRoleWritable `guards.ts:3`
-
-1. `is_locked` → `FORBIDDEN / ROLE_LOCKED`.
-2. `orgId` verildiyse ve `organization_id !== orgId` → `FORBIDDEN`.
-
-Owner / sistem rolleri kilitli olabilir (`OWNER_ROLE_ID` vb.).
-
----
-
 ## updateRole `update.ts:8`
 
 1. Yok → `NOT_FOUND / role`.
-2. `assertRoleWritable(existing)` (yalnızca lock).
-3. `repo.update`.
+2. `is_locked` → `ROLE_LOCKED`.
+3. `repo.update(orgId, id)` — başka org ve global satır eşleşmez.
 
 ---
 
 ## softDeleteRole `soft-delete.ts:6`
 
 1. Yok → `NOT_FOUND`.
-2. `assertRoleWritable(existing, orgId)`.
-3. `repo.softDelete`.
+2. `is_locked` → `ROLE_LOCKED`.
+3. `repo.softDelete(orgId, id)`.
 
 ⚠ `role_permission` satırları otomatik temizlenmeyebilir — repo davranışına bak.

@@ -44,10 +44,11 @@ Yönetici bir `person` için davet oluşturur; public token ile kabul edilir. Ka
 
 ## Sabitler (`constants.ts`)
 
-| Sabit             | Değer                                         | Açıklama                              |
-| ----------------- | --------------------------------------------- | ------------------------------------- |
-| `INVITE_STATUS.*` | Enum string mirror (`PENDING`, `ACCEPTED`, …) | Repo status yazımı                    |
-| `INVITE_TTL_DAYS` | `7`                                           | `computeExpiry` varsayılan gün sayısı |
+| Sabit             | Değer | Açıklama                              |
+| ----------------- | ----- | ------------------------------------- |
+| `INVITE_TTL_DAYS` | `7`   | `computeExpiry` varsayılan gün sayısı |
+
+Durum değerleri `constants.ts` içinde tutulmaz. Kaynak `import { InviteStatus } from "@/modules/db"`.
 
 ---
 
@@ -76,9 +77,9 @@ Yönetici bir `person` için davet oluşturur; public token ile kabul edilir. Ka
 
 ## Tüketiciler
 
-| Domain                                                                | Dosyalar   | Kullanım                                                                                       |
-| --------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------- |
-| [`apps/web/invite/domain`](../../apps/web/invite/domain/doc.md)       | `flows.ts` | Oluştur, yeniden gönder, iptal, liste; `generateUniqueToken`, `computeExpiry`, `INVITE_STATUS` |
-| [`apps/public/invite/domain`](../../apps/public/invite/domain/doc.md) | `flows.ts` | `findByToken`, accept akışı; `accessRepo.findBlocking`, `accessRepo.insert`                    |
+| Domain                                                                | Dosyalar   | Kullanım                                                                                      |
+| --------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------- |
+| [`apps/web/invite/domain`](../../apps/web/invite/domain/doc.md)       | `flows.ts` | Oluştur, yeniden gönder, iptal, liste; `generateUniqueToken`, `computeExpiry`, `InviteStatus` |
+| [`apps/public/invite/domain`](../../apps/public/invite/domain/doc.md) | `flows.ts` | `findByToken`, accept akışı; `accessRepo.findBlocking`, `accessRepo.insert`                   |
 
 İlgili modüller: [`person`](../person/doc.md), [`access`](../access/doc.md), [`user`](../user/doc.md), [`organization`](../organization/doc.md).

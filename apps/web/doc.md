@@ -4,7 +4,8 @@
 
 **Dosya:** `index.ts` (`webRouter`)  
 **Mount:** `app_config.surfaces.web` — enabled  
-**Auth:** `authMiddleware` — tüm uçlar bearer zorunlu
+**Auth:** `authMiddleware` — tüm uçlar bearer zorunlu  
+**Testler:** `tests/integrity/policy.integration.test.ts`
 
 ---
 

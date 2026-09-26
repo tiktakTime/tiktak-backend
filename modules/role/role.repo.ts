@@ -34,13 +34,19 @@ export const COLUMNS = [
   "updated_at",
 ] as const;
 
-/** Kimliğe göre getir. */
-export async function findById(id: string) {
+/** Kimliğe göre getir. Global satır (`organization_id` null) her org'a görünür. */
+export async function findById(orgId: string, id: string) {
   return db
     .selectFrom("role")
     .select(COLUMNS)
     .where("id", "=", id)
     .where("deleted_at", "is", null)
+    .where((eb) =>
+      eb.or([
+        eb("organization_id", "is", null),
+        eb("organization_id", "=", orgId),
+      ]),
+    )
     .executeTakeFirst();
 }
 
@@ -90,24 +96,30 @@ export async function insert(orgId: string, input: RoleInsertInput) {
     .executeTakeFirstOrThrow();
 }
 
-/** Güncelle. */
-export async function update(id: string, input: RoleUpdateInput) {
+/** Güncelle. Yalnızca oturum org'unun satırı. */
+export async function update(
+  orgId: string,
+  id: string,
+  input: RoleUpdateInput,
+) {
   const { permissions: _permissions, ...rest } = input;
   return db
     .updateTable("role")
     .set({ ...rest, updated_at: new Date() })
     .where("id", "=", id)
+    .where("organization_id", "=", orgId)
     .where("deleted_at", "is", null)
     .returning(COLUMNS)
     .executeTakeFirst();
 }
 
-/** Soft-delete. */
-export async function softDelete(id: string) {
+/** Soft-delete. Yalnızca oturum org'unun satırı. */
+export async function softDelete(orgId: string, id: string) {
   return db
     .updateTable("role")
     .set({ deleted_at: new Date(), updated_at: new Date() })
     .where("id", "=", id)
+    .where("organization_id", "=", orgId)
     .where("deleted_at", "is", null)
     .returning(["id"])
     .executeTakeFirst();

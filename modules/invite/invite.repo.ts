@@ -1,13 +1,10 @@
+import type { Selectable } from "kysely";
 import { randomBytes, randomUUID } from "node:crypto";
 
 import { paginate } from "@/core/http";
-import { db } from "@/modules/db";
+import { type Invite, InviteStatus, db } from "@/modules/db";
 
-import {
-  INVITE_STATUS,
-  INVITE_TTL_DAYS,
-  type InviteStatusValue,
-} from "./constants";
+import { INVITE_TTL_DAYS } from "./constants";
 
 export const COLUMNS = [
   "id",
@@ -30,26 +27,7 @@ export const COLUMNS = [
   "updated_at",
 ] as const;
 
-export type InviteRow = {
-  id: string;
-  organization_id: string;
-  user_id: string | null;
-  person_id: string;
-  email: string;
-  token: string;
-  status: InviteStatusValue;
-  description: string | null;
-  expires_at: Date;
-  accepted_at: Date | null;
-  canceled_at: Date | null;
-  accept_attempts: number;
-  last_attempt_at: Date | null;
-  locked_until: Date | null;
-  created_by_id: string | null;
-  updated_by_id: string | null;
-  created_at: Date;
-  updated_at: Date;
-};
+export type InviteRow = Pick<Selectable<Invite>, (typeof COLUMNS)[number]>;
 
 type Executor = typeof db;
 
@@ -86,7 +64,7 @@ export async function findPendingByPerson(orgId: string, personId: string) {
     .select(COLUMNS)
     .where("organization_id", "=", orgId)
     .where("person_id", "=", personId)
-    .where("status", "=", INVITE_STATUS.PENDING)
+    .where("status", "=", InviteStatus.pending)
     .where("deleted_at", "is", null)
     .executeTakeFirst() as Promise<InviteRow | undefined>;
 }
@@ -126,7 +104,7 @@ export async function insert(input: {
       user_id: input.user_id,
       email: input.email,
       token: input.token,
-      status: INVITE_STATUS.PENDING,
+      status: InviteStatus.pending,
       description: input.description ?? null,
       expires_at: input.expires_at,
       created_by_id: input.created_by_id,
@@ -139,7 +117,7 @@ export async function updateById(
   id: string,
   patch: Partial<{
     token: string;
-    status: InviteStatusValue;
+    status: InviteStatus;
     expires_at: Date;
     accepted_at: Date | null;
     canceled_at: Date | null;
@@ -163,7 +141,7 @@ export async function updateById(
 
 export async function search(
   orgId: string,
-  params: { page: number; limit: number; status?: string },
+  params: { page: number; limit: number; status?: InviteStatus },
 ) {
   let query = db
     .selectFrom("invite")
@@ -171,7 +149,7 @@ export async function search(
     .where("deleted_at", "is", null);
 
   if (params.status) {
-    query = query.where("status", "=", params.status as InviteStatusValue);
+    query = query.where("status", "=", params.status);
   }
 
   return paginate(

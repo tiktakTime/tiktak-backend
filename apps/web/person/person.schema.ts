@@ -1,11 +1,17 @@
 import { z } from "@hono/zod-openapi";
+import type { Selectable } from "kysely";
 
 import { DateOnlySchema, IdParamSchema, IsoInstantSchema } from "@/core/fields";
 import { PaginationQuerySchema } from "@/core/http";
+import {
+  PersonGender,
+  type Person as PersonRow,
+  PersonStatus,
+} from "@/modules/db";
 
-const PersonStatusSchema = z.enum(["active", "inactive", "blocked"]);
+const PersonStatusSchema = z.enum(PersonStatus);
 
-const PersonGenderSchema = z.enum(["female", "male", "other", "none"]);
+const PersonGenderSchema = z.enum(PersonGender);
 
 const TaxClassSchema = z.enum([
   "0_employees_residing_abroad",
@@ -46,42 +52,81 @@ const PersonMatchFieldSchema = z.enum([
   "bank",
 ]);
 
+type PersonPublic = Pick<
+  Selectable<PersonRow>,
+  | "id"
+  | "organization_id"
+  | "user_id"
+  | "role_id"
+  | "employee_id"
+  | "country_id"
+  | "nationality_id"
+  | "first_name"
+  | "last_name"
+  | "display_name"
+  | "email"
+  | "gender"
+  | "birth_location"
+  | "birthdate"
+  | "picture"
+  | "phone_landline"
+  | "phone_number"
+  | "driver_license_no"
+  | "driver_license_type"
+  | "driver_license_organization"
+  | "insurance_company"
+  | "insurance_no"
+  | "insurance_class"
+  | "tax_no"
+  | "tax_id"
+  | "tax_class"
+  | "child_exempt_amount"
+  | "health_insurance"
+  | "social_health_no"
+  | "status"
+  | "expired_date"
+  | "created_at"
+  | "updated_at"
+>;
+
 export const PersonSchema = z
-  .object({
-    id: z.uuid(),
-    organization_id: z.uuid(),
-    user_id: z.uuid().nullable(),
-    role_id: z.uuid().nullable(),
-    employee_id: z.uuid().nullable(),
-    country_id: z.uuid().nullable(),
-    nationality_id: z.uuid().nullable(),
-    first_name: z.string().max(255),
-    last_name: z.string().max(255),
-    display_name: z.string().max(255).nullable(),
-    email: z.email().max(255).nullable(),
-    gender: PersonGenderSchema,
-    birth_location: z.string().max(255).nullable(),
-    birthdate: z.string().nullable(),
-    picture: z.string().nullable(),
-    phone_landline: z.string().max(15).nullable(),
-    phone_number: z.string().max(50).nullable(),
-    driver_license_no: z.string().max(255).nullable(),
-    driver_license_type: z.string().max(255).nullable(),
-    driver_license_organization: z.string().max(255).nullable(),
-    insurance_company: z.string().max(255).nullable(),
-    insurance_no: z.string().max(255).nullable(),
-    insurance_class: z.string().max(255).nullable(),
-    tax_no: z.string().max(255).nullable(),
-    tax_id: z.string().max(255).nullable(),
-    tax_class: z.string().max(255).nullable(),
-    child_exempt_amount: z.string().max(255).nullable(),
-    health_insurance: z.string().max(255).nullable(),
-    social_health_no: z.string().max(255).nullable(),
-    status: PersonStatusSchema,
-    expired_date: z.date().nullable(),
-    created_at: z.date(),
-    updated_at: z.date(),
-  })
+  .toZod<PersonPublic>()(
+    z.object({
+      id: z.uuid(),
+      organization_id: z.uuid(),
+      user_id: z.uuid().nullable(),
+      role_id: z.uuid().nullable(),
+      employee_id: z.uuid().nullable(),
+      country_id: z.uuid().nullable(),
+      nationality_id: z.uuid().nullable(),
+      first_name: z.string().max(255),
+      last_name: z.string().max(255),
+      display_name: z.string().max(255).nullable(),
+      email: z.email().max(255).nullable(),
+      gender: PersonGenderSchema,
+      birth_location: z.string().max(255).nullable(),
+      birthdate: z.coerce.date().nullable(),
+      picture: z.string().nullable(),
+      phone_landline: z.string().max(15).nullable(),
+      phone_number: z.string().max(50).nullable(),
+      driver_license_no: z.string().max(255).nullable(),
+      driver_license_type: z.string().max(255).nullable(),
+      driver_license_organization: z.string().max(255).nullable(),
+      insurance_company: z.string().max(255).nullable(),
+      insurance_no: z.string().max(255).nullable(),
+      insurance_class: z.string().max(255).nullable(),
+      tax_no: z.string().max(255).nullable(),
+      tax_id: z.string().max(255).nullable(),
+      tax_class: z.string().max(255).nullable(),
+      child_exempt_amount: z.string().max(255).nullable(),
+      health_insurance: z.string().max(255).nullable(),
+      social_health_no: z.string().max(255).nullable(),
+      status: PersonStatusSchema,
+      expired_date: z.date().nullable(),
+      created_at: z.date(),
+      updated_at: z.date(),
+    }),
+  )
   .openapi("Person");
 
 export const PersonCreateSchema = z

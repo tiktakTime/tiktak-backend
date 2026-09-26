@@ -1,7 +1,6 @@
-import { readdirSync } from "node:fs";
-
 import js from "@eslint/js";
 import sonarjs from "eslint-plugin-sonarjs";
+import { readdirSync } from "node:fs";
 import tseslint from "typescript-eslint";
 
 /**
@@ -204,6 +203,24 @@ export default tseslint.config(
     files: ["**/*.test.ts"],
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
+      "no-restricted-properties": [
+        "error",
+        {
+          object: "it",
+          property: "only",
+          message: "it.only commit'e girmez.",
+        },
+        {
+          object: "test",
+          property: "only",
+          message: "test.only commit'e girmez.",
+        },
+        {
+          object: "describe",
+          property: "only",
+          message: "describe.only commit'e girmez.",
+        },
+      ],
       ...restricted([
         {
           group: ["@/core/*", "@/platform/*"],

@@ -1,24 +1,18 @@
 import { z } from "@hono/zod-openapi";
+import type { Selectable } from "kysely";
 
 import { IdParamSchema, IsoInstantSchema } from "@/core/fields";
 import { PaginationQuerySchema } from "@/core/http";
-import { OrganizationBusinessType } from "@/modules/db";
+import {
+  type Employee as EmployeeRow,
+  OrganizationBusinessType,
+  type Person,
+  PersonStatus,
+} from "@/modules/db";
 
-const OrganizationBusinessTypeSchema = z.enum([
-  OrganizationBusinessType.sole_proprietorship,
-  OrganizationBusinessType.partnership,
-  OrganizationBusinessType.corporation,
-  OrganizationBusinessType.cooperative,
-  OrganizationBusinessType.association,
-  OrganizationBusinessType.civil_law_foundation,
-  OrganizationBusinessType.public_authority,
-  OrganizationBusinessType.public_law_institution,
-  OrganizationBusinessType.public_law_corporation,
-  OrganizationBusinessType.state_municipal_enterprise,
-]);
+const OrganizationBusinessTypeSchema = z.enum(OrganizationBusinessType);
 
-/** Person status — duplicated locally (apps peer-import yasak). */
-const PersonStatusSchema = z.enum(["active", "inactive", "blocked"]);
+const PersonStatusSchema = z.enum(PersonStatus);
 
 const ExperienceTypeSchema = z.enum([
   "entry",
@@ -96,17 +90,31 @@ const RuntimeModelSchema = z.enum([
 
 const LocationTypeSchema = z.enum(["remote", "office", "hybrid", "field_work"]);
 
+type EmployeePublic = Pick<
+  Selectable<EmployeeRow>,
+  | "id"
+  | "organization_id"
+  | "person_id"
+  | "experience_id"
+  | "exit_date"
+  | "employee_no"
+  | "created_at"
+  | "updated_at"
+>;
+
 export const EmployeeSchema = z
-  .object({
-    id: z.uuid(),
-    organization_id: z.uuid(),
-    person_id: z.uuid(),
-    experience_id: z.uuid().nullable(),
-    exit_date: z.date().nullable(),
-    employee_no: z.number().int().nullable(),
-    created_at: z.date(),
-    updated_at: z.date(),
-  })
+  .toZod<EmployeePublic>()(
+    z.object({
+      id: z.uuid(),
+      organization_id: z.uuid(),
+      person_id: z.uuid(),
+      experience_id: z.uuid().nullable(),
+      exit_date: z.date().nullable(),
+      employee_no: z.number().int().nullable(),
+      created_at: z.date(),
+      updated_at: z.date(),
+    }),
+  )
   .openapi("Employee");
 
 export const EmployeeCreateSchema = z
@@ -146,29 +154,52 @@ export const NextEmployeeNoQuerySchema = z.object({
   organization_id: z.uuid(),
 });
 
+type EmployeeCreatorInput = Partial<
+  Pick<Selectable<Person>, "first_name" | "last_name" | "email">
+> &
+  Partial<Pick<Selectable<EmployeeRow>, "person_id" | "employee_no">> & {
+    user_id?: string;
+    company_id?: string;
+    company_name?: string | null;
+    business_type?: OrganizationBusinessType | null;
+    type_of_employment: z.infer<typeof TypeOfEmploymentSchema>;
+    title?: string | null;
+    type?: z.infer<typeof ExperienceTypeSchema>;
+    runtime_model?: z.infer<typeof RuntimeModelSchema> | null;
+    location_type?: z.infer<typeof LocationTypeSchema> | null;
+    reason?: z.infer<typeof ExperienceReasonSchema> | null;
+    description?: string | null;
+    start_date?: string | null;
+    end_date?: string | null;
+    short_time_work?: boolean;
+    insured_by_us?: boolean;
+  };
+
 export const EmployeeCreatorSchema = z
-  .object({
-    person_id: z.uuid().optional(),
-    user_id: z.uuid().optional(),
-    first_name: z.string().trim().max(255).optional(),
-    last_name: z.string().trim().max(255).optional(),
-    email: z.email().max(255).nullable().optional(),
-    employee_no: z.number().int().min(1).nullable().optional(),
-    company_id: z.uuid().optional(),
-    company_name: z.string().trim().max(255).nullable().optional(),
-    business_type: OrganizationBusinessTypeSchema.nullable().optional(),
-    type_of_employment: TypeOfEmploymentSchema,
-    title: z.string().trim().max(255).nullable().optional(),
-    type: ExperienceTypeSchema.optional(),
-    runtime_model: RuntimeModelSchema.nullable().optional(),
-    location_type: LocationTypeSchema.nullable().optional(),
-    reason: ExperienceReasonSchema.nullable().optional(),
-    description: z.string().nullable().optional(),
-    start_date: IsoInstantSchema,
-    end_date: IsoInstantSchema,
-    short_time_work: z.boolean().optional(),
-    insured_by_us: z.boolean().optional(),
-  })
+  .toZod<EmployeeCreatorInput>()(
+    z.object({
+      person_id: z.uuid().optional(),
+      user_id: z.uuid().optional(),
+      first_name: z.string().trim().max(255).optional(),
+      last_name: z.string().trim().max(255).optional(),
+      email: z.email().max(255).nullable().optional(),
+      employee_no: z.number().int().min(1).nullable().optional(),
+      company_id: z.uuid().optional(),
+      company_name: z.string().trim().max(255).nullable().optional(),
+      business_type: OrganizationBusinessTypeSchema.nullable().optional(),
+      type_of_employment: TypeOfEmploymentSchema,
+      title: z.string().trim().max(255).nullable().optional(),
+      type: ExperienceTypeSchema.optional(),
+      runtime_model: RuntimeModelSchema.nullable().optional(),
+      location_type: LocationTypeSchema.nullable().optional(),
+      reason: ExperienceReasonSchema.nullable().optional(),
+      description: z.string().nullable().optional(),
+      start_date: IsoInstantSchema,
+      end_date: IsoInstantSchema,
+      short_time_work: z.boolean().optional(),
+      insured_by_us: z.boolean().optional(),
+    }),
+  )
   .refine(
     (value) =>
       !!(

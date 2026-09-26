@@ -127,7 +127,7 @@ Böylece zincir kapanır:
 
 ```
 prisma → generated DB tipi → COLUMNS → Row → domain → zod şeması
-         ✅ otomatik        ✅ tsc    ✅     ✅       tip köprüsü (api-standards)
+         ✅ otomatik        ✅ tsc    ✅     ✅       z.toZod (api-standards §9)
 ```
 
 ### Enum değişikliği ne yakalanır

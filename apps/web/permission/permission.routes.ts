@@ -88,7 +88,8 @@ const update = defineRoute({
   tenant: "org",
   policy: ["permission.patch"],
   cache: { write: { purge: ["permission"] } },
-  handle: ({ params, body }) => updatePermission(params.id, body),
+  handle: ({ tenantId, params, body }) =>
+    updatePermission(tenantId, params.id, body),
 });
 
 const remove = defineRoute({
@@ -116,7 +117,7 @@ const get = defineRoute({
   tenant: "org",
   policy: ["permission.get"],
   cache: { read: { ttl: TTL.LONG, tags: ["permission"] } },
-  handle: ({ params }) => getPermission(params.id),
+  handle: ({ tenantId, params }) => getPermission(tenantId, params.id),
 });
 
 export const permissionRouter = createSlice([

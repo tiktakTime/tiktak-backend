@@ -89,7 +89,9 @@ export async function rotateRefreshToken(
 ): Promise<TokenPair> {
   const redis = getRedis();
   const hash = sha256(refreshToken);
-  const sid = await redis.get(refreshKey(hash));
+  // GETDEL tek kazanan bırakır. İki eşzamanlı rotate aynı token'ı ikisi de
+  // geçerli saymasın.
+  const sid = await redis.getdel(refreshKey(hash));
   if (!sid) throw new Error("Invalid refresh token");
 
   const session = await getSession(sid);

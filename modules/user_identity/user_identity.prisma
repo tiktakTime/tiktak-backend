@@ -3,7 +3,7 @@ model UserIdentity {
   id                   String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id              String       @db.Uuid
   provider             AuthProvider
-  /// Google/Apple `sub`; password için `"local"`.
+  /// Google/Apple `sub`. Password için user id.
   provider_subject     String       @db.VarChar(255)
   provider_email       String?      @db.VarChar(255)
   password_hash        String?      @db.VarChar(255)

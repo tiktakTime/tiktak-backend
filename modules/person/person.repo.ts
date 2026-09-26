@@ -1,5 +1,5 @@
 import { type PaginationParams, paginate, toPaginateSort } from "@/core/http";
-import { db } from "@/modules/db";
+import { type PersonGender, type PersonStatus, db } from "@/modules/db";
 
 export type PersonSearchParams = PaginationParams & {
   q?: string;
@@ -8,9 +8,6 @@ export type PersonSearchParams = PaginationParams & {
   sort?: string;
   order?: "ASC" | "DESC";
 };
-
-export type PersonGender = "female" | "male" | "other" | "none";
-export type PersonStatus = "active" | "inactive" | "blocked";
 
 export type PersonUpdateInput = {
   user_id?: string | null;

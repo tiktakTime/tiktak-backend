@@ -1,7 +1,7 @@
 import { AppError } from "@/core/errors";
 import { normalizeEmail } from "@/core/fields";
 import * as accessRepo from "@/modules/access/access.repo";
-import { INVITE_STATUS } from "@/modules/invite/constants";
+import { InviteStatus } from "@/modules/db";
 import * as repo from "@/modules/invite/invite.repo";
 import type { InviteRow } from "@/modules/invite/invite.repo";
 import * as organizationRepo from "@/modules/organization/organization.repo";
@@ -120,7 +120,7 @@ export async function resendInvite(input: {
 }) {
   const invite = await repo.findById(input.organizationId, input.inviteId);
   if (!invite) throw new AppError("INVITE_NOT_FOUND");
-  if (invite.status !== INVITE_STATUS.PENDING) {
+  if (invite.status !== InviteStatus.pending) {
     throw new AppError("INVITE_NOT_PENDING");
   }
 
@@ -152,12 +152,12 @@ export async function cancelInvite(input: {
 }) {
   const invite = await repo.findById(input.organizationId, input.inviteId);
   if (!invite) throw new AppError("INVITE_NOT_FOUND");
-  if (invite.status !== INVITE_STATUS.PENDING) {
+  if (invite.status !== InviteStatus.pending) {
     throw new AppError("INVITE_NOT_PENDING");
   }
 
   const updated = await repo.updateById(invite.id, {
-    status: INVITE_STATUS.CANCELED,
+    status: InviteStatus.canceled,
     canceled_at: new Date(),
     updated_by_id: input.actorUserId,
   });
@@ -174,7 +174,7 @@ export async function getInvite(organizationId: string, inviteId: string) {
 
 export async function searchInvites(
   organizationId: string,
-  params: { page: number; limit: number; status?: string },
+  params: { page: number; limit: number; status?: InviteStatus },
 ) {
   return repo.search(organizationId, params);
 }

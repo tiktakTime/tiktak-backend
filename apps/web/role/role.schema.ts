@@ -1,19 +1,35 @@
 import { z } from "@hono/zod-openapi";
+import type { Selectable } from "kysely";
 
 import { IdParamSchema } from "@/core/fields";
 import { PaginationQuerySchema } from "@/core/http";
+import { type Role as RoleRow } from "@/modules/db";
+
+type RolePublic = Pick<
+  Selectable<RoleRow>,
+  | "id"
+  | "organization_id"
+  | "slug"
+  | "name"
+  | "description"
+  | "is_locked"
+  | "created_at"
+  | "updated_at"
+>;
 
 export const RoleSchema = z
-  .object({
-    id: z.uuid(),
-    organization_id: z.uuid().nullable(),
-    slug: z.string().nullable(),
-    name: z.string(),
-    description: z.string().nullable(),
-    is_locked: z.boolean(),
-    created_at: z.date(),
-    updated_at: z.date(),
-  })
+  .toZod<RolePublic>()(
+    z.object({
+      id: z.uuid(),
+      organization_id: z.uuid().nullable(),
+      slug: z.string().nullable(),
+      name: z.string(),
+      description: z.string().nullable(),
+      is_locked: z.boolean(),
+      created_at: z.date(),
+      updated_at: z.date(),
+    }),
+  )
   .openapi("Role");
 
 export const RoleCreateSchema = z

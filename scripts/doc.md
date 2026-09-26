@@ -10,11 +10,12 @@ Başlangıç: [`docs/getting-started.md`](../docs/getting-started.md)
 
 | Dosya                                      | Amaç                                         | Çalıştırma                           |
 | ------------------------------------------ | -------------------------------------------- | ------------------------------------ |
+| `test-clean.ts`                            | `tiktak-test-v2` tabloları + Redis db 15     | `pnpm db:test:clean`                 |
 | `e2e-smoke.mjs`                            | API duman testi (auth + CRUD akışı + socket) | `node scripts/e2e-smoke.mjs`         |
 | `test-cache-socket.mjs`                    | Cache hit/miss + socket `invalidate`         | `node scripts/test-cache-socket.mjs` |
 | `local/postgres-init/01-create-test-db.sh` | Docker ilk ayağa kalkış — test DB            | Compose volume init (manuel değil)   |
 
-**Not:** Bu iki `.mjs` için kök `package.json`’da henüz npm script tanımı yok — doğrudan `node` kullan.
+**Not:** `e2e-smoke` ve `test-cache-socket` için npm script yok — doğrudan `node` kullan.
 
 ---
 

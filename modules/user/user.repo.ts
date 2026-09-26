@@ -104,15 +104,15 @@ function mergeUserProfile(
 }
 
 /** Kimliğe göre getir (+ profil). */
-export async function findById(id: string) {
-  const user = await db
+export async function findById(id: string, trx: Executor = db) {
+  const user = await trx
     .selectFrom("user")
     .select(PUBLIC_COLUMNS)
     .where("id", "=", id)
     .where("deleted_at", "is", null)
     .executeTakeFirst();
   if (!user) return undefined;
-  const profile = await profileRepo.findByUserId(id);
+  const profile = await profileRepo.findByUserId(id, trx);
   return mergeUserProfile(user, profile ?? null);
 }
 
@@ -306,7 +306,7 @@ export async function create(input: {
       await identityRepo.upsertPassword(user.id, input.password, trx);
     }
 
-    return findById(user.id);
+    return findById(user.id, trx);
   });
 }
 

@@ -2,7 +2,7 @@
 
 İndeks: [`apps/web/permission/doc.md`](../doc.md) · [`apps/doc.md`](../../../doc.md)
 
-Kaynaklar: `create.ts`, `get.ts`, `search.ts`, `update.ts`, `soft-delete.ts`, `guards.ts`
+Kaynaklar: `create.ts`, `get.ts`, `search.ts`, `update.ts`, `soft-delete.ts`
 
 ---
 
@@ -14,27 +14,18 @@ Kaynaklar: `create.ts`, `get.ts`, `search.ts`, `update.ts`, `soft-delete.ts`, `g
 | `GET .../with/role` | org   | (route)                | ⚠ çoğu route’ta liste; domain ince |
 | `POST .../`         | org   | `createPermission`     | `permission`                       |
 | `GET .../{id}`      | org   | `getPermission`        | `permission`                       |
-| `PATCH .../{id}`    | org   | `updatePermission`     | `permission` + guard               |
-| `DELETE .../{id}`   | org   | `softDeletePermission` | `permission` + guard               |
+| `PATCH .../{id}`    | org   | `updatePermission`     | `permission`                       |
+| `DELETE .../{id}`   | org   | `softDeletePermission` | `permission`                       |
 
 ---
 
 ## getPermission `get.ts:5`
 
-`findById` — yoksa `NOT_FOUND / permission`.
+`findById(orgId, id)` — yoksa `NOT_FOUND / permission`. Global satır repoda görünür.
 
 ## searchPermissions `search.ts:5`
 
 `repo.search(orgId, params)` — delege.
-
----
-
-## assertPermissionWritable `guards.ts:3`
-
-1. `is_locked` → `FORBIDDEN / PERMISSION_LOCKED`.
-2. `orgId` verildiyse ve `organization_id !== orgId` → `FORBIDDEN` (kod mesajı yok).
-
-Global / kilitli permission’lar org tarafından değiştirilemez.
 
 ---
 
@@ -52,13 +43,13 @@ Org içi slug çakışması repo/DB’ye bırakılır.
 ## updatePermission `update.ts:8`
 
 1. Yok → `NOT_FOUND`.
-2. `assertPermissionWritable(existing)` — orgId **geçilmez** (yalnızca lock kontrolü).
-3. `repo.update`.
+2. `is_locked` → `PERMISSION_LOCKED`.
+3. `repo.update(orgId, id)` — başka org ve global satır eşleşmez.
 
 ---
 
 ## softDeletePermission `soft-delete.ts:6`
 
 1. Yok → `NOT_FOUND`.
-2. `assertPermissionWritable(existing, orgId)` — lock **ve** org sahipliği.
-3. `repo.softDelete`.
+2. `is_locked` → `PERMISSION_LOCKED`.
+3. `repo.softDelete(orgId, id)`.

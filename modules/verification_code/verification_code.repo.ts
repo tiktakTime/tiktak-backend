@@ -1,30 +1,13 @@
+import type { Selectable } from "kysely";
 import { randomBytes, randomUUID } from "node:crypto";
 
 import { AppError } from "@/core/errors";
-import { db } from "@/modules/db";
-
-export const VERIFICATION_TYPES = [
-  "register",
-  "invite",
-  "access_confirm",
-  "password_reset",
-  "email_change",
-  "two_factor",
-  "phone_verification",
-  "account_recovery",
-  "login_verification",
-] as const;
-
-export type VerificationType = (typeof VERIFICATION_TYPES)[number];
-
-export const VERIFICATION_STATUSES = [
-  "pending",
-  "verified",
-  "expired",
-  "cancelled",
-] as const;
-
-export type VerificationStatus = (typeof VERIFICATION_STATUSES)[number];
+import {
+  type VerificationCode,
+  type VerificationCodeStatus,
+  type VerificationCodeType,
+  db,
+} from "@/modules/db";
 
 export const COLUMNS = [
   "id",
@@ -47,26 +30,10 @@ export const COLUMNS = [
   "updated_at",
 ] as const;
 
-export type VerificationCodeRow = {
-  id: string;
-  organization_id: string | null;
-  user_id: string | null;
-  type: VerificationType;
-  email: string | null;
-  phone: string | null;
-  code: string | null;
-  token: string | null;
-  status: VerificationStatus;
-  expires_at: Date;
-  used_at: Date | null;
-  attempts: number;
-  max_attempts: number;
-  ip_address: string | null;
-  user_agent: string | null;
-  metadata: unknown;
-  created_at: Date;
-  updated_at: Date;
-};
+export type VerificationCodeRow = Pick<
+  Selectable<VerificationCode>,
+  (typeof COLUMNS)[number]
+>;
 
 export function generateToken(): string {
   return `${randomUUID()}${randomBytes(16).toString("hex")}`;
@@ -74,8 +41,8 @@ export function generateToken(): string {
 
 export async function findByToken(
   token: string,
-  type: VerificationType,
-  status?: VerificationStatus,
+  type: VerificationCodeType,
+  status?: VerificationCodeStatus,
 ) {
   let query = db
     .selectFrom("verification_code")
@@ -90,7 +57,7 @@ export async function findByToken(
 
 export async function cancelPending(input: {
   userId: string;
-  type: VerificationType;
+  type: VerificationCodeType;
 }) {
   return db
     .updateTable("verification_code")
@@ -105,7 +72,7 @@ export async function create(input: {
   user_id?: string | null;
   organization_id?: string | null;
   email?: string | null;
-  type: VerificationType;
+  type: VerificationCodeType;
   token: string;
   expires_at: Date;
   ip_address?: string | null;
@@ -153,7 +120,7 @@ export async function markExpired(id: string) {
 /** Token kaydını bul; yoksa INVALID_TOKEN. */
 export async function requireTokenRecord(
   token: string,
-  type: VerificationType,
+  type: VerificationCodeType,
   opts?: { pendingOnly?: boolean },
 ): Promise<VerificationCodeRow> {
   const record = await findByToken(

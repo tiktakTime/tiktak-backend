@@ -36,13 +36,13 @@ koşar; `build` / `deploy` yalnızca push'ta çalışır (`if: github.event_name
 Bazı hata sınıfları test gerektirmez — `tsc` yazarken söyler. Test yükünü
 azalttığı için bunlar **testten önce** kurulur. Detay: [`testing.md`](./testing.md).
 
-| Desen                            | Yakaladığı                              | Nerede                                         |
-| -------------------------------- | --------------------------------------- | ---------------------------------------------- |
-| `satisfies Record<K, V>`         | Eksik anahtar                           | `platform/i18n/catalog.meta.ts` (`ERROR_META`) |
-| Enum tek kaynak (`@/modules/db`) | Enum değeri silindi / adı değişti       | [`database.md`](./database.md)                 |
-| `Record<Enum, …>` karar tablosu  | Enum'a **yeni değer eklendi**           | `modules/` kontrol noktası                     |
-| `Pick<Selectable<T>, COLUMNS>`   | Kolon silindi / tipi değişti            | [`database.md`](./database.md)                 |
-| Şema ↔ model tip köprüsü         | Kolon eklendi/silindi, sözleşme ayrıştı | [`api-standards.md`](./api-standards.md) §9    |
+| Desen                            | Yakaladığı                        | Nerede                                         |
+| -------------------------------- | --------------------------------- | ---------------------------------------------- |
+| `satisfies Record<K, V>`         | Eksik anahtar                     | `platform/i18n/catalog.meta.ts` (`ERROR_META`) |
+| Enum tek kaynak (`@/modules/db`) | Enum değeri silindi / adı değişti | [`database.md`](./database.md)                 |
+| `Record<Enum, …>` karar tablosu  | Enum'a **yeni değer eklendi**     | `modules/` kontrol noktası                     |
+| `Pick<Selectable<T>, COLUMNS>`   | Kolon silindi / tipi değişti      | [`database.md`](./database.md)                 |
+| `z.toZod<Hedef>()`               | Şema çıktısı hedef tipten saptı   | [`api-standards.md`](./api-standards.md) §9    |
 
 Kural: **derleyicinin yakalayabildiği şey için test yazılmaz.**
 

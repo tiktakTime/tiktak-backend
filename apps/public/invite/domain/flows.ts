@@ -3,8 +3,7 @@ import { hash } from "bcryptjs";
 import { AppError } from "@/core/errors";
 import { normalizeEmail } from "@/core/fields";
 import * as accessRepo from "@/modules/access/access.repo";
-import { db } from "@/modules/db";
-import { INVITE_STATUS } from "@/modules/invite/constants";
+import { InviteStatus, db } from "@/modules/db";
 import * as repo from "@/modules/invite/invite.repo";
 import type { InviteRow } from "@/modules/invite/invite.repo";
 import * as organizationRepo from "@/modules/organization/organization.repo";
@@ -20,16 +19,16 @@ function resolveAcceptState(
   blocking: unknown,
   now = new Date(),
 ) {
-  if (invite.status === INVITE_STATUS.ACCEPTED) {
+  if (invite.status === InviteStatus.accepted) {
     return { can_accept: false, reason: "INVITE_ALREADY_ACCEPTED" as const };
   }
-  if (invite.status === INVITE_STATUS.CANCELED) {
+  if (invite.status === InviteStatus.canceled) {
     return { can_accept: false, reason: "INVITE_CANCELED" as const };
   }
-  if (invite.status === INVITE_STATUS.EXPIRED || isExpired(invite, now)) {
+  if (invite.status === InviteStatus.expired || isExpired(invite, now)) {
     return { can_accept: false, reason: "INVITE_EXPIRED" as const };
   }
-  if (invite.status !== INVITE_STATUS.PENDING) {
+  if (invite.status !== InviteStatus.pending) {
     return { can_accept: false, reason: "INVITE_NOT_PENDING" as const };
   }
   if (blocking) {
@@ -47,9 +46,9 @@ export async function getInviteByToken(tokenRaw: string) {
   if (!invite) throw new AppError("INVITE_NOT_FOUND");
 
   const now = new Date();
-  if (invite.status === INVITE_STATUS.PENDING && isExpired(invite, now)) {
+  if (invite.status === InviteStatus.pending && isExpired(invite, now)) {
     invite =
-      (await repo.updateById(invite.id, { status: INVITE_STATUS.EXPIRED })) ??
+      (await repo.updateById(invite.id, { status: InviteStatus.expired })) ??
       invite;
   }
 
@@ -112,24 +111,24 @@ async function assertAcceptable(
   invite: LockedInvite,
   now: Date,
 ): Promise<void> {
-  if (invite.status === INVITE_STATUS.ACCEPTED) {
+  if (invite.status === InviteStatus.accepted) {
     throw new AppError("INVITE_ALREADY_ACCEPTED");
   }
-  if (invite.status === INVITE_STATUS.CANCELED) {
+  if (invite.status === InviteStatus.canceled) {
     throw new AppError("INVITE_CANCELED");
   }
   if (
-    invite.status === INVITE_STATUS.EXPIRED ||
+    invite.status === InviteStatus.expired ||
     isExpired(invite as InviteRow, now)
   ) {
     await trx
       .updateTable("invite")
-      .set({ status: INVITE_STATUS.EXPIRED, updated_at: now })
+      .set({ status: InviteStatus.expired, updated_at: now })
       .where("id", "=", invite.id)
       .execute();
     throw new AppError("INVITE_EXPIRED");
   }
-  if (invite.status !== INVITE_STATUS.PENDING) {
+  if (invite.status !== InviteStatus.pending) {
     throw new AppError("INVITE_NOT_PENDING");
   }
 }
@@ -252,7 +251,7 @@ export async function acceptInvite(input: {
     const updatedInvite = await trx
       .updateTable("invite")
       .set({
-        status: INVITE_STATUS.ACCEPTED,
+        status: InviteStatus.accepted,
         accepted_at: now,
         user_id: userId,
         updated_at: now,

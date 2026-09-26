@@ -66,6 +66,7 @@ Port ve prefix `.env.local` içindeki `PORT` / `API_BASE_PATH` ile değişir. `R
 | `pnpm db:deploy`               | `.env`       | `migrate deploy`                           |
 | `pnpm db:status`               | `.env.local` | Migration durumu                           |
 | `pnpm db:studio`               | `.env.local` | Prisma Studio                              |
+| `pnpm db:test:clean`           | `.env.local` | Test DB tabloları + Redis db 15            |
 
 ---
 
