@@ -1,23 +1,94 @@
 import { createRouter } from "@/core/router";
 import { authMiddleware } from "@/middlewares";
 
-import { accessRouter } from "./access/access.routes";
-import { employeeRouter } from "./employee/employee.routes";
-import { inviteRouter } from "./invite/invite.routes";
-import { permissionRouter } from "./permission/permission.routes";
-import { personRouter } from "./person/person.routes";
-import { roleRouter } from "./role/role.routes";
+import { webAbsenceRouter } from "./absence/absence.routes";
+import { webAgreementRouter } from "./agreement/agreement.routes";
+import { webAttributeRouter } from "./attribute/attribute.routes";
+import { webCompanyRouter } from "./company/company.routes";
+import { webContractRouter } from "./contract/contract.routes";
+import { webDepartmentRouter } from "./department/department.routes";
+import { webDocumentTemplateRouter } from "./document-template/document-template.routes";
+import { webDocumentRouter } from "./document/document.routes";
+import { webEmailLogRouter } from "./email-log/email-log.routes";
+import { webEmailTemplateRouter } from "./email-template/email-template.routes";
+import { webEmployeeLedgerRouter } from "./employee-ledger/employee-ledger.routes";
+import { webEmployeeRouter } from "./employee/employee.routes";
+import { webExperienceRouter } from "./experience/experience.routes";
+import { webJobTitleRouter } from "./job-title/job-title.routes";
+import { webLocationRouter } from "./location/location.routes";
+import { webMailServerRouter } from "./mail-server/mail-server.routes";
+import { webModuleRouter } from "./module/module.routes";
+import { webOfficialRouter } from "./official/official.routes";
+import { webOrderRouter } from "./order/order.routes";
+import { webOrganizationRouter } from "./organization/organization.routes";
+import { webPermissionRouter } from "./permission/permission.routes";
+import { webPersonRouter } from "./person/person.routes";
+import { webRoleRouter } from "./role/role.routes";
+import { webSettlementRoomRouter } from "./settlement-room/settlement-room.routes";
+import { webSettlementRouter } from "./settlement/settlement.routes";
+import { webShiftRouter } from "./shift/shift.routes";
+import { webTeamRouter } from "./team/team.routes";
+import { webTrafficPunishmentRouter } from "./traffic-punishment/traffic-punishment.routes";
+import { webTransactionCategoryRouter } from "./transaction-category/transaction-category.routes";
+import { webTransactionRouter } from "./transaction/transaction.routes";
+import { webUserRouter } from "./user/user.routes";
+import { webVehicleActivityRouter } from "./vehicle-activity/vehicle-activity.routes";
+import { webVehicleAssignmentRouter } from "./vehicle-assignment/vehicle-assignment.routes";
+import { webVehicleBrandRouter } from "./vehicle-brand/vehicle-brand.routes";
+import { webVehicleClassRouter } from "./vehicle-class/vehicle-class.routes";
+import { webVehicleColorHistoryRouter } from "./vehicle-color-history/vehicle-color-history.routes";
+import { webVehicleFinancialRecordRouter } from "./vehicle-financial-record/vehicle-financial-record.routes";
+import { webVehicleMaintenanceRouter } from "./vehicle-maintenance/vehicle-maintenance.routes";
+import { webVehicleModelRouter } from "./vehicle-model/vehicle-model.routes";
+import { webVehiclePlateRouter } from "./vehicle-plate/vehicle-plate.routes";
+import { webVehicleRouter } from "./vehicle/vehicle.routes";
+import { webWorkSettingsRouter } from "./work-settings/work-settings.routes";
+import { webWorkRouter } from "./work/work.routes";
+import { webWorkspaceRouter } from "./workspace/workspace.routes";
 
-/**
- * Web yüzeyi — requirePermission (yönetim) uçları.
- * Auth zorunlu; org/permission handler içinde assert edilir.
- */
 export const webRouter = createRouter();
 webRouter.use("*", authMiddleware);
-webRouter
-  .route("/", personRouter)
-  .route("/", employeeRouter)
-  .route("/", accessRouter)
-  .route("/", roleRouter)
-  .route("/", permissionRouter)
-  .route("/", inviteRouter);
+webRouter.route("/", webAbsenceRouter);
+webRouter.route("/", webAgreementRouter);
+webRouter.route("/", webAttributeRouter);
+webRouter.route("/", webCompanyRouter);
+webRouter.route("/", webContractRouter);
+webRouter.route("/", webDepartmentRouter);
+webRouter.route("/", webDocumentRouter);
+webRouter.route("/", webDocumentTemplateRouter);
+webRouter.route("/", webEmailLogRouter);
+webRouter.route("/", webEmailTemplateRouter);
+webRouter.route("/", webEmployeeRouter);
+webRouter.route("/", webEmployeeLedgerRouter);
+webRouter.route("/", webExperienceRouter);
+webRouter.route("/", webJobTitleRouter);
+webRouter.route("/", webLocationRouter);
+webRouter.route("/", webMailServerRouter);
+webRouter.route("/", webModuleRouter);
+webRouter.route("/", webOfficialRouter);
+webRouter.route("/", webOrderRouter);
+webRouter.route("/", webOrganizationRouter);
+webRouter.route("/", webPermissionRouter);
+webRouter.route("/", webPersonRouter);
+webRouter.route("/", webRoleRouter);
+webRouter.route("/", webSettlementRouter);
+webRouter.route("/", webSettlementRoomRouter);
+webRouter.route("/", webShiftRouter);
+webRouter.route("/", webTeamRouter);
+webRouter.route("/", webTrafficPunishmentRouter);
+webRouter.route("/", webTransactionRouter);
+webRouter.route("/", webTransactionCategoryRouter);
+webRouter.route("/", webUserRouter);
+webRouter.route("/", webVehicleRouter);
+webRouter.route("/", webVehicleActivityRouter);
+webRouter.route("/", webVehicleAssignmentRouter);
+webRouter.route("/", webVehicleBrandRouter);
+webRouter.route("/", webVehicleClassRouter);
+webRouter.route("/", webVehicleColorHistoryRouter);
+webRouter.route("/", webVehicleFinancialRecordRouter);
+webRouter.route("/", webVehicleMaintenanceRouter);
+webRouter.route("/", webVehicleModelRouter);
+webRouter.route("/", webVehiclePlateRouter);
+webRouter.route("/", webWorkRouter);
+webRouter.route("/", webWorkSettingsRouter);
+webRouter.route("/", webWorkspaceRouter);

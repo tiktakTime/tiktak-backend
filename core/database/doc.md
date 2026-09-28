@@ -2,9 +2,9 @@
 
 İndeks: [`core/doc.md`](../doc.md) · Detay: [`docs/database.md`](../../docs/database.md) · Şema: [`modules/doc.md`](../../modules/doc.md)
 
-**Dosyalar:** `db.ts`, `index.ts`, `prisma/migrations/`, `generated/kysely/` (üretilir)
+**Dosyalar:** `db.ts`, `index.ts`. `generated/kysely/` `pnpm db:generate` ile dolar. `prisma/migrations/` henüz yok.
 
-Kysely query runtime + Prisma generator çıktısı (tipler / enum’lar). Tek DB istemcisi.
+Kysely bağlantı havuzu. `DB` tipi üretilen Kysely çıktısından gelir. İlk model `user`. Migration yazılmadı.
 
 Barrel: `@/core/database`
 
@@ -27,12 +27,11 @@ Runtime’da tüm SQL Kysely ile; şema tanımı `modules/` altında Prisma birl
 
 ## Public yüzey
 
-| Sembol                            | Açıklama                           |
-| --------------------------------- | ---------------------------------- |
-| `db`                              | Kysely `<DB>` singleton            |
-| `closeDb()`                       | Pool kapat                         |
-| `DB` (type)                       | Generated tablo tipleri            |
-| `*` from `generated/kysely/enums` | Prisma enum’ları (`UserStatus`, …) |
+| Sembol      | Açıklama                             |
+| ----------- | ------------------------------------ |
+| `db`        | Kysely `<DB>` singleton              |
+| `closeDb()` | Pool kapat                           |
+| `DB` (type) | Üretilen tablo tipleri. Şu an `user` |
 
 ---
 
@@ -62,6 +61,6 @@ Test DB: Docker init [`scripts/local/postgres-init/`](../../scripts/local/postgr
 
 ## Tüketiciler
 
-`modules/*.repo`, `apps/*/domain`, `apps/system/health` (readiness), `apps/auth` (doğrudan sorgular).
+`modules/db.ts` üzerinden: `apps/system/health` (readiness), `index.ts` (kapanış), testler (`closeDb`).
 
-`core/database` ↛ `apps` / `modules` — yalnızca tipler import edilir, domain bilgisi yok.
+`core/database` ↛ `apps` / `modules`.

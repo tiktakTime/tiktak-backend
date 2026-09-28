@@ -66,7 +66,7 @@ Gerçek wiring: [`server/doc.md`](../../server/doc.md) (`org` / `member` / `orgP
 | `response`          | —          | `Result` / `Page` / …                       |
 | `cache.read`        | —          | `{ ttl, tags? }` — GET önbellek             |
 | `cache.write.purge` | —          | Mutation sonrası tag purge                  |
-| `handle(ctx)`       | —          | Domain; `Response` veya data / `ok()`       |
+| `handle(ctx)`       | —          | `Response` veya data / `ok()`               |
 
 `RouteCtx`: `params`, `query`, `body` (lazy `req.valid`), `tenantId`, `actorId`, `c`.
 
@@ -94,7 +94,7 @@ Her `def` için:
 | Sonuç                            | Wire                                 |
 | -------------------------------- | ------------------------------------ |
 | `Response`                       | olduğu gibi                          |
-| `page` mode                      | JSON olduğu gibi (zarf domain’de)    |
+| `page` mode                      | JSON olduğu gibi (zarf handle'da)    |
 | `ok(code, data)` / named success | `renderSuccess`                      |
 | düz data                         | `renderSuccess` ile `code: def.name` |
 
@@ -130,7 +130,7 @@ Detay anahtar/tag: [`cache/doc.md`](../cache/doc.md).
 | `tenantId` / `actorId`                               | Context üzerinden ürün çözücü |
 | `extractBearerToken`                                 | `Authorization: Bearer …`     |
 | `renderSuccess` / `renderError` / `renderValidation` | Tek huni                      |
-| `ok(code, data)`                                     | Domain success override       |
+| `ok(code, data)`                                     | Success kodu override         |
 | `toPage` / `paginate`                                | Liste zarfı                   |
 | `negotiateLocale` / `interpolate`                    | Accept-Language + `{param}`   |
 

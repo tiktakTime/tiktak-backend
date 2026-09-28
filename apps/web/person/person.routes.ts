@@ -1,249 +1,163 @@
 import { z } from "@hono/zod-openapi";
 
-import { TTL } from "@/core/cache";
 import { AppError } from "@/core/errors";
-import { Page, Result, createSlice, defineRoute } from "@/core/http";
+import { Result, createSlice, defineRoute } from "@/core/http";
 
-import {
-  createPerson,
-  getPerson,
-  restorePerson,
-  searchPersons,
-  softDeletePerson,
-  updatePerson,
-} from "./domain";
-import {
-  PersonCompareQuerySchema,
-  PersonCreateSchema,
-  PersonIdParamSchema,
-  PersonMatchWithUserBodySchema,
-  PersonRolePermissionBodySchema,
-  PersonSchema,
-  PersonSearchQuerySchema,
-  PersonSearchWithUserQuerySchema,
-  PersonUpdateSchema,
-} from "./person.schema";
+const Pending = z.object({}).passthrough().openapi("Web.personPending");
 
-const TAG = "person";
-const BASE = "/organization/person";
-
-const PersonIdResultSchema = z.object({ id: z.uuid() }).openapi("PersonId");
-
-const search = defineRoute({
-  name: "person.search",
-  method: "get",
-  path: `${BASE}/search`,
-  tag: TAG,
-  summary: "Search persons",
-  request: { query: PersonSearchQuerySchema },
-  response: Page(PersonSchema, "Matching persons"),
-  tenant: "org",
-  policy: ["person.get"],
-  cache: { read: { ttl: TTL.DEFAULT, tags: ["person"] } },
-  handle: ({ tenantId, query }) => searchPersons(tenantId, query),
-});
-
-const searchWithUser = defineRoute({
-  name: "person.search-with-user",
-  method: "get",
-  path: `${BASE}/search-with-user`,
-  tag: TAG,
-  summary: "Search persons with user data",
-  request: { query: PersonSearchWithUserQuerySchema },
-  response: Page(PersonSchema, "Matching persons with user info"),
-  tenant: "org",
-  handle: ({ tenantId, query }) => {
-    void tenantId;
-    void query;
-    throw new AppError("NOT_IMPLEMENTED");
-  },
-});
-
-const dashboard = defineRoute({
-  name: "person.dashboard",
-  method: "get",
-  path: `${BASE}/dashboard`,
-  tag: TAG,
-  summary: "Person dashboard statistics",
-  response: Page(z.object({}).passthrough().openapi("PersonDashboardRow")),
-  tenant: "org",
-  handle: ({ tenantId }) => {
-    void tenantId;
-    throw new AppError("NOT_IMPLEMENTED");
-  },
-});
-
-const compareWithUser = defineRoute({
-  name: "person.compare-with-user",
-  method: "get",
-  path: `${BASE}/compare-with-user`,
-  tag: TAG,
-  summary: "Compare person with user",
-  request: { query: PersonCompareQuerySchema },
-  response: Result(
-    z.object({}).passthrough().openapi("PersonCompare"),
-    "Comparison result",
-  ),
-  tenant: "org",
-  handle: ({ tenantId, query }) => {
-    void tenantId;
-    void query;
-    throw new AppError("NOT_IMPLEMENTED");
-  },
-});
-
-const matchWithUser = defineRoute({
-  name: "person.match-with-user",
+const post_organization_person = defineRoute({
+  name: "web.post.organization.person",
   method: "post",
-  path: `${BASE}/match-with-user`,
-  tag: TAG,
-  summary: "Match person with user",
-  request: {
-    query: z.object({ user_id: z.uuid() }),
-    body: PersonMatchWithUserBodySchema,
-  },
-  response: Result(
-    z.object({}).passthrough().openapi("PersonMatch"),
-    "Match result",
-  ),
-  tenant: "org",
-  handle: ({ tenantId, query, body }) => {
-    void tenantId;
-    void query;
-    void body;
+  path: "/organization/person",
+  tag: "web.person",
+  summary: "POST /organization/person",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
     throw new AppError("NOT_IMPLEMENTED");
   },
 });
 
-const create = defineRoute({
-  name: "person.create",
-  method: "post",
-  path: BASE,
-  tag: TAG,
-  summary: "Create person",
-  request: { body: PersonCreateSchema },
-  response: Result(PersonSchema, "Created"),
-  tenant: "org",
-  policy: ["person.post"],
-  cache: { write: { purge: ["person"] } },
-  handle: ({ tenantId, body }) => createPerson(tenantId, body),
-});
-
-const rolePermissionGet = defineRoute({
-  name: "person.role-permission.get",
-  method: "get",
-  path: `${BASE}/{id}/role-permission`,
-  tag: TAG,
-  summary: "Get person role + custom permissions",
-  request: { params: PersonIdParamSchema },
-  response: Result(
-    z.object({}).passthrough().openapi("PersonRolePermission"),
-    "Role and permissions",
-  ),
-  tenant: "org",
-  cache: { read: { ttl: TTL.DEFAULT, tags: ["person"] } },
-  handle: ({ tenantId, params }) => {
-    void tenantId;
-    void params;
-    throw new AppError("NOT_IMPLEMENTED");
-  },
-});
-
-const rolePermissionUpdate = defineRoute({
-  name: "person.role-permission.update",
-  method: "patch",
-  path: `${BASE}/{id}/role-permission`,
-  tag: TAG,
-  summary: "Update person role + custom permissions",
-  request: {
-    params: PersonIdParamSchema,
-    body: PersonRolePermissionBodySchema,
-  },
-  response: Result(
-    z.object({}).passthrough().openapi("PersonRolePermissionUpdated"),
-    "Updated",
-  ),
-  tenant: "org",
-  handle: ({ tenantId, params, body }) => {
-    void tenantId;
-    void params;
-    void body;
-    throw new AppError("NOT_IMPLEMENTED");
-  },
-});
-
-const restore = defineRoute({
-  name: "person.restore",
-  method: "patch",
-  path: `${BASE}/{id}/restore`,
-  tag: TAG,
-  summary: "Restore soft-deleted person",
-  request: { params: PersonIdParamSchema },
-  response: Result(PersonSchema, "Restored"),
-  tenant: "org",
-  policy: ["person.patch"],
-  cache: { write: { purge: ["person"] } },
-  handle: ({ tenantId, params }) => restorePerson(tenantId, params.id),
-});
-
-const get = defineRoute({
-  name: "person.get",
-  method: "get",
-  path: `${BASE}/{id}`,
-  tag: TAG,
-  summary: "Get person by id",
-  request: { params: PersonIdParamSchema },
-  response: Result(PersonSchema, "The person"),
-  tenant: "org",
-  policy: ["person.get"],
-  cache: { read: { ttl: TTL.LONG, tags: ["person"] } },
-  handle: ({ tenantId, params }) => getPerson(tenantId, params.id),
-});
-
-const update = defineRoute({
-  name: "person.update",
-  method: "patch",
-  path: `${BASE}/{id}`,
-  tag: TAG,
-  summary: "Update person",
-  request: {
-    params: PersonIdParamSchema,
-    body: PersonUpdateSchema,
-  },
-  response: Result(PersonSchema, "Updated"),
-  tenant: "org",
-  policy: ["person.patch"],
-  cache: { write: { purge: ["person"] } },
-  handle: ({ tenantId, params, body }) =>
-    updatePerson(tenantId, params.id, body),
-});
-
-const remove = defineRoute({
-  name: "person.delete",
+const delete_organization_person_id = defineRoute({
+  name: "web.delete.organization.person.id",
   method: "delete",
-  path: `${BASE}/{id}`,
-  tag: TAG,
-  summary: "Soft-delete person",
-  request: { params: PersonIdParamSchema },
-  response: Result(PersonIdResultSchema, "Deleted"),
-  tenant: "org",
-  policy: ["person.delete"],
-  cache: { write: { purge: ["person"] } },
-  handle: ({ tenantId, params, actorId }) =>
-    softDeletePerson(tenantId, params.id, actorId),
+  path: "/organization/person/{id}",
+  tag: "web.person",
+  summary: "DELETE /organization/person/{id}",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
 });
 
-export const personRouter = createSlice([
-  search,
-  searchWithUser,
-  dashboard,
-  compareWithUser,
-  matchWithUser,
-  create,
-  rolePermissionGet,
-  rolePermissionUpdate,
-  restore,
-  get,
-  update,
-  remove,
+const get_organization_person_id = defineRoute({
+  name: "web.get.organization.person.id",
+  method: "get",
+  path: "/organization/person/{id}",
+  tag: "web.person",
+  summary: "GET /organization/person/{id}",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+const patch_organization_person_id = defineRoute({
+  name: "web.patch.organization.person.id",
+  method: "patch",
+  path: "/organization/person/{id}",
+  tag: "web.person",
+  summary: "PATCH /organization/person/{id}",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+const get_organization_person_id_role_permission = defineRoute({
+  name: "web.get.organization.person.id.role-permission",
+  method: "get",
+  path: "/organization/person/{id}/role-permission",
+  tag: "web.person",
+  summary: "GET /organization/person/{id}/role-permission",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+const patch_organization_person_id_role_permission = defineRoute({
+  name: "web.patch.organization.person.id.role-permission",
+  method: "patch",
+  path: "/organization/person/{id}/role-permission",
+  tag: "web.person",
+  summary: "PATCH /organization/person/{id}/role-permission",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+const get_organization_person_compare_with_user = defineRoute({
+  name: "web.get.organization.person.compare-with-user",
+  method: "get",
+  path: "/organization/person/compare-with-user",
+  tag: "web.person",
+  summary: "GET /organization/person/compare-with-user",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+const get_organization_person_dashboard = defineRoute({
+  name: "web.get.organization.person.dashboard",
+  method: "get",
+  path: "/organization/person/dashboard",
+  tag: "web.person",
+  summary: "GET /organization/person/dashboard",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+const post_organization_person_match_with_user = defineRoute({
+  name: "web.post.organization.person.match-with-user",
+  method: "post",
+  path: "/organization/person/match-with-user",
+  tag: "web.person",
+  summary: "POST /organization/person/match-with-user",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+const get_organization_person_search = defineRoute({
+  name: "web.get.organization.person.search",
+  method: "get",
+  path: "/organization/person/search",
+  tag: "web.person",
+  summary: "GET /organization/person/search",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+const get_organization_person_search_with_user = defineRoute({
+  name: "web.get.organization.person.search-with-user",
+  method: "get",
+  path: "/organization/person/search-with-user",
+  tag: "web.person",
+  summary: "GET /organization/person/search-with-user",
+  response: Result(Pending),
+  tenant: "none",
+  handle: () => {
+    throw new AppError("NOT_IMPLEMENTED");
+  },
+});
+
+export const webPersonRouter = createSlice([
+  post_organization_person,
+  delete_organization_person_id,
+  get_organization_person_id,
+  patch_organization_person_id,
+  get_organization_person_id_role_permission,
+  patch_organization_person_id_role_permission,
+  get_organization_person_compare_with_user,
+  get_organization_person_dashboard,
+  post_organization_person_match_with_user,
+  get_organization_person_search,
+  get_organization_person_search_with_user,
 ]);

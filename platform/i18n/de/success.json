@@ -250,5 +250,997 @@
   "user.update": {
     "title": "User updated",
     "message": "The user was updated successfully."
+  },
+  "web.patch.user.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.user.settings.me": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.department": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.department.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.department.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.job-title": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.job-title.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.job-title.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.order": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.order.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.order.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.order.order_id.content-values": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.order.pricing.bulk": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.order.pricing.group-apply": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.order.pricing.employee-order": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.post.organization.invite": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.post.organization.invite.id.resend": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "public.post.invite.accept": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.company": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.company.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.company.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.company.company_id.contract": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.company.company_id.contract.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.company.company_id.contract.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.company.location": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.company.location.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.company.location.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.company.official": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.company.official.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.company.official.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.person": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.person.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.person.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.person.id.role-permission": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.person.match-with-user": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.team": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.team.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.team.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.creator": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.employee.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.employee.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.absence": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.employee.absence.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.employee.absence.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.experience": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.experience.with-terms": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.employee.experience.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.agreement": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.employee.agreement.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.employee.agreement.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.document": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.employee.document.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.employee.document.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.document.id.issue": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.document.id.revert": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.document.id.sign": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.document.id.file": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.document.id.void": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.document.id.send-email": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.document.id.deliver": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.document-template.import-samples": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.document-template": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.document-template.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.document-template.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.form.module": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.form.module.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.form.module.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.form.attribute": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.form.attribute.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.form.attribute.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.settlement.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.work.id.stamp": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.id.work-include": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.id.work-adjust": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.id.agreement-stamp": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.id.agreement-adjust": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.id.agreement-refresh": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.room": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.settlement.room.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.settlement.room.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.room.id.recalculate": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.room.id.employees": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.room.id.employees.remove": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.room.id.archive": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.transaction": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.settlement.transaction.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.settlement.transaction.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.transaction.id.stamp": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.transaction.id.unstamp": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.settlement.transaction-category": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.settlement.transaction-category.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.work.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.work.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.work.id.series.content": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work.id.series.rebuild": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work.repeat.conflicts": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work.id.series.unrepeat": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work.id.timeline": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work.id.timeline.reset": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.work.order.id.status": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work.order.id.reset": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work.order.work_order_id.work-values": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.workspace.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.workspace.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.workspace": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.work.shift": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.work.shift.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.work.shift.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.work.work-settings.me": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.role": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.role.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.role.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.vehicle.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.vehicle.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.vehicle.vehicle_id.assignments.assignment_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.exit": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.request": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.vehicle.vehicle_id.activities.activity_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.vehicle.vehicle_id.maintenance.maintenance_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.vehicle.vehicle_id.maintenance.maintenance_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.vehicle_id.maintenance": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.vehicle.vehicle_id.financial-records.record_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.vehicle.vehicle_id.financial-records.record_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.plate": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.vehicle.plate.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.vehicle_id.color-history": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.mail-server": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.mail-server.test": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.mail-server.id.test": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.mail-server.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.mail-server.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.email-template": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.email-template.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.email-template.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.email-log.id.retry": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.traffic-punishment": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.traffic-punishment.duplicate-check": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.vehicle.traffic-punishment.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.delete.organization.vehicle.traffic-punishment.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.traffic-punishment.id.send-email": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.organization": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.patch.superadmin.organization.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.delete.superadmin.organization.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.patch.superadmin.organization.id.restore": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.user": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.patch.superadmin.user.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.delete.superadmin.user.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.patch.superadmin.user.id.restore": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.user.id.send-set-password": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.user.id.revoke-sessions": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.user.id.grant-super-admin": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.user.id.revoke-super-admin": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.invite": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.invite.id.resend": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.patch.superadmin.invite.id.cancel": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.vehicle.brand": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.patch.superadmin.vehicle.brand.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.delete.superadmin.vehicle.brand.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.vehicle.model": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.patch.superadmin.vehicle.model.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.delete.superadmin.vehicle.model.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.post.superadmin.vehicle.class": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.patch.superadmin.vehicle.class.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "admin.delete.superadmin.vehicle.class.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.sign-in": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.logout": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.sign-up": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.verify-email": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.verify-email.request": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.forgot-password": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.reset-password": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.recovery-email.request": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.recovery-email.verify": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.delete.auth.recovery-email": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.email-change.request": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.auth.email-change.verify": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.patch.user.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.employee.absence": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.patch.organization.employee.absence.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.delete.organization.employee.absence.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.patch.organization.work.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.work.self": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.patch.organization.work.self.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.delete.organization.work.self.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.work.id.timeline": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.patch.organization.vehicle.id.self": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.post.address": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.delete.address.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.patch.address.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.post.bank-account": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.delete.bank-account.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.patch.bank-account.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.post.social-media": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.delete.social-media.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.patch.social-media.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.employee.absence.id.sign": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.employee.document.me.id.sign": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.employee.document.me.id.acknowledge": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.work.id.location-log": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.patch.organization.work.id.timeline.batch": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.delete.organization.work.work_id.timeline.events.event_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.work.id.timeline.reset": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.patch.organization.work.order.id.status": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.work.order.id.reset": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.work.order.id.work-values": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.entry": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.exit": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.request": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.assignment_id.respond": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.email-change.verify": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.forgot-password": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.forgot-password-recovery": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.recovery-email.verify": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.reset-password": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.sign-in": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.sign-up": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.verify-email": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.change-password": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.email-change.request": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.logout": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.get.auth.member": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.delete.auth.recovery-email": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.recovery-email.request": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.get.auth.switch.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "auth.post.auth.verify-email.request": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.patch.organization.access.upsert-access": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.delete.country.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.patch.country.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.post.files": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.delete.files.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.patch.files.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.employee.experience.exit-preflight": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "common.patch.organization.invite.id.cancel": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.settlement.id.status": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.settlement.room.id.status": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.settlement.transaction.id.cancel": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.settlement.transaction-category.id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.vehicle.vehicle_id.activities.activity_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.vehicle_id.activities": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.patch.organization.vehicle.vehicle_id.assignments.assignment_id": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.entry": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.assignment_id.respond": {
+    "title": "Noch nicht umgesetzt",
+    "message": "Dieser Endpunkt ist noch nicht umgesetzt."
   }
 }

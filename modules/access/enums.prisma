@@ -1,7 +1,0 @@
-enum AccessStatus {
-  pending
-  active
-  inactive
-  blocked
-  canceled
-}

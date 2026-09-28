@@ -16,7 +16,7 @@ Barrel: `@/middlewares`
 
 | Kural       | Anlam                                                                      |
 | ----------- | -------------------------------------------------------------------------- |
-| İnce katman | Context set / erken reddet; repo/domain çağrısı yok                        |
+| İnce katman | Context set / erken reddet; veritabanı çağrısı yok                         |
 | Bağımlılık  | `middlewares` → `platform` / `core` (+ `app.config`); ↛ `apps` / `modules` |
 | Mount yeri  | Global → `server/`; yüzey → `apps/*/index.ts`; route → tek endpoint        |
 
@@ -51,7 +51,7 @@ Barrel: `@/middlewares`
 1. Bearer yok → doğrudan `next()` (context boş kalır)
 2. Bearer var → `verifyAccessToken` + session doldur; geçersiz token **yutulur** (devam eder)
 
-Kullanım: `common` / `web` barrel `use("*", authMiddleware)`; cache prefix için tenant bilgisi gerekir. `public` auth yok.
+Kullanım: `common`, `web`, `mobile`, `admin` ve `auth` barrel'ları `use("*", authMiddleware)`. `public` auth yok. `optionalAuthMiddleware` şu an kullanılmıyor.
 
 ---
 
@@ -99,7 +99,8 @@ Limit aşımı → `AppError("TOO_MANY_REQUESTS", ...)`.
 | Preset                                 | Default                                            | Mount                          |
 | -------------------------------------- | -------------------------------------------------- | ------------------------------ |
 | `rate_limit.standard`                  | 2000 / 60s                                         | `server/buildServer` — tüm API |
-| `rate_limit.auth`                      | 20 / 60s, prefix `rate-limit:auth:`, `force: true` | `apps/auth` uçları             |
+| `rate_limit.auth`                      | 20 / 60s, prefix `rate-limit:auth:`, `force: true` | `/auth/sign-in`                |
+| `rate_limit.invite`                    | 20 / 60s, prefix `rate-limit:invite:`, `force: true` | `GET /invite/by-token`, `POST /invite/accept` |
 | `rate_limit.custom(window, max, msg?)` | özel                                               | route bazlı                    |
 | `rate_limit.test`                      | 3 / 10s, `force: true`                             | test                           |
 
@@ -121,8 +122,8 @@ Test helper: `rate-limit:{sanitizedIp}` DEL.
 server/buildServer
   api.use("*", rate_limit.standard)
   mount healthRouter, authRouter
-  surfaces: public (auth yok) | common/web (authMiddleware)
-  auth routes: rate_limit.auth (+ seçili authMiddleware)
+  surfaces: public (auth yok) | common/web/mobile/admin (authMiddleware)
+  auth: /auth/sign-in rate_limit.auth; açık uçlardan sonra authMiddleware
 ```
 
 Detay: [`server/doc.md`](../server/doc.md)

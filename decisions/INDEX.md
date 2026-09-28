@@ -1,3 +1,21 @@
-| Tarih | Başlık | Durum | Dosya |
-| --- | --- | --- | --- |
-| 2026-09-25 | Taşınmayan v2 uçları | Geçerli | [09-25-16-23-tasinmayan-v2-uclari.md](./09-25-16-23-tasinmayan-v2-uclari.md) |
+| Tarih      | Başlık                               | Durum                                                               | Dosya                                                                              |
+| ---------- | ------------------------------------ | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| 2026-09-25 | Taşınmayan v2 uçları                 | Geçerli                                                             | [09-25-16-23-tasinmayan-v2-uclari.md](./09-25-16-23-tasinmayan-v2-uclari.md)       |
+| 2026-09-26 | Yüzey önekli route kaydı             | Yerine geçti → [09-26-18-50](./09-26-18-50-kullanilan-ve-common.md) | [09-26-18-35-yuzey-oneki-route.md](./09-26-18-35-yuzey-oneki-route.md)             |
+| 2026-09-26 | Kullanılan yollar ve common          | Geçerli                                                             | [09-26-18-50-kullanilan-ve-common.md](./09-26-18-50-kullanilan-ve-common.md)       |
+| 2026-09-26 | Mobil kayıtları ekran çağrısı        | Geçerli                                                             | [09-26-19-52-mobil-ekran-uclari.md](./09-26-19-52-mobil-ekran-uclari.md)           |
+| 2026-09-26 | Auth ve ortak access, country, file  | Geçerli                                                             | [09-26-19-56-auth-ve-ortak.md](./09-26-19-56-auth-ve-ortak.md)                     |
+| 2026-09-26 | Web ve admin ekran çağrıları         | Geçerli                                                             | [09-26-20-02-web-admin-ekran.md](./09-26-20-02-web-admin-ekran.md)                 |
+| 2026-09-28 | Access common'da kalır               | Geçerli                                                             | [09-28-08-50-access-common.md](./09-28-08-50-access-common.md)                     |
+| 2026-09-28 | Eski domain ve modeller silindi      | Geçerli                                                             | [09-28-09-33-eski-domain-ve-modeller.md](./09-28-09-33-eski-domain-ve-modeller.md) |
+| 2026-09-28 | Eski repolar silindi                 | Geçerli                                                             | [09-28-10-25-eski-repolar.md](./09-28-10-25-eski-repolar.md)                       |
+| 2026-09-28 | Eski veritabanı kalıntısı silindi    | Geçerli                                                             | [09-28-10-28-database-temizlik.md](./09-28-10-28-database-temizlik.md)             |
+| 2026-09-28 | User modeli bağımlılıksız kopyalandı | Yerine geçti → [09-28-13-29](./09-28-13-29-user-modul-iliskileri.md) | [09-28-10-38-user-modeli.md](./09-28-10-38-user-modeli.md)                         |
+| 2026-09-28 | Model oluşturma sırası               | Geçerli                                                             | [09-28-10-54-model-olusturma-sirasi.md](./09-28-10-54-model-olusturma-sirasi.md)   |
+| 2026-09-28 | User modülü içi ilişki               | Yerine geçti → [09-28-14-03](./09-28-14-03-oturum-cihazda.md)       | [09-28-13-29-user-modul-iliskileri.md](./09-28-13-29-user-modul-iliskileri.md)     |
+| 2026-09-28 | Davet modeli ve yüzey                | Geçerli                                                             | [09-28-13-29-davet-modeli.md](./09-28-13-29-davet-modeli.md)                       |
+| 2026-09-28 | Oturum cihaz satırında               | Geçerli                                                             | [09-28-14-03-oturum-cihazda.md](./09-28-14-03-oturum-cihazda.md)                   |
+| 2026-09-28 | User full_name                       | Geçerli                                                             | [09-28-14-07-user-full-name.md](./09-28-14-07-user-full-name.md)                   |
+| 2026-09-28 | Auth domain taşıma sırası            | Geçerli                                                             | [09-28-14-22-auth-domain-sirasi.md](./09-28-14-22-auth-domain-sirasi.md)           |
+| 2026-09-28 | Giriş kayıt açmaz                    | Geçerli                                                             | [09-28-14-58-giris-kayit-ayri.md](./09-28-14-58-giris-kayit-ayri.md)               |
+| 2026-09-28 | Auth vertical slice paketleme        | Geçerli                                                             | [09-28-17-38-auth-vertical-slice.md](./09-28-17-38-auth-vertical-slice.md)         |

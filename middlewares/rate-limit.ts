@@ -157,6 +157,12 @@ export const rate_limit = {
     key_prefix: "rate-limit:auth:",
     force: true,
   }),
+  invite: createRateLimit({
+    window_ms: app_config.rate_limit.invite.window_ms,
+    max_requests: app_config.rate_limit.invite.max_requests,
+    key_prefix: "rate-limit:invite:",
+    force: true,
+  }),
   test: createRateLimit({
     window_ms: 10 * 1000,
     max_requests: 3,

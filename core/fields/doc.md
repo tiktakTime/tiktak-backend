@@ -11,7 +11,7 @@ Wire üzerinde tekrarlayan Zod parçaları ve e-posta normalizasyonu.
 
 ## Amaç
 
-Slice şemalarında kopyala-yapıştır UUID / tarih / e-posta kurallarını tek yerde tutmak. Domain doğrulama burada değil.
+Slice şemalarında kopyala-yapıştır UUID / tarih / e-posta kurallarını tek yerde tutmak. İş doğrulaması burada değil.
 
 ---
 
@@ -33,13 +33,10 @@ normalizeEmail(""); // null
 normalizeEmail(null); // null
 ```
 
-Trim + lowercase; boş → `null`. Auth, invite, user email guard’larında kullanılır.
+Trim + lowercase; boş → `null`.
 
 ---
 
 ## Tüketiciler
 
-| Kim                              | Ne                            |
-| -------------------------------- | ----------------------------- |
-| `apps/**/*.schema.ts`            | IdParam, DateOnly, IsoInstant |
-| `apps/auth`, invite, user domain | `normalizeEmail`              |
+Şu an yok. Route'lar stub.

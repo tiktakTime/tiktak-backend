@@ -250,5 +250,997 @@
   "user.update": {
     "title": "User updated",
     "message": "The user was updated successfully."
+  },
+  "web.patch.user.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.user.settings.me": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.department": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.department.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.department.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.job-title": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.job-title.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.job-title.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.order": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.order.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.order.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.order.order_id.content-values": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.order.pricing.bulk": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.order.pricing.group-apply": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.order.pricing.employee-order": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.post.organization.invite": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.post.organization.invite.id.resend": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "public.post.invite.accept": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.company": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.company.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.company.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.company.company_id.contract": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.company.company_id.contract.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.company.company_id.contract.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.company.location": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.company.location.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.company.location.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.company.official": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.company.official.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.company.official.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.person": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.person.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.person.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.person.id.role-permission": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.person.match-with-user": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.team": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.team.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.team.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.creator": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.employee.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.employee.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.absence": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.employee.absence.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.employee.absence.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.experience": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.experience.with-terms": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.employee.experience.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.agreement": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.employee.agreement.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.employee.agreement.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.document": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.employee.document.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.employee.document.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.document.id.issue": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.document.id.revert": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.document.id.sign": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.document.id.file": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.document.id.void": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.document.id.send-email": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.document.id.deliver": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.document-template.import-samples": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.document-template": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.document-template.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.document-template.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.form.module": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.form.module.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.form.module.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.form.attribute": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.form.attribute.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.form.attribute.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.settlement.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.work.id.stamp": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.id.work-include": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.id.work-adjust": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.id.agreement-stamp": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.id.agreement-adjust": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.id.agreement-refresh": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.room": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.settlement.room.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.settlement.room.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.room.id.recalculate": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.room.id.employees": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.room.id.employees.remove": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.room.id.archive": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.transaction": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.settlement.transaction.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.settlement.transaction.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.transaction.id.stamp": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.transaction.id.unstamp": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.settlement.transaction-category": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.settlement.transaction-category.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.work.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.work.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.work.id.series.content": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work.id.series.rebuild": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work.repeat.conflicts": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work.id.series.unrepeat": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work.id.timeline": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work.id.timeline.reset": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.work.order.id.status": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work.order.id.reset": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work.order.work_order_id.work-values": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.workspace.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.workspace.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.workspace": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.work.shift": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.work.shift.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.work.shift.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.work.work-settings.me": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.role": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.role.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.role.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.vehicle.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.vehicle.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.vehicle.vehicle_id.assignments.assignment_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.exit": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.request": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.vehicle.vehicle_id.activities.activity_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.vehicle.vehicle_id.maintenance.maintenance_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.vehicle.vehicle_id.maintenance.maintenance_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.vehicle_id.maintenance": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.vehicle.vehicle_id.financial-records.record_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.vehicle.vehicle_id.financial-records.record_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.plate": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.vehicle.plate.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.vehicle_id.color-history": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.mail-server": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.mail-server.test": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.mail-server.id.test": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.mail-server.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.mail-server.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.email-template": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.email-template.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.email-template.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.email-log.id.retry": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.traffic-punishment": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.traffic-punishment.duplicate-check": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.vehicle.traffic-punishment.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.delete.organization.vehicle.traffic-punishment.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.traffic-punishment.id.send-email": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.organization": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.patch.superadmin.organization.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.delete.superadmin.organization.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.patch.superadmin.organization.id.restore": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.user": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.patch.superadmin.user.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.delete.superadmin.user.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.patch.superadmin.user.id.restore": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.user.id.send-set-password": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.user.id.revoke-sessions": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.user.id.grant-super-admin": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.user.id.revoke-super-admin": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.invite": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.invite.id.resend": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.patch.superadmin.invite.id.cancel": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.vehicle.brand": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.patch.superadmin.vehicle.brand.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.delete.superadmin.vehicle.brand.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.vehicle.model": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.patch.superadmin.vehicle.model.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.delete.superadmin.vehicle.model.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.post.superadmin.vehicle.class": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.patch.superadmin.vehicle.class.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "admin.delete.superadmin.vehicle.class.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.sign-in": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.logout": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.sign-up": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.verify-email": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.verify-email.request": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.forgot-password": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.reset-password": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.recovery-email.request": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.recovery-email.verify": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.delete.auth.recovery-email": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.email-change.request": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.auth.email-change.verify": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.patch.user.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.employee.absence": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.patch.organization.employee.absence.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.delete.organization.employee.absence.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.patch.organization.work.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.work.self": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.patch.organization.work.self.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.delete.organization.work.self.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.work.id.timeline": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.patch.organization.vehicle.id.self": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.post.address": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.delete.address.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.patch.address.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.post.bank-account": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.delete.bank-account.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.patch.bank-account.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.post.social-media": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.delete.social-media.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.patch.social-media.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.employee.absence.id.sign": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.employee.document.me.id.sign": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.employee.document.me.id.acknowledge": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.work.id.location-log": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.patch.organization.work.id.timeline.batch": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.delete.organization.work.work_id.timeline.events.event_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.work.id.timeline.reset": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.patch.organization.work.order.id.status": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.work.order.id.reset": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.work.order.id.work-values": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.entry": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.exit": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.request": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.assignment_id.respond": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.email-change.verify": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.forgot-password": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.forgot-password-recovery": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.recovery-email.verify": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.reset-password": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.sign-in": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.sign-up": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.verify-email": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.change-password": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.email-change.request": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.logout": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.get.auth.member": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.delete.auth.recovery-email": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.recovery-email.request": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.get.auth.switch.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "auth.post.auth.verify-email.request": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.patch.organization.access.upsert-access": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.delete.country.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.patch.country.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.post.files": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.delete.files.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.patch.files.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.employee.experience.exit-preflight": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "common.patch.organization.invite.id.cancel": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.settlement.id.status": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.settlement.room.id.status": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.settlement.transaction.id.cancel": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.settlement.transaction-category.id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.vehicle.vehicle_id.activities.activity_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.vehicle_id.activities": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.patch.organization.vehicle.vehicle_id.assignments.assignment_id": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.entry": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.assignment_id.respond": {
+    "title": "Henüz yok",
+    "message": "Bu uç henüz yazılmadı."
   }
 }

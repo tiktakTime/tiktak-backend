@@ -7,9 +7,7 @@
     "**/generated/**",
     "prisma.config.ts",
     "core/files/**",
-    "modules/country/country.repo.ts",
-    "modules/user_device/user_device.repo.ts",
-    "modules/person_permission/person_permission.repo.ts"
+    "apps/**/*.schema.ts"
   ],
   "ignoreDependencies": [
     "prisma-kysely",

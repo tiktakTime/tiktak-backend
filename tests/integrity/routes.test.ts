@@ -48,4 +48,11 @@ describe("route sözleşmesi", () => {
     const stale = [...read].filter((tag) => !purge.has(tag)).sort();
     expect(stale).toEqual([]);
   });
+
+  it("taşınan uçlarda policy yok", () => {
+    const withPolicy = listRegisteredRoutes().filter(
+      (route) => (route.policy?.length ?? 0) > 0,
+    );
+    expect(withPolicy).toEqual([]);
+  });
 });

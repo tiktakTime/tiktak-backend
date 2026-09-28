@@ -1,9 +1,8 @@
 # auth
 
-İndeks: [`platform/doc.md`](../doc.md) · Middleware: [`middlewares/doc.md`](../../middlewares/doc.md) · Domain: [`apps/auth/domain/doc.md`](../../apps/auth/domain/doc.md)
+İndeks: [`platform/doc.md`](../doc.md) · Middleware: [`middlewares/doc.md`](../../middlewares/doc.md)
 
-TikTak oturum motoru: JWT access + Redis session + refresh rotate. İş kuralı
-(kullanıcı/şifre/invite) burada yok — `apps/auth` domain çağırır.
+TikTak oturum motoru: JWT access + Redis session + refresh rotate. Kullanıcı ve şifre kuralı burada yok.
 
 Barrel: `@/platform/auth`
 
@@ -87,7 +86,7 @@ Yeni `jti` + `signJwt` (`HS256`, `JWT_SECRET`). Tek başına session yazmaz.
    - `SADD user_sessions:{userId}` + `PEXPIRE`
 5. `issueAccessToken` → `TokenPair` döndür
 
-Kim çağırır: `apps/auth` `issueSessionForUser` (sign-in, oauth, refresh sonrası).
+Kim çağırır: şu an yalnızca `tests/auth.ts` (`signInAs`). Auth route'ları stub.
 
 ### `rotateRefreshToken(refreshToken)` — adımlar
 
@@ -103,7 +102,7 @@ Amaç: refresh tek kullanımlık; çalınmış token replay’i eski oturumu da 
 Session yok → `"Session not found"`. Kalan TTL (`expires_at - now`) ile `SET` yeniden yazar.
 `updateSessionOrganization` yalnızca `organization_id` kısayolu.
 
-Kim: org switch (`apps/auth`), permission hydrate, `revokeOrganizationSessions`.
+Kim: `revokeOrganizationSessions`.
 
 ### `revokeSession(sid)`
 
@@ -134,7 +133,7 @@ organization_id: null, permissions: [], person_id: null, role_id: null
 `user_sessions` set’indeki her sid için: eşleşmeyen org atlanır; stale sid SREM.
 Dönen dizi: temizlenen sid listesi.
 
-Kim: access hard-delete / üyelik düşürme domain’i (kullanıcı başka org’ta kalabilir).
+Kim: şu an çağıran yok. Üyelik düşürüldüğünde kullanılacak (kullanıcı başka org'ta kalabilir).
 
 ---
 
@@ -150,7 +149,7 @@ Runtime import yok; tsconfig `include` ile ambient. `middlewares/auth` şunları
 ## Yaşam döngüsü (özet)
 
 ```
-sign-in / oauth
+sign-in
   → createSession → TokenPair
   → client: Authorization Bearer access
 
@@ -177,6 +176,5 @@ logout
 ```
 platform/auth → core/crypto, core/redis, core/env
 middlewares/auth → platform/auth
-apps/auth domain → platform/auth
 platform/scope/rooms → getSession (canJoin)
 ```

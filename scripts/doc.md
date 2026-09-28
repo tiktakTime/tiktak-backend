@@ -15,7 +15,7 @@ Başlangıç: [`docs/getting-started.md`](../docs/getting-started.md)
 | `test-cache-socket.mjs`                    | Cache hit/miss + socket `invalidate`         | `node scripts/test-cache-socket.mjs` |
 | `local/postgres-init/01-create-test-db.sh` | Docker ilk ayağa kalkış — test DB            | Compose volume init (manuel değil)   |
 
-**Not:** `e2e-smoke` ve `test-cache-socket` için npm script yok — doğrudan `node` kullan.
+**Not:** `e2e-smoke` ve `test-cache-socket` için npm script yok — doğrudan `node` kullan. İkisi de eski yolları (`/user`, `/organization`, `/auth/refresh`) ve çalışan auth'u bekler; route'lar stub olduğu için şu an geçmez.
 
 ---
 

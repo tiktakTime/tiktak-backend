@@ -12,7 +12,6 @@ Barrel: `@/core/errors`
 
 ```ts
 throw new AppError("EMAIL_ALREADY_EXISTS");
-throw new AppError("EMAIL_ALREADY_EXISTS");
 ```
 
 | Üye      | Anlam                                                       |
@@ -22,17 +21,16 @@ throw new AppError("EMAIL_ALREADY_EXISTS");
 
 HTTP status **AppError’da yok** — `platform/i18n/catalog.meta.ts` → `renderError`.
 
-Kayıt yoksa domain açık yazar:
+Kayıt yoksa açık yazılır:
 
 ```ts
-const row = await repo.findById(id);
-if (!row) throw new AppError("PERSON_NOT_FOUND");
+if (!row) throw new AppError("USER_NOT_FOUND");
 ```
 
 ### `ERROR_CODES`
 
 OpenAPI standart hata yanıtları + `HTTPException` eşlemesi için 8 base kod.
-Domain fırlatmaları katalog anahtarı kullanır; base kod ikinci argüman değildir.
+Fırlatmalar katalog anahtarı kullanır; base kod ikinci argüman değildir.
 
 ---
 

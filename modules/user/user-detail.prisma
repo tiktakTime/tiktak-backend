@@ -1,0 +1,36 @@
+/// Hesaba bire bir bağlı kişisel ve personel bilgisi.
+model UserDetail {
+  user_id String @id @db.Uuid
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  country_id     String? @db.Uuid
+  nationality_id String? @db.Uuid
+
+  gender         UserGender @default(none)
+  birth_location String?    @db.VarChar(255)
+  birthdate      DateTime?  @db.Date
+  phone_landline String?    @unique(map: "idx_user_detail_phone_landline_unique") @db.VarChar(15)
+
+  driver_license_no           String? @db.VarChar(255)
+  driver_license_type         String? @db.VarChar(255)
+  driver_license_organization String? @db.VarChar(255)
+
+  insurance_company String? @db.VarChar(255)
+  insurance_no      String? @db.VarChar(255)
+  insurance_class   String? @db.VarChar(255)
+
+  tax_no              String? @db.VarChar(255)
+  tax_id              String? @db.VarChar(255)
+  tax_class           String? @db.VarChar(255)
+  child_exempt_amount String? @db.VarChar(255)
+
+  health_insurance String? @db.VarChar(255)
+  social_health_no String? @db.VarChar(255)
+
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+
+  @@index([country_id], map: "idx_user_detail_country_id")
+  @@index([nationality_id], map: "idx_user_detail_nationality_id")
+  @@map("user_detail")
+}

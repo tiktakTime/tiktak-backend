@@ -65,4 +65,4 @@ Uygulama runtime pooled `DATABASE_URL` kullanır; Prisma CLI migrate `DIRECT_URL
 
 ## Tüketiciler
 
-`core/database`, `core/redis`, `core/crypto`, `core/files`, `core/queue`, `platform/auth`, `platform/notifications`, `server/`, `index.ts`, `middlewares/rate-limit` (dev bypass).
+`core/database`, `core/redis`, `core/crypto`, `core/files`, `core/http`, `platform/auth`, `platform/notifications`, `server/`, `index.ts`, `middlewares/rate-limit` (dev bypass), `tests/`.

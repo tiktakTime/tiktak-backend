@@ -24,7 +24,7 @@ Barrel: `@/platform/notifications`
 | `payload` | ✓       | Şablona giden serbest JSON                           |
 | `userId`  |         | Queue `meta.userId` olarak yazılır                   |
 
-Domain (`apps/auth`, invite) bu tipi doldurur; ham `addMailJob` çağırmaz.
+Çağıran bu tipi doldurur; ham `addMailJob` çağırmaz. Şu an çağıran yok.
 
 ---
 
@@ -35,7 +35,7 @@ Her job için:
 1. `addMailJob({ key, mail, payload, meta?: { userId } })`
 2. `NODE_ENV !== production` → konsola `[mail] key → mail payload` (worker yokken debug)
 
-Hata: queue/Redis hatası yukarı fırlar — çağıran domain yakalar veya route error handler’a gider.
+Hata: queue/Redis hatası yukarı fırlar — çağıran yakalar veya route error handler'a gider.
 
 ---
 
@@ -64,9 +64,7 @@ Kullanım: e-posta doğrulama, şifre sıfırlama, invite kabul linkleri.
 ## Tipik akış
 
 ```
-domain (forgot-password / verify-email / invite)
-  → randomToken + verification_code repo
-  → buildVerificationLink("/…", token, resolvePlatform(…))
+buildVerificationLink("/…", token, resolvePlatform(…))
   → sendEmail({ key, mail, userId?, payload: { link, … } })
   → mail-queue / send-mail
   → (harici worker şablon render + SMTP)
@@ -78,6 +76,5 @@ domain (forgot-password / verify-email / invite)
 
 ```
 platform/notifications → core/queue, core/env
-apps/** domain → sendEmail / buildVerificationLink
 core/queue ↛ platform   (ters yön yok)
 ```

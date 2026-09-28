@@ -1,13 +1,10 @@
 import { createRouter } from "@/core/router";
+import { rate_limit } from "@/middlewares";
 
-import { invitePublicRouter } from "./invite/invite-public.routes";
+import { publicInviteRouter } from "./invite/invite.routes";
 
-/**
- * Public yüzey — authMiddleware yok.
- * Token / credential ile gelen authsuz uçlar (invite accept, …).
- *
- * Not: `apps/auth` melez (authlı + authsuz) olduğu için üst seviyede kalır;
- * `server/` onu surfaces döngüsü dışında mount eder.
- */
+/** Oturumsuz uçlar. Önek `/`. */
 export const publicRouter = createRouter();
-publicRouter.route("/", invitePublicRouter);
+publicRouter.use("/invite/by-token", rate_limit.invite);
+publicRouter.use("/invite/accept", rate_limit.invite);
+publicRouter.route("/", publicInviteRouter);

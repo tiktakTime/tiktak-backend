@@ -27,5 +27,4 @@
 
 - **Liveness** (`/health`): DB'ye dokunmaz; process ayakta mı
 - **Readiness** (`/health/ready`): Postgres erişimi; başarısızsa **503** (degraded)
-- OpenAPI tag: genelde `system` veya health ayrı dokümante
-- Slice / domain klasörü yok — tek dosya router
+- Tek dosya router; slice klasörü yok

@@ -250,5 +250,997 @@
   "user.update": {
     "title": "User updated",
     "message": "The user was updated successfully."
+  },
+  "web.patch.user.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.user.settings.me": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.department": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.department.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.department.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.job-title": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.job-title.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.job-title.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.order": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.order.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.order.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.order.order_id.content-values": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.order.pricing.bulk": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.order.pricing.group-apply": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.order.pricing.employee-order": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.post.organization.invite": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.post.organization.invite.id.resend": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "public.post.invite.accept": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.company": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.company.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.company.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.company.company_id.contract": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.company.company_id.contract.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.company.company_id.contract.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.company.location": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.company.location.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.company.location.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.company.official": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.company.official.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.company.official.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.person": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.person.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.person.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.person.id.role-permission": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.person.match-with-user": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.team": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.team.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.team.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.creator": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.employee.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.employee.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.absence": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.employee.absence.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.employee.absence.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.experience": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.experience.with-terms": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.employee.experience.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.agreement": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.employee.agreement.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.employee.agreement.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.document": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.employee.document.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.employee.document.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.document.id.issue": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.document.id.revert": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.document.id.sign": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.document.id.file": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.document.id.void": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.document.id.send-email": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.document.id.deliver": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.document-template.import-samples": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.document-template": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.document-template.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.document-template.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.form.module": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.form.module.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.form.module.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.form.attribute": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.form.attribute.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.form.attribute.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.settlement.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.work.id.stamp": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.id.work-include": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.id.work-adjust": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.id.agreement-stamp": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.id.agreement-adjust": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.id.agreement-refresh": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.room": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.settlement.room.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.settlement.room.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.room.id.recalculate": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.room.id.employees": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.room.id.employees.remove": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.room.id.archive": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.transaction": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.settlement.transaction.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.settlement.transaction.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.transaction.id.stamp": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.transaction.id.unstamp": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.settlement.transaction-category": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.settlement.transaction-category.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.work.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.work.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.work.id.series.content": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work.id.series.rebuild": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work.repeat.conflicts": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work.id.series.unrepeat": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work.id.timeline": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work.id.timeline.reset": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.work.order.id.status": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work.order.id.reset": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work.order.work_order_id.work-values": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.workspace.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.workspace.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.workspace": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.work.shift": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.work.shift.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.work.shift.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.work.work-settings.me": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.role": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.role.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.role.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.vehicle.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.vehicle.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.vehicle.vehicle_id.assignments.assignment_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.exit": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.request": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.vehicle.vehicle_id.activities.activity_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.vehicle.vehicle_id.maintenance.maintenance_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.vehicle.vehicle_id.maintenance.maintenance_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.vehicle_id.maintenance": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.vehicle.vehicle_id.financial-records.record_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.vehicle.vehicle_id.financial-records.record_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.plate": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.vehicle.plate.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.vehicle_id.color-history": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.mail-server": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.mail-server.test": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.mail-server.id.test": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.mail-server.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.mail-server.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.email-template": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.email-template.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.email-template.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.email-log.id.retry": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.traffic-punishment": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.traffic-punishment.duplicate-check": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.vehicle.traffic-punishment.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.delete.organization.vehicle.traffic-punishment.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.traffic-punishment.id.send-email": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.organization": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.patch.superadmin.organization.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.delete.superadmin.organization.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.patch.superadmin.organization.id.restore": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.user": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.patch.superadmin.user.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.delete.superadmin.user.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.patch.superadmin.user.id.restore": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.user.id.send-set-password": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.user.id.revoke-sessions": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.user.id.grant-super-admin": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.user.id.revoke-super-admin": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.invite": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.invite.id.resend": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.patch.superadmin.invite.id.cancel": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.vehicle.brand": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.patch.superadmin.vehicle.brand.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.delete.superadmin.vehicle.brand.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.vehicle.model": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.patch.superadmin.vehicle.model.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.delete.superadmin.vehicle.model.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.post.superadmin.vehicle.class": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.patch.superadmin.vehicle.class.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "admin.delete.superadmin.vehicle.class.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.sign-in": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.logout": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.sign-up": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.verify-email": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.verify-email.request": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.forgot-password": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.reset-password": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.recovery-email.request": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.recovery-email.verify": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.delete.auth.recovery-email": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.email-change.request": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.auth.email-change.verify": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.patch.user.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.employee.absence": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.patch.organization.employee.absence.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.delete.organization.employee.absence.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.patch.organization.work.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.work.self": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.patch.organization.work.self.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.delete.organization.work.self.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.work.id.timeline": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.patch.organization.vehicle.id.self": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.post.address": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.delete.address.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.patch.address.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.post.bank-account": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.delete.bank-account.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.patch.bank-account.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.post.social-media": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.delete.social-media.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.patch.social-media.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.employee.absence.id.sign": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.employee.document.me.id.sign": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.employee.document.me.id.acknowledge": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.work.id.location-log": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.patch.organization.work.id.timeline.batch": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.delete.organization.work.work_id.timeline.events.event_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.work.id.timeline.reset": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.patch.organization.work.order.id.status": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.work.order.id.reset": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.work.order.id.work-values": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.entry": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.exit": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.request": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "mobile.post.organization.vehicle.vehicle_id.assignments.assignment_id.respond": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.email-change.verify": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.forgot-password": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.forgot-password-recovery": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.recovery-email.verify": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.reset-password": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.sign-in": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.sign-up": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.verify-email": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.change-password": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.email-change.request": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.logout": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.get.auth.member": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.delete.auth.recovery-email": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.recovery-email.request": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.get.auth.switch.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "auth.post.auth.verify-email.request": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.patch.organization.access.upsert-access": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.delete.country.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.patch.country.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.post.files": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.delete.files.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.patch.files.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.employee.experience.exit-preflight": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "common.patch.organization.invite.id.cancel": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.settlement.id.status": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.settlement.room.id.status": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.settlement.transaction.id.cancel": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.settlement.transaction-category.id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.vehicle.vehicle_id.activities.activity_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.vehicle_id.activities": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.patch.organization.vehicle.vehicle_id.assignments.assignment_id": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.entry": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
+  },
+  "web.post.organization.vehicle.vehicle_id.assignments.assignment_id.respond": {
+    "title": "Not implemented",
+    "message": "This endpoint is not implemented yet."
   }
 }

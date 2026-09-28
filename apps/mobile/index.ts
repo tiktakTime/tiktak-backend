@@ -1,8 +1,30 @@
 import { createRouter } from "@/core/router";
+import { authMiddleware } from "@/middlewares";
 
-/**
- * Mobile yüzeyi — requireMember / self-service uçları (ileride).
- * Humans örnekleri: employee absence, work/my-*, vehicle assignments, order/search/self.
- * Şimdilik boş; common + web ile çakışmayan slice’lar eklenecek.
- */
+import { mobileAbsenceRouter } from "./absence/absence.routes";
+import { mobileDocumentRouter } from "./document/document.routes";
+import { mobileEmployeeRouter } from "./employee/employee.routes";
+import { mobileModuleRouter } from "./module/module.routes";
+import { mobileOrderRouter } from "./order/order.routes";
+import { mobilePersonRouter } from "./person/person.routes";
+import { mobileShiftRouter } from "./shift/shift.routes";
+import { mobileTeamRouter } from "./team/team.routes";
+import { mobileUserRouter } from "./user/user.routes";
+import { mobileVehicleAssignmentRouter } from "./vehicle-assignment/vehicle-assignment.routes";
+import { mobileVehicleRouter } from "./vehicle/vehicle.routes";
+import { mobileWorkRouter } from "./work/work.routes";
+
 export const mobileRouter = createRouter();
+mobileRouter.use("*", authMiddleware);
+mobileRouter.route("/", mobileAbsenceRouter);
+mobileRouter.route("/", mobileDocumentRouter);
+mobileRouter.route("/", mobileEmployeeRouter);
+mobileRouter.route("/", mobileModuleRouter);
+mobileRouter.route("/", mobileOrderRouter);
+mobileRouter.route("/", mobilePersonRouter);
+mobileRouter.route("/", mobileShiftRouter);
+mobileRouter.route("/", mobileTeamRouter);
+mobileRouter.route("/", mobileUserRouter);
+mobileRouter.route("/", mobileVehicleRouter);
+mobileRouter.route("/", mobileVehicleAssignmentRouter);
+mobileRouter.route("/", mobileWorkRouter);

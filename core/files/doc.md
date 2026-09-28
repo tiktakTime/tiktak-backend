@@ -96,5 +96,6 @@ validate extension + size + magic
 
 ```
 core/files → core/env, app.config
-apps / domain upload route’ları → @/core/files
 ```
+
+Şu an tüketici yok. `apps/common/file` route'ları stub.

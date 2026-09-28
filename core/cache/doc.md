@@ -106,5 +106,7 @@ http / socket → cache
 | Kim                       | Ne                            |
 | ------------------------- | ----------------------------- |
 | `core/http` `wrapHandler` | get / setWithTags / tag purge |
-| `apps/**/*.routes.ts`     | `TTL.*` sabitleri             |
 | `core/socket`             | emitter kaydı                 |
+| `server/`                 | `configureCache`              |
+
+Route'larda `cache` alanı şu an yok; `TTL.*` kullanan route yok.

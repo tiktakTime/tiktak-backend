@@ -79,13 +79,13 @@ prisma.config.ts    # schema klasörü, migration yolu, CLI bağlantısı
 server/             # buildServer() — server/doc.md
 platform/           # auth · scope · notifications · i18n — platform/doc.md
 apps/               # apps/doc.md
-  public/           # authsuz + domain
-  common/<entity>/  # schema + routes + domain
-  web/<entity>/     # schema + routes + domain
+  public/
+  common/<slice>/
+  web/<slice>/
   mobile/ | admin/
-  auth/             # melez + domain
+  auth/
   system/
-modules/<entity>/   # prisma + repo — modules/doc.md
+modules/<entity>/   # prisma — modules/doc.md
 middlewares/        # middlewares/doc.md
 core/               # core/doc.md
 scripts/            # scripts/doc.md

@@ -22,7 +22,7 @@ I/O ağırlıklı bir API'de her domain fonksiyonu DB okur, Redis'e yazar, kuyru
 | 1 — Saf birim   | I/O'suz fonksiyonlar + domain karar ağaçları | vitest                         | ms     |
 | 2 — Domain      | Karar mantığı, repo `vi.mock` ile            | vitest                         | ms     |
 | 3 — Entegrasyon | `buildServer()` + gerçek Postgres/Redis      | vitest + `app.request()`       | saniye |
-| 4 — Sözleşme    | OpenAPI snapshot + fuzzing                   | vitest + Schemathesis          | dakika |
+| 4 — Sözleşme    | OpenAPI snapshot                             | vitest                         | saniye |
 
 ### Katman seçim kuralı
 
@@ -72,7 +72,7 @@ Hiçbir `apps` testinin dokunmadığı bir config değeri fiilen test edilmemiş
 
 ## Local çalıştırma
 
-Tüm testler **geliştirici makinesinde** koşar. OrbStack / Docker Compose yeterli; bulut servisi gerekmez (OAuth hariç — aşağıda).
+Tüm testler **geliştirici makinesinde** koşar. OrbStack / Docker Compose yeterli.
 
 ```bash
 pnpm local:up                                          # postgres + redis + minio
@@ -88,21 +88,19 @@ pnpm test
 ### OrbStack
 
 - Docker API uyumlu; `docker compose` komutları değişmez.
-- Testcontainers'a geçilirse socket: `DOCKER_HOST=unix://$HOME/.orbstack/run/docker.sock` (şimdilik kullanılmıyor).
 
 ---
 
 ## Dış bağımlılıklar
 
-| Bağımlılık           | Local karşılığı                       | Not                                   |
-| -------------------- | ------------------------------------- | ------------------------------------- |
-| PostgreSQL           | compose `postgres` → `tiktak-test-v2` | ✅                                    |
-| Redis                | compose `redis`                       | ✅ session, cache, rate-limit, BullMQ |
-| S3                   | compose `minio`                       | ✅ upload geldiğinde                  |
-| Socket.IO            | aynı süreç + `socket.io-client`       | ✅                                    |
-| Mail                 | kuyruk doğrulaması (Redis)            | ✅ SMTP gerekmez                      |
-| Push / FCM           | —                                     | ⚪ henüz endpoint yok                 |
-| Google / Apple OAuth | `verifyOAuthIdToken` mock             | ⚠️ tek gerçek boşluk                  |
+| Bağımlılık | Local karşılığı                       | Not                                   |
+| ---------- | ------------------------------------- | ------------------------------------- |
+| PostgreSQL | compose `postgres` → `tiktak-test-v2` | ✅                                    |
+| Redis      | compose `redis`                       | ✅ session, cache, rate-limit, BullMQ |
+| S3         | compose `minio`                       | ✅ upload geldiğinde                  |
+| Socket.IO  | aynı süreç + `socket.io-client`       | ✅                                    |
+| Mail       | kuyruk doğrulaması (Redis)            | ✅ SMTP gerekmez                      |
+| Push / FCM | —                                     | ⚪ henüz endpoint yok                 |
 
 ### Mail — iki seviye
 
@@ -117,24 +115,12 @@ Seviye 1, backend'in sahip olduğu sınırı test eder. Mailpit yalnızca **manu
 
 ### Mobile
 
-| Anlam                 | Durum                                                            |
-| --------------------- | ---------------------------------------------------------------- |
-| `apps/mobile` yüzeyi  | Boş router; `surfaces.mobile` disabled — test edilecek route yok |
-| Mail `platform` param | `resolvePlatform` — saf fonksiyon, katman 1                      |
-| Push (`user_device`)  | Şema + repo hazır; auth route yok. Gelince kuyruk sınırında test |
+| Anlam                 | Durum                                                       |
+| --------------------- | ----------------------------------------------------------- |
+| `apps/mobile` yüzeyi  | İstemci yolları `/mobile` altında; handle `NOT_IMPLEMENTED` |
+| Mail `platform` param | `resolvePlatform` — saf fonksiyon, katman 1                 |
 
 Mobil istemcinin kendisi backend testinin konusu değil; HTTP sözleşmesi OpenAPI + entegrasyon ile kapsanır.
-
-### OAuth
-
-`verifyOAuthIdToken` uzak JWKS (`googleapis` / `appleid`) çeker; gerçek `id_token` local üretilemez.
-
-| Seçenek          | Nasıl                                                              | Ne zaman                |
-| ---------------- | ------------------------------------------------------------------ | ----------------------- |
-| A — sınırda mock | `vi.mock` → `verifyOAuthIdToken`; `resolveOAuthUser` gerçek DB ile | Önerilen — refactor yok |
-| B — local JWKS   | JWKS URL env'e; test RSA + sahte token                             | Tam offline gerekirse   |
-
-Domain mantığı (`resolveOAuthUser`: identity bul, blocked, inactive→active, email bağla, transaction insert) tamamen local test edilir. jose doğrulaması kütüphane kodudur — mock sınırı burasıdır.
 
 ---
 
@@ -146,25 +132,19 @@ Domain mantığı (`resolveOAuthUser`: identity bul, blocked, inactive→active,
 
 ### İzolasyon: truncate
 
-Transaction rollback **kullanılmıyor** — `apps/public/invite/domain/flows.ts` ve `apps/auth/domain/oauth.ts` kendi içinde `db.transaction()` + `forUpdate()` çalıştırıyor; dıştan sarmak bu akışları bozar.
-
 Tablolar test bitince durur; incelemek için yerinde kalır. Temizlik elle: `pnpm db:test:clean` (`tiktak-test-v2` + Redis db 15). Canlı veritabanına dokunmaz.
 
 Redis test DB'si (db 15) her testten önce `FLUSHDB` olur — rate-limit sayacı birikmesin diye. Tablo satırları silinmez.
 
 ### Yardımcılar (`tests/`)
 
-| Helper                                                        | Görev                                                         |
-| ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `assertTestDatabase()`                                        | URL `-test` içermiyorsa process exit                          |
-| `resetDb()`                                                   | `pnpm db:test:clean` — truncate + Redis db 15                 |
-| `makeOrganization` / `makePerson` / `makeUser` / `makeAccess` | Veri fabrikaları — test sadece önemsediği alanı override eder |
-| `signInAs(user)`                                              | Gerçek `createSession` → `Bearer` token                       |
-| `request(app, path, { token })`                               | `app.request` sarmalayıcısı, zarf parse                       |
-| `assertInvariants(orgId)`                                     | Değişmez kontrolleri (aşağıda)                                |
-| `Expect` / `Equal` / `Extends`                                | Tip-seviyesi iddia yardımcıları (`tests/types.ts`)            |
-
-Fabrika kuralı: zorunlu alanlar varsayılan, benzersiz alanlar `randomUUID()`. Şemaya alan eklendiğinde tek yer değişir.
+| Helper                          | Görev                                              |
+| ------------------------------- | -------------------------------------------------- |
+| `assertTestDatabase()`          | URL `-test` içermiyorsa process exit               |
+| `resetDb()`                     | `pnpm db:test:clean` — truncate + Redis db 15      |
+| `signInAs(user)`                | Gerçek `createSession` → `Bearer` token            |
+| `request(app, path, { token })` | `app.request` sarmalayıcısı, zarf parse            |
+| `Expect` / `Equal` / `Extends`  | Tip-seviyesi iddia yardımcıları (`tests/types.ts`) |
 
 ---
 
@@ -173,27 +153,14 @@ Fabrika kuralı: zorunlu alanlar varsayılan, benzersiz alanlar `randomUUID()`. 
 Testler **kodun yanında** durur; `tests/` yalnızca paylaşılan altyapıdır.
 
 ```
-apps/web/employee/
-├── doc.md
-├── employee.routes.ts
-├── employee.schema.ts
-├── employee.integration.test.ts     ← katman 3: gerçek DB + HTTP
-└── domain/
-    ├── doc.md
-    ├── create.ts
-    ├── create.test.ts               ← katman 1-2: hızlı
-    ├── employee-no.ts
-    └── employee-no.test.ts
-
 tests/
 ├── setup.ts
-├── types.ts                          Expect / Equal / Extends
-├── db.ts                             assertTestDatabase, resetDb
-├── auth.ts                           signInAs
+├── types.ts
+├── db.ts
+├── auth.ts
 ├── request.ts
-├── invariants/                       assertInvariants(org)
-├── factories/
-└── integrity/                        genel kontroller
+├── invariants/
+└── integrity/
 ```
 
 | Katman   | İsim                          |
@@ -203,31 +170,6 @@ tests/
 | Bütünlük | `tests/integrity/*.test.ts`   |
 
 İki farklı sonek, hızlı/yavaş ayrı koşulabilsin diye. Testler barrel'dan import etmez ([`quality-tools.md`](./quality-tools.md) barrel politikası).
-
----
-
-## Doküman senkronu
-
-`doc.md` dosyaları domain fonksiyonlarını **adım adım** yazıyor. Kural: **doküman adımı = test adı.**
-
-```ts
-describe("createEmployee", () => {
-  it("1. aktif employee varsa EMPLOYEE_ALREADY_EXISTS", ...);
-  it("2. employee_no verilmezse sıradaki numarayı alır", ...);
-  it("2. verilen numara doluysa EMPLOYEE_NO_IN_USE", ...);
-  it("3. experience_id boş bırakılabilir", ...);
-});
-```
-
-Kazanç: test çıktısını okuyan dokümanı okumuş olur; dokümana adım eklenince karşılığı olmayan numara göze çarpar; kırılan test hangi kuralın bozulduğunu adıyla söyler.
-
-Ters yön: her `doc.md` başına test dosyası satırı —
-
-```markdown
-Testler: `create.test.ts` · `employee.integration.test.ts`
-```
-
-Doküman ile testi otomatik %100 senkron tutmanın yolu yoktur. Doküman "ne yapmalı", test "gerçekten yapıyor mu" der; aynı kelimelerle yazılırsa ayrışma insan gözüne çarpar.
 
 ---
 
@@ -246,7 +188,7 @@ Testi kodu okuyarak yazarsan, test kodun yaptığını onaylamaktan başka bir �
 
 | Kaynak          | Yöntem                                                         |
 | --------------- | -------------------------------------------------------------- |
-| Her `throw`     | `rg "AppError\(" apps/<slice>/domain` — her satır bir senaryo  |
+| Her `throw`     | Her `AppError` bir senaryo                                     |
 | Her `if`        | İki senaryo: doğru / yanlış dal                                |
 | Her şema alanı  | Boş, `null`, çok uzun, yanlış tip, sınır değeri                |
 | Her enum değeri | `it.each` tablosu — tablo uzunluğu enum uzunluğuna eşit olmalı |
@@ -256,32 +198,7 @@ Testi kodu okuyarak yazarsan, test kodun yaptığını onaylamaktan başka bir �
 
 **Değişmezler** — hangi fonksiyon çalışırsa çalışsın her zaman doğru olması gerekenler. Tek fonksiyonun kodundan çıkmaz; sistemin bütününe bakılarak yazılır.
 
-`employee` + `person` için:
-
-| Değişmez                                                       |
-| -------------------------------------------------------------- |
-| Her aktif employee'nin bir person'ı vardır                     |
-| `person.employee_id` ↔ `employee.person_id` birbirini gösterir |
-| Bir org'da bir person'ın en fazla bir aktif employee'si olur   |
-| Aktif employee'ler arasında `employee_no` tekrar etmez         |
-| Silinmiş employee'nin numarası serbest kalır                   |
-
-Her entegrasyon testinin sonunda `await assertInvariants(orgId)`. Kodu hiç okumadan yazılır, kodun kaçırdığı tutarsızlığı yakalar — özellikle çok tabloya dokunan akışlarda (`createEmployeeViaCreator`, `softDeleteEmployee`, invite accept).
-
-Her modülün `doc.md`'sine **"Değişmezler"** bölümü eklenir; test oradan yazılır.
-
 **Yolculuk testleri** — tek fonksiyon doğru, arka arkaya çalışınca bozuluyor. Hiçbir fonksiyonun kodunda yazmaz.
-
-Klasik kalıp: **oluştur → sil → yeniden oluştur.**
-
-```
-1. creator ile personel ekle (no: 5)
-2. sil
-3. aynı kişiyi creator ile tekrar ekle
-   → numara 5 mi, yeni mi?
-   → person restore mu edilir, yenisi mi açılır?
-   → person.employee_id doğru bağlanır mı?
-```
 
 **"Ya şöyle olursa" listesi** — sistematik sorular:
 
@@ -309,7 +226,7 @@ Klasik kalıp: **oluştur → sil → yeniden oluştur.**
 
 Üçüncüsü en değerli sonuçtur. Süreç:
 
-1. `it.todo("blocked person creator ile aktifleşmeli mi?")` — çalışmaz, listede durur, CI'ı kilitlemez
+1. `it.todo("kural belirsiz")` — çalışmaz, listede durur, CI'ı kilitlemez
 2. Kararı ver ve **`doc.md`'ye yaz**
 3. Kodu karara uydur
 4. Testi yeşile çevir
@@ -350,11 +267,9 @@ Her `AppError` dalı için bir test. Hata testinde **yan etkinin oluşmadığı*
 
 `Promise.all` ile iki eşzamanlı çağrı:
 
-| Akış                        | Beklenen                                                      |
-| --------------------------- | ------------------------------------------------------------- |
-| Davet kabul (aynı token)    | Biri 200, diğeri `INVITE_ALREADY_ACCEPTED`; tek access satırı |
-| `employee_no` tahsisi       | İki farklı numara                                             |
-| Refresh rotate (aynı token) | Biri başarılı, diğeri reddedilir                              |
+| Akış                        | Beklenen                         |
+| --------------------------- | -------------------------------- |
+| Refresh rotate (aynı token) | Biri başarılı, diğeri reddedilir |
 
 ### 6. Cache tutarlılığı
 
@@ -382,31 +297,27 @@ Slice'tan bağımsız iddialar. Her biri 5–10 satır, kalıcı koruma.
 
 Bazı hatalar test gerektirmez — derleyici anında söyler. Test yükünü azalttığı için **önce bunlar kurulur.**
 
-| Koruma                               | Yakaladığı                        | Detay                                    |
-| ------------------------------------ | --------------------------------- | ---------------------------------------- |
-| Enum tek kaynak (`@/modules/db`)     | Enum değeri silindi / adı değişti | [`database.md`](./database.md)           |
-| Karar tablosu `Record<Enum, …>`      | Enum'a **yeni değer eklendi**     | aşağıda                                  |
-| `Row = Pick<Selectable<T>, COLUMNS>` | Kolon silindi / tipi değişti      | [`database.md`](./database.md)           |
-| `z.toZod<Hedef>()`                   | Şema çıktısı hedef tipten saptı   | [`api-standards.md`](./api-standards.md) |
-| `satisfies Record<K, V>`             | Eksik anahtar (ör. `ERROR_META`)  | [`quality-tools.md`](./quality-tools.md) |
+| Koruma                           | Yakaladığı                        | Detay                                    |
+| -------------------------------- | --------------------------------- | ---------------------------------------- |
+| Enum tek kaynak (`@/modules/db`) | Enum değeri silindi / adı değişti | [`database.md`](./database.md)           |
+| `z.toZod<Hedef>()`               | Şema çıktısı hedef tipten saptı   | derleme                                  |
+| `satisfies Record<K, V>`         | Eksik anahtar (ör. `ERROR_META`)  | [`quality-tools.md`](./quality-tools.md) |
 
 ### Enum tamlığı — kontrol noktası
 
 Enum'a **değer eklemek** tip sisteminde sessizdir: hiçbir `if` zinciri kırılmaz, yeni değer hiçbir karar ağacında ele alınmaz. Çözüm, kararı tablo olarak yazmak:
 
 ```ts
-import { AccessStatus } from "@/modules/db";
+import { UserStatus } from "@/modules/db";
 
-const BLOCKING: Record<AccessStatus, boolean> = {
-  pending: false,
+const OPEN: Record<UserStatus, boolean> = {
   active: true,
-  inactive: true,
-  blocked: true,
-  canceled: false,
+  inactive: false,
+  blocked: false,
 };
 ```
 
-Prisma'ya yeni değer eklendiğinde `Record` eksik anahtar verir → **derleme hatası**: "bu değer için karar yaz". Bu koruma `modules` katmanında durur — az, keskin, enum değiştiği an çalar.
+Prisma'ya yeni değer eklendiğinde `Record` eksik anahtar verir → derleme hatası.
 
 ---
 
@@ -444,28 +355,20 @@ Kırmızı listesi beklenenden kısaysa kapsam eksiktir; o da bir bilgidir.
 
 `buildServer()` → `/openapi.json` → `toMatchSnapshot()`. Kasıtlı değişiklikte `vitest -u`; diff PR'da incelenir.
 
-### Fuzzing (CI, opsiyonel adım)
-
-```bash
-uvx schemathesis run $BASE/openapi.json --phases=examples,coverage,fuzzing,stateful
-```
-
-Şemadan otomatik üretilen sınır/geçersiz girdiler ve `create → get → delete` zincirleri. Test yazma maliyeti sıfır.
-
 ---
 
 ## Koşum kapsamı
 
 Günlük kullanım parça parçadır; tamamı yalnızca commit öncesi koşar.
 
-| Ne istiyorsun    | Komut                                               |
-| ---------------- | --------------------------------------------------- |
-| Tek dosya        | `pnpm test apps/web/employee/domain/create.test.ts` |
-| Bir klasör       | `pnpm test apps/web/employee`                       |
-| Adında geçen     | `pnpm test -t "employee_no"`                        |
-| Yazarken sürekli | `pnpm test --watch apps/web/employee`               |
-| Değişenle ilgili | `pnpm test --changed`                               |
-| Hepsi            | `pnpm test`                                         |
+| Ne istiyorsun    | Komut                                       |
+| ---------------- | ------------------------------------------- |
+| Tek dosya        | `pnpm test tests/smoke.integration.test.ts` |
+| Bir klasör       | `pnpm test tests/integrity`                 |
+| Adında geçen     | `pnpm test -t "health"`                     |
+| Yazarken sürekli | `pnpm test --watch tests/integrity`         |
+| Değişenle ilgili | `pnpm test --changed`                       |
+| Hepsi            | `pnpm test`                                 |
 
 ### Hızlı / yavaş ayrımı
 
@@ -493,27 +396,20 @@ Günlük kullanım parça parçadır; tamamı yalnızca commit öncesi koşar.
 | Satırda durup bakayım  | `pnpm test --inspect-brk --no-file-parallelism <yol>`                                                                       |
 
 ```ts
-onTestFailed(async () => {
-  console.log(
-    "employee:",
-    await db.selectFrom("employee").selectAll().execute(),
-  );
+onTestFailed(() => {
   console.log("son yanıt:", lastResponseBody);
 });
 ```
 
 ### Yorumlama
 
-| Metrik         | Ne söyler                           | Ne söylemez                |
-| -------------- | ----------------------------------- | -------------------------- |
-| Yeşil/kırmızı  | Bilinen kurallar korunuyor          | Kural doğru mu             |
-| Coverage       | Hangi satır **çalıştı**             | Hangi satır **doğrulandı** |
-| Mutation score | Testler gerçekten hata yakalıyor mu | —                          |
-| Süre           | Katman dengesi bozulmuş mu          | —                          |
+| Metrik        | Ne söyler                  | Ne söylemez                |
+| ------------- | -------------------------- | -------------------------- |
+| Yeşil/kırmızı | Bilinen kurallar korunuyor | Kural doğru mu             |
+| Coverage      | Hangi satır **çalıştı**    | Hangi satır **doğrulandı** |
+| Süre          | Katman dengesi bozulmuş mu | —                          |
 
-Coverage hedef değil teşhis aracıdır. `%100 coverage + %0 mutation score` mümkündür.
-
-Mutation testing (Stryker) yalnızca `apps/auth/domain` ve `apps/public/invite/domain` üzerinde, manuel/haftalık.
+Coverage hedef değil teşhis aracıdır.
 
 ---
 
@@ -523,8 +419,7 @@ Mutation testing (Stryker) yalnızca `apps/auth/domain` ve `apps/public/invite/d
 - Testler birbirine bağlanmaz; herhangi bir sırada çalışır.
 - Kütüphane test edilmez (Kysely'nin SQL'i değil, `findById`'in silinmişi döndürmemesi).
 - Private fonksiyona `as any` ile sızılmaz — ya export edilir ya public API üzerinden test edilir.
-- Mock yalnızca katman 2'de ve yalnızca repo sınırında (OAuth doğrulama sınırı hariç).
-- Sahip olunmayan sınır test edilmez (SMTP, FCM, jose JWT doğrulaması).
+- Mock, sahip olunmayan dış sınırda kalır (SMTP, FCM, jose JWT doğrulaması).
 - Derleyicinin yakalayabildiği şey için test yazılmaz.
 - `doc.md` → kod → test sırası bozulmaz.
 
@@ -532,18 +427,12 @@ Mutation testing (Stryker) yalnızca `apps/auth/domain` ve `apps/public/invite/d
 
 ## Yol haritası
 
-| Aşama | İş                                                                                 | Durum |
-| ----- | ---------------------------------------------------------------------------------- | ----- |
-| 0     | Derleme zamanı korumalar: enum tek kaynak, `Row` türetme, `z.toZod`                | ✅    |
-| 1     | Altyapı: `assertTestDatabase`, `resetDb`, fabrikalar, `signInAs`, `tests/types.ts` | ✅    |
-| 2     | Bütünlük testleri                                                                  | ✅    |
-| 3     | OpenAPI snapshot                                                                   | ✅    |
-| 4     | `apps/auth` uçtan uca                                                              | ✅    |
-| 5     | Yetki matrisi (`tests/integrity/policy.integration.test.ts`)                       | ✅    |
-| 6     | Davet akışı + race + değişmezler (`apps/public/invite/invite.integration.test.ts`) | ✅    |
-| 7     | Kalan slice'lar (person, employee, access, role, permission, organization, user)   | ✅    |
-| 8     | Schemathesis CI                                                                    | ⬜    |
-| 9     | Property-based + mutation                                                          | ⬜    |
+| Aşama | İş                                                                     | Durum |
+| ----- | ---------------------------------------------------------------------- | ----- |
+| 0     | Derleme zamanı korumalar: enum tek kaynak, `z.toZod`                   | ✅    |
+| 1     | Altyapı: `assertTestDatabase`, `resetDb`, `signInAs`, `tests/types.ts` | ✅    |
+| 2     | Bütünlük testleri                                                      | ✅    |
+| 3     | OpenAPI snapshot                                                       | ✅    |
 
 Aşama 0 test değil, tip işidir — ama en ucuz korumayı verdiği için önce gelir.
 
@@ -553,20 +442,9 @@ Aşama 0 test değil, tip işidir — ama en ucuz korumayı verdiği için önce
 
 Test yazılınca doğrulanacak:
 
-| #   | Risk                                                                      | Konum                                     |
-| --- | ------------------------------------------------------------------------- | ----------------------------------------- |
-| 1   | `hydrateScope` cache prefix'ini query/body'den alıyor — prefix kirlenmesi | `platform/scope/resolve.ts`               |
-| 2   | `revokeOrganizationSessions` sessiz başarısızlık (catch + devam)          | `platform/auth/revoke-organization.ts`    |
-| 3   | Eşzamanlı refresh meşru oturumu düşürebilir                               | `platform/auth/session.ts`                |
-| 4   | `purge` yazılmamış mutation'lar → bayat cache                             | `apps/**/*.routes.ts`                     |
-| 5   | `employee_no` tahsis yarışı                                               | `apps/web/employee/domain/employee-no.ts` |
-
-## Karar bekleyen domain soruları
-
-Bunlar test değil, **ürün kararıdır**; cevaplanmadan test yazılmaz (`it.todo` ile bekletilir).
-
-| #   | Soru                                                                                      | Konum                                 |
-| --- | ----------------------------------------------------------------------------------------- | ------------------------------------- |
-| 1   | `person_id` + `user_id` + `email` birlikte gelirse: sessiz öncelik mi, çelişki hatası mı? | `apps/web/employee/domain/creator.ts` |
-| 2   | Soft-delete edilmiş `blocked` person, creator ile restore edilince `active` olmalı mı?    | `creator.ts` — `restoreAndUpdate`     |
-| 3   | `employee_no` sil/geri-ekle sonrası korunmalı mı, yeni mi verilmeli?                      | `soft-delete.ts` + `employee-no.ts`   |
+| #   | Risk                                                                      | Konum                                  |
+| --- | ------------------------------------------------------------------------- | -------------------------------------- |
+| 1   | `hydrateScope` cache prefix'ini query/body'den alıyor — prefix kirlenmesi | `platform/scope/resolve.ts`            |
+| 2   | `revokeOrganizationSessions` sessiz başarısızlık (catch + devam)          | `platform/auth/revoke-organization.ts` |
+| 3   | Eşzamanlı refresh meşru oturumu düşürebilir                               | `platform/auth/session.ts`             |
+| 4   | `purge` yazılmamış mutation'lar → bayat cache                             | `apps/**/*.routes.ts`                  |

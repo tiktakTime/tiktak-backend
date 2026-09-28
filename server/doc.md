@@ -38,15 +38,15 @@ export function buildServer() {
   mount(healthRouter); // apps/system
   mount(authRouter); // apps/auth (melez authlı/authsuz)
 
-  // 5 — yüzeyler
+  // 5 — spec, yüzeylerin authMiddleware'inden önce
+  mountOpenAPI(api);
+
+  // 6 — yüzeyler
   for (const [name, surface] of Object.entries(app_config.surfaces)) {
     if (surface.enabled) {
       mount(surfaceRouters[name], surface.prefix || "/");
     }
   }
-
-  // 6
-  mountOpenAPI(api);
 
   // 7 — kök app + API prefix
   return createApp().route(env.API_BASE_PATH, api);
@@ -55,17 +55,17 @@ export function buildServer() {
 
 ### Mount path prefix’leri
 
-| Router         | Prefix                                             | Not                   |
-| -------------- | -------------------------------------------------- | --------------------- |
-| `healthRouter` | `/`                                                | readiness/liveness    |
-| `authRouter`   | `/`                                                | surfaces döngüsü dışı |
-| `publicRouter` | `app_config.surfaces.public.prefix` (şimdilik `/`) | auth yok              |
-| `commonRouter` | `/`                                                | authMiddleware        |
-| `webRouter`    | `/`                                                | auth + permission     |
-| `mobileRouter` | `/`                                                | disabled              |
-| `adminRouter`  | `/`                                                | disabled              |
+| Router         | Prefix    | Not                                             |
+| -------------- | --------- | ----------------------------------------------- |
+| `healthRouter` | `/`       | readiness/liveness                              |
+| `authRouter`   | `/`       | oturum uçları, tüm cihazlar                     |
+| `publicRouter` | `/`       | boş                                             |
+| `commonRouter` | `/common` | address, bank, social, access, country, file    |
+| `webRouter`    | `/web`    | istemci yolları; davet token uçları auth öncesi |
+| `mobileRouter` | `/mobile` | istemci yolları                                 |
+| `adminRouter`  | `/admin`  | süperadmin yolları                              |
 
-Gerçek URL: `{host}{API_BASE_PATH}{routePath}` — örn. `/api/...` veya gateway `/api-test/...`.
+Gerçek URL: `{host}{API_BASE_PATH}{yüzey öneki}{routePath}` — örn. `/api/web/organization/work/search`.
 
 ### Neden `mount` cast?
 
@@ -104,7 +104,7 @@ Production’da spec erişilebilir kalır; browsable UI kapalı.
 | Scope       | `platform/scope` (`hydrateScope`)                                          |
 | Rate limit  | `middlewares/rate-limit`                                                   |
 
-Domain/repo import **yok** — yalnızca app barrel router’ları.
+Yalnızca app barrel router'ları import edilir.
 
 ---
 

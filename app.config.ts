@@ -2,18 +2,19 @@
  * Application decisions that belong in git (not secrets).
  * Secrets / env URLs stay in `core/env`.
  *
- * Yüzey yerleşimi (tiktak-service-humans referansı):
- * - public: authMiddleware yok (invite by-token/accept, …)
- * - common: her istemci aynı contract/yanıt (user, organization)
- * - web: yönetim / requirePermission (role, permission, person/employee/access CRUD)
- * - mobile: self-service / requireMember (şimdilik boş; work/my-*, absence, …)
- * - admin: süper-admin (şimdilik boş)
+ * Yüzey yerleşimi:
+ * - web: web istemcisinin yolları, önek `/web`
+ * - mobile: mobil istemcinin yolları, önek `/mobile`
+ * - admin: süperadmin yolları, önek `/admin`
+ * - public: bu adımda boş
+ * - common: address, bank-account, social-media, access, country, file — önek `/common`
  *
- * `apps/auth` melez (authlı + authsuz) — surfaces dışında ayrı mount.
+ * `apps/auth` oturum uçları — tüm cihazlar, yol `/auth/...`.
  * `apps/system` süreç sağlık uçları — yüzey değil.
  *
- * Humans’ta ayrı path prefix yok; ayrım RBAC. Bizde dosya olarak ayrılır,
- * mount path şimdilik `/` — ileride gerekirse prefix açılır.
+ * İstemci yolları yüzey önekiyle ayrılır: `/web`, `/mobile`, `/admin`, `/common`.
+ * Aynı yol iki istemcideyse iki route ve iki handle vardır.
+ * Ortak kaynaklar (address, bank-account, social-media) yalnızca `/common` altındadır.
  */
 export const app_config = {
   openapi: {
@@ -55,14 +56,15 @@ export const app_config = {
   rate_limit: {
     standard: { window_ms: 60_000, max_requests: 2000 },
     auth: { window_ms: 60_000, max_requests: 20 },
+    invite: { window_ms: 60_000, max_requests: 20 },
   },
 
   surfaces: {
     public: { enabled: true, prefix: "/" },
-    common: { enabled: true, prefix: "/" },
-    web: { enabled: true, prefix: "/" },
-    mobile: { enabled: false, prefix: "/" },
-    admin: { enabled: false, prefix: "/" },
+    common: { enabled: true, prefix: "/common" },
+    web: { enabled: true, prefix: "/web" },
+    mobile: { enabled: true, prefix: "/mobile" },
+    admin: { enabled: true, prefix: "/admin" },
   },
 
   /**

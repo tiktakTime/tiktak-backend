@@ -3,3 +3,57 @@ enum UserStatus {
   inactive
   blocked
 }
+
+enum UserGender {
+  female
+  male
+  other
+  none
+}
+
+enum UserAuthProvider {
+  email
+  google
+  apple
+}
+
+enum DevicePlatform {
+  ios
+  android
+  web
+}
+
+enum PushProvider {
+  fcm
+  apns
+  web_push
+}
+
+enum VerificationType {
+  email_verify
+  recovery_email_verify
+  phone_verify
+  password_reset
+  email_change
+}
+
+enum UserLogEvent {
+  register
+  login_success
+  login_failed
+  logout
+  logout_all
+  password_changed
+  password_reset
+  email_changed
+  identity_linked
+  identity_unlinked
+  device_added
+  device_revoked
+  session_revoked
+  token_reuse_detected
+  two_factor_enabled
+  two_factor_disabled
+  profile_updated
+  status_changed
+}

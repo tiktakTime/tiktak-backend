@@ -10,8 +10,9 @@ Barrel: `@/core/crypto`
 | Dosya      | Export                 |
 | ---------- | ---------------------- |
 | `jwt.ts`   | `signJwt`, `verifyJwt` |
-| `hash.ts`  | `sha256`               |
-| `token.ts` | `randomToken`, `newId` |
+| `hash.ts`     | `sha256`                          |
+| `password.ts` | `hashPassword`, `passwordMatches` |
+| `token.ts`    | `randomToken`, `newId`            |
 
 ---
 
@@ -55,11 +56,11 @@ Ham refresh Redis’e yazılmaz.
 
 ## Ne burada değil
 
-| İhtiyaç                      | Nerede                               |
-| ---------------------------- | ------------------------------------ |
-| Session CRUD / rotate        | `platform/auth`                      |
-| Bearer header parse          | `core/http/bearer`                   |
-| Password hash (argon/bcrypt) | (varsa domain/user) — bu pakette yok |
+| İhtiyaç                | Nerede             |
+| ---------------------- | ------------------ |
+| Session CRUD / rotate  | `platform/auth`    |
+| Bearer header parse    | `core/http/bearer` |
+| Password hash (bcrypt) | Bu pakette yok     |
 
 ---
 

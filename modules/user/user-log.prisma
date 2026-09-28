@@ -1,0 +1,17 @@
+/// Yalnızca eklenir. Şifre, token ve kod yazılmaz. Kullanıcı silinse de satır kalır.
+model UserLog {
+  id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id       String? @db.Uuid
+  actor_user_id String? @db.Uuid
+  device_id     String? @db.Uuid
+
+  event      UserLogEvent
+  ip         String?      @db.Inet
+  user_agent String?      @db.Text
+  metadata   Json?
+  created_at DateTime     @default(now()) @db.Timestamptz(6)
+
+  @@index([user_id, created_at], map: "idx_user_log_user_created")
+  @@index([event, created_at], map: "idx_user_log_event_created")
+  @@map("user_log")
+}

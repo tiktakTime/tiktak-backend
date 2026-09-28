@@ -50,19 +50,18 @@ pnpm dev             # http://localhost:3001/api-test
 
 ## Doküman haritası
 
-| Doküman                                              | İçerik                         |
-| ---------------------------------------------------- | ------------------------------ |
-| [docs/getting-started.md](./docs/getting-started.md) | Kurulum, env, script’ler       |
-| [docs/inceleme-sirasi.md](./docs/inceleme-sirasi.md) | Kod inceleme yolu              |
-| [docs/architecture.md](./docs/architecture.md)       | Katmanlar, bağımlılık yönü     |
-| [docs/layers.md](./docs/layers.md)                   | Katman detayı                  |
-| [docs/decisions.md](./docs/decisions.md)             | Ürün / teknoloji kararları     |
-| [docs/api-standards.md](./docs/api-standards.md)     | Slice, `defineRoute`, zarf     |
-| [docs/database.md](./docs/database.md)               | Prisma + Kysely                |
-| [docs/quality-tools.md](./docs/quality-tools.md)     | `pnpm verify` kalite kapısı    |
-| [docs/testing.md](./docs/testing.md)                 | Test stratejisi + yol haritası |
-| [docs/auth-identity.md](./docs/auth-identity.md)     | User/profile/identity plan     |
-| [docs/README.md](./docs/README.md)                   | Tam indeks                     |
+| Doküman                                              | İçerik                            |
+| ---------------------------------------------------- | --------------------------------- |
+| [docs/getting-started.md](./docs/getting-started.md) | Kurulum, env, script’ler          |
+| [docs/inceleme-sirasi.md](./docs/inceleme-sirasi.md) | Kod inceleme yolu                 |
+| [docs/architecture.md](./docs/architecture.md)       | Katmanlar, bağımlılık yönü        |
+| [docs/layers.md](./docs/layers.md)                   | Katman detayı                     |
+| [docs/decisions.md](./docs/decisions.md)             | Ürün / teknoloji kararları        |
+| [docs/api-standards.md](./docs/api-standards.md)     | Hono, Zod, OpenAPI, `defineRoute` |
+| [docs/database.md](./docs/database.md)               | Prisma + Kysely                   |
+| [docs/quality-tools.md](./docs/quality-tools.md)     | `pnpm verify` kalite kapısı       |
+| [docs/testing.md](./docs/testing.md)                 | Test stratejisi + yol haritası    |
+| [docs/README.md](./docs/README.md)                   | Tam indeks                        |
 
 ---
 

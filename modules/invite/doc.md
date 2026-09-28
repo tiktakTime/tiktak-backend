@@ -3,83 +3,81 @@
 İndeks: [`modules/doc.md`](../doc.md)
 
 **Tablo:** `invite`  
-**Dosyalar:** `invite.prisma`, `enums.prisma`, `invite.repo.ts`, `constants.ts`  
-**Tür:** Entity — org daveti (e-posta + token).
+**Dosyalar:** `invite.prisma`, `enums.prisma`  
+**Tür:** Entity — organizasyon daveti. Repo yok.
 
-**Soft-delete:** `deleted_at` kolonu var; tüm okuma sorguları `deleted_at IS NULL` filtreler. Ayrı soft-delete helper yok — domain gerekirse `updateById` ile yönetir.
+**Soft-delete:** `deleted_at`. Okuma filtresi henüz yok.  
+**Bağımlılık:** `user_id` doluysa `user.id`, `onDelete: SetNull`. `organization_id` ve `person_id` düz uuid. Bu iki model henüz yok. `created_by_id`, `updated_by_id`, `deleted_by_id` düz uuid.
+
+Kaynak: humans `src/v2/module/organization/invite/model.js`. Token bu satırdadır. `user_verification` içine kopyalanmaz.
 
 ---
 
 ## Amaç
 
-Yönetici bir `person` için davet oluşturur; public token ile kabul edilir. Kabulde `access` + `user`/`person` bağları kurulur.
+Bir kişiye organizasyon daveti. Linkteki anahtar `token` kolonudur. Kabul, hesap yoksa `user` ve `user_identity` yazar. Hesap varsa onu bağlar. Doğrulanmamış hesabı bu kabul doğrulanmış sayar. İkinci bir doğrulama maili açılmaz.
+
+Gönderme, yeniden gönderme, arama ve iptal oturumlu `common` yüzeyindedir. `GET /invite/by-token` ve `POST /invite/accept` oturumsuz `public` yüzeyindedir.
 
 ---
 
 ## Alanlar
 
-| Alan                                  | Tip            | Null   | Açıklama                                   |
-| ------------------------------------- | -------------- | ------ | ------------------------------------------ |
-| `id`                                  | uuid           | PK     |                                            |
-| `organization_id`                     | uuid           |        | Kiracı                                     |
-| `user_id`                             | uuid           | ✓      | Bilinen hesap (mevcut kullanıcı senaryosu) |
-| `person_id`                           | uuid           |        | Davet edilen kişi                          |
-| `email`                               | varchar(255)   |        | Davet e-postası                            |
-| `token`                               | varchar(128)   | unique | Public token                               |
-| `status`                              | `InviteStatus` |        | Yaşam döngüsü                              |
-| `description`                         | text           | ✓      | Not (mail'e gider)                         |
-| `expires_at`                          | timestamptz    |        | Son geçerlilik                             |
-| `accepted_at` / `canceled_at`         | timestamptz    | ✓      |                                            |
-| `accept_attempts`                     | int            |        | Deneme sayacı                              |
-| `last_attempt_at` / `locked_until`    | timestamptz    | ✓      | Brute-force kilidi                         |
-| `*_by_id` / timestamps / `deleted_at` |                |        | Soft-delete kolonu                         |
+| Alan              | Tip            | Null | Açıklama                                                                                          |
+| ----------------- | -------------- | ---- | ------------------------------------------------------------------------------------------------- |
+| `id`              | uuid           | PK   | Davet kimliği. UUID v4, otomatik.                                                                 |
+| `organization_id` | uuid           |      | Davetin organizasyonu. Index'li. Relation yok.                                                    |
+| `person_id`       | uuid           |      | Davet edilen kişi kaydı. Index'li. Relation yok.                                                  |
+| `user_id`         | uuid           | ✓    | Davet edilen hesap. Yoksa kabul sırasında dolar. `onDelete: SetNull`. Index'li.                  |
+| `email`           | varchar(255)   |      | Davet anındaki adres. Kayıtta trim ve küçük harf.                                                 |
+| `token`           | varchar(128)   |      | Link anahtarı. Unique. UUID artı 16 bayt. Düz metin.                                              |
+| `status`          | `InviteStatus` |      | `pending`, `accepted`, `expired`, `canceled`. Varsayılan `pending`. Index'li.                     |
+| `description`     | text           | ✓    | Açıklama. Kayıtta trim.                                                                           |
+| `expires_at`      | timestamptz    |      | Geçerlilik bitişi. Humans'ta 7 gün. Index'li.                                                     |
+| `accepted_at`     | timestamptz    | ✓    | Kabul zamanı.                                                                                     |
+| `canceled_at`     | timestamptz    | ✓    | İptal zamanı.                                                                                     |
+| `accept_attempts` | int            |      | Kabul denemesi. Varsayılan `0`. Yeniden gönderimde sıfırlanır.                                    |
+| `last_attempt_at` | timestamptz    | ✓    | Son kabul denemesi.                                                                               |
+| `locked_until`    | timestamptz    | ✓    | Bu ana kadar kabul kilitli. Index'li.                                                             |
+| `created_by_id`   | uuid           | ✓    | Daveti açan hesap. Relation yok.                                                                  |
+| `updated_by_id`   | uuid           | ✓    | Son güncelleyen. Relation yok.                                                                    |
+| `deleted_by_id`   | uuid           | ✓    | Silen. Relation yok.                                                                              |
+| `created_at`      | timestamptz    |      | Oluşturma.                                                                                        |
+| `updated_at`      | timestamptz    |      | Son güncelleme.                                                                                   |
+| `deleted_at`      | timestamptz    | ✓    | Doluysa soft-delete.                                                                              |
+
+`user` kolon değildir.
 
 ---
 
 ## Enum — InviteStatus
 
-`pending`, `accepted`, `expired`, `canceled`
+| Değer      | Anlam                          |
+| ---------- | ------------------------------ |
+| `pending`  | Bekliyor. Varsayılan.          |
+| `accepted` | Kabul edildi.                  |
+| `expired`  | Süresi doldu.                  |
+| `canceled` | İptal edildi. Red statüsü yok. |
 
 ---
 
-## Sabitler (`constants.ts`)
+## Unique ve indeksler
 
-| Sabit             | Değer | Açıklama                              |
-| ----------------- | ----- | ------------------------------------- |
-| `INVITE_TTL_DAYS` | `7`   | `computeExpiry` varsayılan gün sayısı |
-
-Durum değerleri `constants.ts` içinde tutulmaz. Kaynak `import { InviteStatus } from "@/modules/db"`.
+- Unique: `token` (`idx_invite_token_unique`)
+- Index: `organization_id`, `person_id`, `user_id`, `status`, `expires_at`, `locked_until`
 
 ---
 
-## İndeksler
+## Yalnızca SQL
 
-`organization_id`, `user_id`, `person_id`, `status`, `expires_at`, `locked_until`; unique `token`.
-
----
-
-## Repo yüzeyi (`invite.repo.ts`)
-
-| Fonksiyon             | Davranış                                                   | Parametreler                                               | Hata / not                          |
-| --------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ----------------------------------- |
-| `generateInviteToken` | `uuid + randomBytes(16 hex)`                               | —                                                          | Senkron; çakışma kontrolü yok       |
-| `computeExpiry`       | `now + days * 24h`                                         | `days` (default `INVITE_TTL_DAYS`)                         |                                     |
-| `tokenExists`         | Token DB'de var mı                                         | `token`                                                    | Silinmiş dahil kontrol              |
-| `generateUniqueToken` | En fazla 5 deneme unique token                             | —                                                          | Son çare yine `generateInviteToken` |
-| `findById`            | Org kapsamında aktif davet                                 | `orgId`, `id`                                              | `deleted_at IS NULL`                |
-| `findByToken`         | Token ile global arama (public accept)                     | `token`                                                    |                                     |
-| `findPendingByPerson` | Person için bekleyen davet                                 | `orgId`, `personId`                                        | `status = pending`                  |
-| `insert`              | Yeni davet; `status: pending`                              | org, person, user, email, token, expires_at, created_by_id |                                     |
-| `updateById`          | Kısmi patch (token yenileme, status, brute-force alanları) | `id`, patch, opsiyonel `trx`                               |                                     |
-| `search`              | Org davet listesi                                          | `orgId`, `{ page, limit, status? }`                        | Sayfalı                             |
+- CHECK, trigger ve extension yok.
+- Kabul kilidi uygulama kuralıdır: 5 deneme, 1 saat pencere, 24 saat kilit. Humans'ta kolon vardır, accept ucu sayacı artırmaz. Bu kopyada artırılacak. Şema sayacı kendisi yürütmez.
 
 ---
 
-## Tüketiciler
+## Alan notu
 
-| Domain                                                                | Dosyalar   | Kullanım                                                                                      |
-| --------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------- |
-| [`apps/web/invite/domain`](../../apps/web/invite/domain/doc.md)       | `flows.ts` | Oluştur, yeniden gönder, iptal, liste; `generateUniqueToken`, `computeExpiry`, `InviteStatus` |
-| [`apps/public/invite/domain`](../../apps/public/invite/domain/doc.md) | `flows.ts` | `findByToken`, accept akışı; `accessRepo.findBlocking`, `accessRepo.insert`                   |
-
-İlgili modüller: [`person`](../person/doc.md), [`access`](../access/doc.md), [`user`](../user/doc.md), [`organization`](../organization/doc.md).
+- Public uçlar `rate_limit.invite` altındadır: IP başına 20 istek / 60 saniye, prefix `rate-limit:invite:`. Giriş limiti ile sayaç paylaşılmaz.
+- Kabul yeni hesap açarsa `user.status = active`, `is_email_verified = true` ve `user_identity.provider = email` olur. Şifre identity satırına yazılır.
+- Var olan ve doğrulanmamış hesap kabulde doğrulanmış sayılır.
+- Süper admin davet uçları `apps/admin` altında durur. Bu tabloyu kullanırlar, ayrı bir model değildir.
